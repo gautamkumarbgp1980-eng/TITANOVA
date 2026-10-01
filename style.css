@@ -22,3 +22,24 @@
         width: auto;
     }
 }
+/* ===== HERO SPACE FIX ===== */
+
+.hero {
+    min-height: auto !important;
+    height: auto !important;
+    padding: 90px 5% 70px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.hero .glow {
+    opacity: 0.35;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: auto !important;
+        height: auto !important;
+        padding: 80px 28px 60px !important;
+    }
+}
