@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TITANNOVA — Decentralized Matrix Ecosystem</title>
+  <meta name="description" content="TITANNOVA — 12-level, 14-spot decentralized matrix ecosystem on BNB Smart Chain.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="#home">TITAN<span>NOVA</span></a>
+    <button class="menu" id="menuBtn">☰</button>
+    <nav id="navLinks">
+      <a href="#how">How It Works</a>
+      <a href="#levels">12 Levels</a>
+      <a href="#nft">NFT</a>
+      <a href="#royalty">Royalty</a>
+      <a href="#faq">FAQ</a>
+      <a class="nav-btn" href="#connect">Connect</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="glow"></div>
+      <p class="eyebrow">BNB SMART CHAIN • WEB3 ECOSYSTEM</p>
+      <h1>BUILD THE<br><span>NEXT TITAN</span></h1>
+      <p class="lead">TITANNOVA is a smart-contract based matrix ecosystem designed around 12 levels, 14 spots, NFT utilities and an on-chain royalty mechanism.</p>
+      <div class="actions">
+        <a class="btn primary" href="#how">Explore Plan</a>
+        <a class="btn ghost" href="#contract">Smart Contract</a>
+      </div>
+      <div class="stats">
+        <div><b>12</b><small>Levels</small></div>
+        <div><b>14</b><small>Spots / Cycle</small></div>
+        <div><b>4</b><small>Royalty Ranks</small></div>
+        <div><b>100K</b><small>Pass Limit</small></div>
+      </div>
+    </section>
+
+    <section id="how" class="section">
+      <p class="eyebrow">THE ARCHITECTURE</p>
+      <h2>How TITANNOVA Works</h2>
+      <p class="section-intro">The ecosystem is organized into a 14-spot matrix at each active level. Placement, spillover, payouts and recycle actions are executed by the smart contract according to its programmed rules.</p>
+      <div class="cards">
+        <article><span>01</span><h3>Registration</h3><p>A participant registers through the smart contract using the configured token payment and receives the Registration Pass NFT, subject to the 100,000-pass limit.</p></article>
+        <article><span>02</span><h3>Matrix Placement</h3><p>Each level uses 14 spots. The contract determines placement and eligible receivers according to the matrix rules.</p></article>
+        <article><span>03</span><h3>Upgrade</h3><p>Levels 1–11 can activate the next level through the programmed cycle-1 Spot 4 and Spot 5 mechanism.</p></article>
+        <article><span>04</span><h3>Recycle</h3><p>When a 14-spot cycle completes, the matrix recycles according to the contract. Spot 4 is allocated to the NFT Pool and Spot 5 to the Royalty Pool.</p></article>
+      </div>
+    </section>
+
+    <section id="levels" class="section dark">
+      <p class="eyebrow">LEVEL SYSTEM</p>
+      <h2>12 Levels</h2>
+      <p class="section-intro">Level costs are configured to double from the previous level. The exact token amount is determined by the deployed contract.</p>
+      <div class="level-grid" id="levelGrid"></div>
+      <p class="note">Illustrative display: verify the deployed contract's public <code>levelTokenCost</code> values before relying on any amount.</p>
+    </section>
+
+    <section id="matrix" class="section">
+      <p class="eyebrow">14-SPOT CYCLE</p>
+      <h2>Matrix Flow</h2>
+      <div class="matrix">
+        <div class="spot special">1<br><small>Upline</small></div>
+        <div class="spot special">2<br><small>Upline</small></div>
+        <div class="spot">3<br><small>Dividend</small></div>
+        <div class="spot nft">4<br><small>NFT Pool*</small></div>
+        <div class="spot royalty">5<br><small>Royalty*</small></div>
+        <div class="spot">6<br><small>Dividend</small></div>
+        <div class="spot spill">7<br><small>Spill</small></div>
+        <div class="spot">8<br><small>Dividend</small></div>
+        <div class="spot">9<br><small>Dividend</small></div>
+        <div class="spot spill">10<br><small>Spill</small></div>
+        <div class="spot">11<br><small>Dividend</small></div>
+        <div class="spot">12<br><small>Dividend</small></div>
+        <div class="spot spill">13<br><small>Spill</small></div>
+        <div class="spot recycle">14<br><small>Recycle</small></div>
+      </div>
+      <p class="note">* Spot 4/5 routing depends on the cycle and level rules in the deployed contract. At Level 12, and on recycle, Spot 4 routes to the NFT Pool and Spot 5 to the Royalty Pool under the stated specification.</p>
+    </section>
+
+    <section id="nft" class="section dark">
+      <p class="eyebrow">NFT ECOSYSTEM</p>
+      <h2>Registration Pass & Level-6 NFT</h2>
+      <div class="two-col">
+        <div class="panel"><h3>100,000 Registration Passes</h3><p>The Registration Pass supply is capped at 100,000. Once the cap is reached, the contract can issue the configured Level-6 NFT to eligible Level-6 achievers according to its rules.</p></div>
+        <div class="panel"><h3>Transferable, Not Burned</h3><p>The Level-6 NFT can be transferred. NFT ownership and Rank achievement are separate: transferring the NFT does <strong>not</strong> transfer the Rank or its royalty eligibility.</p></div>
+      </div>
+    </section>
+
+    <section id="royalty" class="section">
+      <p class="eyebrow">ROYALTY SYSTEM</p>
+      <h2>4 Ranks • 25% Each</h2>
+      <p class="section-intro">The configured royalty system uses four ranks. Each rank receives 25% of the distributable royalty amount for the 30-day period, subject to the deployed contract's eligibility and accounting rules.</p>
+      <div class="rank-grid">
+        <div><b>RANK 1</b><span>LEVEL 3</span><strong>25%</strong></div>
+        <div><b>RANK 2</b><span>LEVEL 6</span><strong>25%</strong></div>
+        <div><b>RANK 3</b><span>LEVEL 9</span><strong>25%</strong></div>
+        <div><b>RANK 4</b><span>LEVEL 12</span><strong>25%</strong></div>
+      </div>
+      <div class="notice"><strong>30-Day Distribution</strong><br>Royalty accounting is intended to operate in 30-day periods. The deployed contract is the source of truth for eligibility, balances, claimability and distribution timing.</div>
+    </section>
+
+    <section id="contract" class="section dark">
+      <p class="eyebrow">ON-CHAIN VERIFICATION</p>
+      <h2>Smart Contract</h2>
+      <div class="contract-box">
+        <p>Network: <strong>BNB Smart Chain</strong></p>
+        <p>Contract: <code id="contractAddress">MAINNET CONTRACT ADDRESS — TO BE ADDED</code></p>
+        <button class="btn primary" id="copyBtn">Copy Address</button>
+      </div>
+      <p class="note">Do not send funds to an address until it has been verified against the official deployed contract and explorer record.</p>
+    </section>
+
+    <section id="connect" class="section">
+      <p class="eyebrow">WEB3 ACCESS</p>
+      <h2>Connect Wallet</h2>
+      <p class="section-intro">The dashboard can be connected to the deployed contract after the Mainnet address and ABI are finalized.</p>
+      <button class="btn primary" id="walletBtn">Connect Wallet</button>
+      <p id="walletStatus" class="wallet-status">Wallet not connected.</p>
+    </section>
+
+    <section id="faq" class="section dark">
+      <p class="eyebrow">FAQ</p>
+      <h2>Frequently Asked Questions</h2>
+      <details><summary>Is TITANNOVA centralized?</summary><p>The intended design is to execute core matrix and fund-routing rules through the smart contract without discretionary admin fund withdrawals. The deployed bytecode and verified source code should be used to confirm the final permissions.</p></details>
+      <details><summary>Does NFT transfer transfer Rank?</summary><p>No. Under the stated specification, NFT ownership can transfer, but Rank achievement and royalty eligibility remain associated with the address that achieved the Rank.</p></details>
+      <details><summary>What happens to Spot 4 and Spot 5?</summary><p>For the stated final plan, Level 12 and recycle use Spot 4 for the NFT Pool and Spot 5 for the Royalty Pool. Cycle-1 Levels 1–11 use the Spot 4/5 upgrade mechanism.</p></details>
+      <details><summary>Where can I verify activity?</summary><p>Use the deployed contract's official BNB Smart Chain explorer page and the contract's verified source code.</p></details>
+    </section>
+  </main>
+
+  <footer>
+    <div class="brand">TITAN<span>NOVA</span></div>
+    <p>Smart-contract based Web3 ecosystem • Verify everything on-chain.</p>
+    <p class="tiny">© 2026 TITANNOVA. Website information is descriptive and does not guarantee returns or future income.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
