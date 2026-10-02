@@ -3,1743 +3,980 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TITANOVA | Testnet Dashboard</title>
 
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+<title>TITANOVA | Decentralized Matrix Ecosystem</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
-
-body{
-background:#050505;
-color:#fff;
-min-height:100vh;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body:before{
-content:"";
-position:fixed;
-inset:0;
-pointer-events:none;
-background:
-radial-gradient(circle at 20% 0%,rgba(255,190,0,.13),transparent 30%),
-radial-gradient(circle at 100% 30%,rgba(255,170,0,.08),transparent 30%);
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#050505;
+    color:#fff;
 }
 
 .container{
-max-width:1150px;
-margin:auto;
-padding:14px;
-position:relative;
-z-index:1;
+    width:94%;
+    max-width:1100px;
+    margin:auto;
 }
 
-.header{
-border:1px solid #80600f;
-border-radius:22px;
-padding:20px;
-background:linear-gradient(145deg,#181818,#080808);
-box-shadow:0 0 35px rgba(255,190,0,.08);
+header{
+    background:#090909;
+    border-bottom:1px solid #2b2b2b;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
-.brand{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:15px;
+.nav{
+    min-height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
 }
 
-.logoArea{
-display:flex;
-align-items:center;
-gap:13px;
+.logo-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
 .logo{
-width:64px;
-height:64px;
-border-radius:15px;
-object-fit:contain;
-background:#111;
-border:1px solid #6d5211;
+    width:48px;
+    height:48px;
+    object-fit:contain;
+    border-radius:50%;
 }
 
-.logoText{
-font-size:30px;
-font-weight:900;
-letter-spacing:3px;
-color:#ffd84d;
+.logo-text{
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:1px;
 }
 
-.subtitle{
-font-size:11px;
-color:#999;
-margin-top:5px;
+.logo-text span{
+    color:#f5c542;
 }
 
 button{
-border:0;
-cursor:pointer;
-font-weight:800;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.connect,
-.goldBtn{
-background:linear-gradient(135deg,#ffe16a,#d99c00);
-color:#000;
-padding:13px 18px;
-border-radius:11px;
+.wallet-btn{
+    background:#f5c542;
+    color:#000;
+    padding:12px 18px;
+    border-radius:10px;
+    font-size:14px;
 }
 
-.connect{
-min-width:180px;
+.wallet-btn:hover{
+    background:#ffd966;
 }
 
-.wallet{
-margin-top:12px;
-font-size:12px;
-color:#aaa;
-word-break:break-all;
+.hero{
+    padding:45px 0 30px;
+    text-align:center;
 }
 
-.status{
-margin-top:10px;
-padding:10px;
-border-radius:9px;
-background:#101010;
-color:#ffd84d;
-font-size:12px;
+.hero h1{
+    font-size:42px;
+    margin-bottom:12px;
 }
 
-.section{
-margin-top:16px;
-border:1px solid #3e3215;
-border-radius:19px;
-padding:18px;
-background:linear-gradient(145deg,#121212,#080808);
+.hero h1 span{
+    color:#f5c542;
 }
 
-.sectionTitle{
-font-size:18px;
-font-weight:900;
-color:#ffd84d;
-margin-bottom:14px;
+.hero p{
+    color:#aaa;
+    line-height:1.6;
 }
 
-.cards{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px;
+.network{
+    display:inline-block;
+    margin-top:18px;
+    padding:7px 14px;
+    border:1px solid #f5c542;
+    border-radius:20px;
+    color:#f5c542;
+    font-size:13px;
 }
 
 .card{
-background:#0c0c0c;
-border:1px solid #3a3018;
-border-radius:14px;
-padding:15px;
+    background:#0d0d0d;
+    border:1px solid #242424;
+    border-radius:16px;
+    padding:20px;
+    margin-bottom:20px;
 }
 
-.cardLabel{
-font-size:10px;
-color:#777;
-text-transform:uppercase;
+.card h2{
+    font-size:21px;
+    margin-bottom:18px;
 }
 
-.cardValue{
-font-size:21px;
-font-weight:900;
-color:#ffd84d;
-margin-top:7px;
-word-break:break-word;
+.card h2 span{
+    color:#f5c542;
 }
 
-.formRow{
-display:flex;
-gap:10px;
-margin-top:12px;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
 }
 
-input{
-width:100%;
-background:#050505;
-border:1px solid #534517;
-color:#fff;
-padding:14px;
-border-radius:11px;
-outline:none;
-font-size:15px;
+.stat{
+    background:#111;
+    border:1px solid #282828;
+    border-radius:12px;
+    padding:17px;
 }
 
-input:focus{
-border-color:#ffd84d;
+.stat-title{
+    color:#999;
+    font-size:12px;
+    margin-bottom:8px;
 }
 
-.message{
-margin-top:10px;
-font-size:12px;
-color:#aaa;
-line-height:1.6;
+.stat-value{
+    font-size:20px;
+    font-weight:bold;
+    color:#f5c542;
+    word-break:break-word;
 }
 
-.success{color:#62ff89}
-.error{color:#ff7070}
-.gold{color:#ffd84d}
-
-.profile{
-display:none;
-margin-top:16px;
+.wallet-address{
+    color:#aaa;
+    font-size:13px;
+    word-break:break-all;
 }
 
-.profileGrid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px;
+.input{
+    width:100%;
+    padding:14px;
+    background:#080808;
+    color:#fff;
+    border:1px solid #333;
+    border-radius:10px;
+    outline:none;
+    margin-bottom:12px;
 }
 
-.info{
-background:#090909;
-border:1px solid #2c2615;
-border-radius:12px;
-padding:13px;
+.input:focus{
+    border-color:#f5c542;
 }
 
-.info span{
-display:block;
-font-size:10px;
-color:#777;
-margin-bottom:6px;
+.primary{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    background:#f5c542;
+    color:#000;
+    font-size:15px;
 }
 
-.info b{
-font-size:13px;
-word-break:break-word;
+.secondary{
+    padding:12px 18px;
+    border-radius:10px;
+    background:#171717;
+    border:1px solid #333;
+    color:#fff;
 }
 
-.address{
-color:#ffd84d;
+.level-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
 }
 
-.levels{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-margin-top:14px;
+.level{
+    padding:16px 10px;
+    text-align:center;
+    border:1px solid #292929;
+    border-radius:12px;
+    background:#101010;
 }
 
-.levelCard{
-background:#090909;
-border:1px solid #3d3217;
-border-radius:15px;
-padding:14px;
+.level-number{
+    color:#f5c542;
+    font-weight:bold;
+    font-size:18px;
 }
 
-.levelHead{
-display:flex;
-justify-content:space-between;
-align-items:center;
+.level-price{
+    color:#aaa;
+    font-size:12px;
+    margin-top:6px;
 }
 
-.levelName{
-font-size:18px;
-font-weight:900;
-color:#ffd84d;
-}
-
-.active{
-color:#5cff87;
-font-size:11px;
-font-weight:bold;
-}
-
-.inactive{
-color:#777;
-font-size:11px;
-font-weight:bold;
-}
-
-.levelInfo{
-margin-top:9px;
-font-size:11px;
-color:#aaa;
-line-height:1.8;
-}
-
-.slots{
-display:grid;
-grid-template-columns:repeat(7,1fr);
-gap:4px;
-margin-top:10px;
+.slot-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
 }
 
 .slot{
-height:28px;
-border-radius:6px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:9px;
-background:#121212;
-border:1px solid #28210f;
-color:#666;
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    background:#101010;
+    border:1px solid #292929;
+    border-radius:10px;
 }
 
-.slot.filled{
-background:#4d3905;
-border-color:#bd901c;
-color:#ffd84d;
+.slot-number{
+    color:#f5c542;
+    font-weight:bold;
 }
 
-.actionGrid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
+.slot-status{
+    font-size:10px;
+    color:#999;
+    margin-top:5px;
 }
 
-.action{
-border:1px solid #3b3016;
-background:#0b0b0b;
-border-radius:14px;
-padding:15px;
+.flow{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
 }
 
-.action h3{
-font-size:14px;
-color:#ffd84d;
-margin-bottom:7px;
+.flow-box{
+    padding:18px;
+    border-radius:12px;
+    background:#101010;
+    border:1px solid #292929;
+    text-align:center;
 }
 
-.action p{
-font-size:11px;
-color:#888;
-line-height:1.6;
+.flow-box strong{
+    display:block;
+    color:#f5c542;
+    margin-bottom:7px;
 }
 
-.footer{
-text-align:center;
-color:#666;
-font-size:11px;
-padding:25px 0;
+.nft-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
 }
 
-@media(max-width:850px){
-.cards{grid-template-columns:repeat(2,1fr)}
-.profileGrid{grid-template-columns:repeat(2,1fr)}
-.levels{grid-template-columns:1fr}
-.actionGrid{grid-template-columns:1fr}
-.brand{flex-direction:column;align-items:flex-start}
-.connect{width:100%}
+.nft{
+    text-align:center;
+    padding:22px 15px;
+    border-radius:14px;
+    background:linear-gradient(145deg,#101010,#171717);
+    border:1px solid #292929;
+}
+
+.nft-icon{
+    font-size:42px;
+    margin-bottom:12px;
+}
+
+.nft h3{
+    margin-bottom:7px;
+}
+
+.nft p{
+    color:#999;
+    font-size:13px;
+}
+
+.info{
+    color:#aaa;
+    line-height:1.7;
+    font-size:14px;
+}
+
+.warning{
+    background:#181208;
+    border:1px solid #634d16;
+    color:#d9bd67;
+    padding:14px;
+    border-radius:10px;
+    font-size:13px;
+    line-height:1.5;
+}
+
+footer{
+    margin-top:30px;
+    padding:30px 0;
+    text-align:center;
+    border-top:1px solid #222;
+    color:#777;
+    font-size:13px;
+}
+
+@media(max-width:800px){
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .level-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .slot-grid{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .nft-grid{
+        grid-template-columns:1fr;
+    }
+
+    .flow{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
 }
 
 @media(max-width:500px){
-.container{padding:9px}
-.logoText{font-size:23px}
-.logo{width:55px;height:55px}
-.formRow{flex-direction:column}
-.cards{gap:8px}
-.card{padding:12px}
-.cardValue{font-size:17px}
+    .logo-text{
+        font-size:18px;
+    }
+
+    .wallet-btn{
+        padding:10px 12px;
+        font-size:12px;
+    }
+
+    .grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .level-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .slot-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<header>
+<div class="container nav">
 
-<!-- HEADER -->
-<div class="header">
+    <div class="logo-box">
+        <img src="logo.png" class="logo" id="logoImage"
+             onerror="this.style.display='none'">
+        <div class="logo-text">
+            TITAN<span>OVA</span>
+        </div>
+    </div>
 
-<div class="brand">
-
-<div class="logoArea">
-
-<img
-src="logo.png"
-class="logo"
-onerror="this.style.display='none'"
->
-
-<div>
-<div class="logoText">TITANOVA</div>
-<div class="subtitle">
-DECENTRALIZED MATRIX ECOSYSTEM • TESTNET
-</div>
-</div>
+    <button class="wallet-btn" id="connectBtn"
+            onclick="connectWallet()">
+        Connect Wallet
+    </button>
 
 </div>
-
-<button
-class="connect"
-id="connectBtn"
-onclick="connectWallet()">
-CONNECT WALLET
-</button>
-
-</div>
-
-<div class="wallet" id="walletAddress">
-Wallet not connected
-</div>
-
-<div class="status" id="status">
-Ready — Connect Wallet
-</div>
-
-</div>
+</header>
 
 
-<!-- MY DASHBOARD -->
-<div class="section">
+<main class="container">
 
-<div class="sectionTitle">
-⚡ MY DASHBOARD
-</div>
+<section class="hero">
 
-<div class="cards">
+    <h1>
+        Welcome to <span>TITANOVA</span>
+    </h1>
 
-<div class="card">
-<div class="cardLabel">My ID</div>
-<div class="cardValue" id="myId">—</div>
-</div>
+    <p>
+        Decentralized Matrix Ecosystem<br>
+        Built on BNB Smart Chain
+    </p>
 
-<div class="card">
-<div class="cardLabel">Referrer ID</div>
-<div class="cardValue" id="myReferrer">—</div>
-</div>
+    <div class="network" id="networkStatus">
+        Wallet Not Connected
+    </div>
 
-<div class="card">
-<div class="cardLabel">Active Levels</div>
-<div class="cardValue" id="myLevels">—</div>
-</div>
+</section>
 
-<div class="card">
-<div class="cardLabel">Team Size</div>
-<div class="cardValue" id="myTeam">—</div>
-</div>
 
-<div class="card">
-<div class="cardLabel">Direct Partners</div>
-<div class="cardValue" id="myDirect">—</div>
-</div>
+<!-- DASHBOARD -->
 
-<div class="card">
-<div class="cardLabel">Total Income</div>
-<div class="cardValue" id="myIncome">—</div>
-</div>
+<section class="card">
 
-<div class="card">
-<div class="cardLabel">Registration Pass</div>
-<div class="cardValue" id="myPass">—</div>
-</div>
+<h2>TITANOVA <span>Dashboard</span></h2>
 
-<div class="card">
-<div class="cardLabel">Royalty Card</div>
-<div class="cardValue" id="myRoyalty">—</div>
-</div>
+<div class="grid">
+
+    <div class="stat">
+        <div class="stat-title">Wallet</div>
+        <div class="wallet-address" id="walletAddress">
+            Not Connected
+        </div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-title">User ID</div>
+        <div class="stat-value" id="userId">
+            -
+        </div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-title">Current Rank</div>
+        <div class="stat-value" id="rank">
+            -
+        </div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-title">Current Level</div>
+        <div class="stat-value" id="level">
+            -
+        </div>
+    </div>
 
 </div>
 
+<br>
+
+<div class="grid">
+
+    <div class="stat">
+        <div class="stat-title">NFT Status</div>
+        <div class="stat-value" id="nftStatus">
+            -
+        </div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-title">Slot Status</div>
+        <div class="stat-value" id="slotStatus">
+            -
+        </div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-title">Royalty</div>
+        <div class="stat-value" id="royaltyStatus">
+            -
+        </div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-title">Network</div>
+        <div class="stat-value">
+            BNB
+        </div>
+    </div>
+
 </div>
 
+</section>
 
-<!-- REGISTRATION -->
-<div class="section">
 
-<div class="sectionTitle">
-🚀 JOIN / REGISTER
-</div>
+<!-- REGISTER -->
 
-<div class="message">
-New wallet se join karne ke liye Referrer ID enter karein.
-Registration ke liye BTCB allowance approve karna zaroori hai.
-</div>
+<section class="card">
 
-<div class="formRow">
+<h2>Register <span>ID</span></h2>
+
+<p class="info">
+Connect your wallet and enter your sponsor/referrer ID.
+</p>
+
+<br>
 
 <input
-id="referrerInput"
-type="number"
-min="1"
-placeholder="Enter Referrer ID e.g. 1"
+    type="number"
+    id="referrerId"
+    class="input"
+    placeholder="Enter Referrer ID"
 >
 
-<button
-class="goldBtn"
-onclick="prepareRegistration()">
-CHECK REFERRER
+<button class="primary" onclick="registerUser()">
+    Register ID
 </button>
 
-</div>
-
-<div id="registrationInfo" class="message"></div>
-
-<div class="formRow">
-
-<button
-class="goldBtn"
-id="approveBtn"
-style="display:none"
-onclick="approveBTCB()">
-1. APPROVE BTCB
-</button>
-
-<button
-class="goldBtn"
-id="registerBtn"
-style="display:none"
-onclick="registerUser()">
-2. REGISTER
-</button>
-
-</div>
-
-<div id="registerStatus" class="message"></div>
-
-</div>
+</section>
 
 
-<!-- ANY ID -->
-<div class="section">
+<!-- LEVELS -->
 
-<div class="sectionTitle">
-🔎 CHECK ANY ID
-</div>
+<section class="card">
 
-<div class="message">
-Kisi bhi registered User ID ka public dashboard check karein.
-</div>
+<h2>12 <span>Levels</span></h2>
 
-<div class="formRow">
+<div class="level-grid">
 
-<input
-id="searchId"
-type="number"
-min="1"
-placeholder="Enter User ID e.g. 1"
->
+<script>
+for(let i=1;i<=12;i++){
 
-<button
-class="goldBtn"
-onclick="checkAnyId()">
-CHECK ID
-</button>
+    let amount = Math.pow(2,i-1) * 0.001;
+
+    document.write(`
+        <div class="level">
+            <div class="level-number">
+                Level ${i}
+            </div>
+            <div class="level-price">
+                ${amount.toFixed(3)} BTCB
+            </div>
+        </div>
+    `);
+}
+</script>
 
 </div>
 
-<div id="searchStatus" class="message"></div>
+</section>
 
-<div class="profile" id="searchedProfile">
 
-<div class="profileGrid">
+<!-- MATRIX -->
 
-<div class="info">
-<span>USER ID</span>
-<b id="sId">—</b>
-</div>
+<section class="card">
 
-<div class="info">
-<span>WALLET</span>
-<b class="address" id="sAddress">—</b>
-</div>
+<h2>14-Slot <span>Matrix</span></h2>
 
-<div class="info">
-<span>REFERRER ID</span>
-<b id="sReferrer">—</b>
-</div>
+<div class="slot-grid">
 
-<div class="info">
-<span>DIRECT PARTNERS</span>
-<b id="sDirect">—</b>
-</div>
+<script>
+for(let i=1;i<=14;i++){
 
-<div class="info">
-<span>ACTIVE LEVELS</span>
-<b id="sLevels">—</b>
-</div>
+    let status="Available";
 
-<div class="info">
-<span>TEAM SIZE</span>
-<b id="sTeam">—</b>
-</div>
+    if(i===4){
+        status="Hold";
+    }
 
-<div class="info">
-<span>TOTAL INCOME</span>
-<b id="sIncome">—</b>
-</div>
+    if(i===5){
+        status="Upgrade";
+    }
 
-<div class="info">
-<span>REGISTRATION</span>
-<b id="sDate">—</b>
-</div>
+    if(i===14){
+        status="Recycle";
+    }
 
-<div class="info">
-<span>REGISTRATION PASS</span>
-<b id="sPass">—</b>
-</div>
-
-<div class="info">
-<span>ROYALTY CARD</span>
-<b id="sRoyalty">—</b>
-</div>
+    document.write(`
+        <div class="slot">
+            <div class="slot-number">
+                Slot ${i}
+            </div>
+            <div class="slot-status">
+                ${status}
+            </div>
+        </div>
+    `);
+}
+</script>
 
 </div>
 
-<div class="sectionTitle" style="font-size:15px;margin-top:18px">
-🧩 USER 12 LEVEL MATRIX
+</section>
+
+
+<!-- MATRIX FLOW -->
+
+<section class="card">
+
+<h2>Matrix <span>Flow</span></h2>
+
+<div class="flow">
+
+    <div class="flow-box">
+        <strong>Slot 1</strong>
+        1 Level Upline
+    </div>
+
+    <div class="flow-box">
+        <strong>Slot 2</strong>
+        2 Level Upline
+    </div>
+
+    <div class="flow-box">
+        <strong>Slot 3</strong>
+        Self
+    </div>
+
+    <div class="flow-box">
+        <strong>Slot 4</strong>
+        Hold
+    </div>
+
+    <div class="flow-box">
+        <strong>Slot 5</strong>
+        Upgrade
+    </div>
+
+    <div class="flow-box">
+        <strong>Slot 6</strong>
+        Self
+    </div>
+
+    <div class="flow-box">
+        <strong>Slot 7</strong>
+        1st Downline
+    </div>
+
+    <div class="flow-box">
+        <strong>Slot 8</strong>
+        Self
+    </div>
+
+    <div class="flow-box">
+        <strong>Slot 9</strong>
+        Self
+    </div>
+
+    <div class="flow-box">
+        <strong>Slot 10</strong>
+        2nd Downline
+    </div>
+
+    <div class="flow-box">
+        <strong>Slot 11</strong>
+        Self
+    </div>
+
+    <div class="flow-box">
+        <strong>Slot 12</strong>
+        Self
+    </div>
+
+    <div class="flow-box">
+        <strong>Slot 13</strong>
+        2-Level 1st Downline
+    </div>
+
+    <div class="flow-box">
+        <strong>Slot 14</strong>
+        Recycle
+    </div>
+
 </div>
 
-<div id="searchedLevels" class="levels"></div>
+</section>
+
+
+<!-- NFT -->
+
+<section class="card">
+
+<h2>NFT <span>System</span></h2>
+
+<div class="nft-grid">
+
+    <div class="nft">
+        <div class="nft-icon">🎫</div>
+        <h3>Registration Pass</h3>
+        <p>
+            TITANOVA registration NFT
+        </p>
+    </div>
+
+    <div class="nft">
+        <div class="nft-icon">🏆</div>
+        <h3>Rank NFT</h3>
+        <p>
+            Rank achievement NFT
+        </p>
+    </div>
+
+    <div class="nft">
+        <div class="nft-icon">👑</div>
+        <h3>Royalty NFT</h3>
+        <p>
+            Royalty achievement NFT
+        </p>
+    </div>
 
 </div>
 
+</section>
+
+
+<!-- ROYALTY -->
+
+<section class="card">
+
+<h2>Royal <span>Pool</span></h2>
+
+<div class="grid">
+
+    <div class="stat">
+        <div class="stat-title">Royalty Level</div>
+        <div class="stat-value">-</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-title">Royal Pool</div>
+        <div class="stat-value">- BTCB</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-title">Rank Reward</div>
+        <div class="stat-value">-</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-title">Status</div>
+        <div class="stat-value">Locked</div>
+    </div>
+
 </div>
 
-
-<!-- MY MATRIX -->
-<div class="section">
-
-<div class="sectionTitle">
-🧩 MY 12 LEVEL MATRIX
-</div>
-
-<div class="message">
-12 levels • 14 matrix positions per level
-</div>
-
-<div id="myLevelsMatrix" class="levels"></div>
-
-</div>
+</section>
 
 
-<!-- FEATURES -->
-<div class="section">
+<!-- INFORMATION -->
 
-<div class="sectionTitle">
-🏆 TITANOVA ECOSYSTEM
-</div>
+<section class="card">
 
-<div class="actionGrid">
+<h2>About <span>TITANOVA</span></h2>
 
-<div class="action">
-<h3>🎫 Registration Pass</h3>
-<p>
-Every registered user receives a unique Registration Pass NFT.
+<p class="info">
+TITANOVA is designed as a decentralized matrix ecosystem
+built on BNB Smart Chain. The platform includes a
+12-level structure, 14-slot matrix, NFT-based registration
+and achievement system, rank mechanism and royalty system.
 </p>
+
+<br>
+
+<div class="warning">
+<strong>Important:</strong><br>
+Always verify the official TITANOVA contract address before
+approving any blockchain transaction. Never share your
+private key or seed phrase.
 </div>
 
-<div class="action">
-<h3>👑 Royalty Card</h3>
-<p>
-Royalty Card is minted by the core contract at the configured levels.
-</p>
-</div>
+</section>
 
-<div class="action">
-<h3>📊 Matrix</h3>
-<p>
-Each level contains up to 14 matrix positions and cycle/reinvest data.
-</p>
-</div>
-
-</div>
-
-</div>
+</main>
 
 
-<div class="footer">
-TITANOVA • Testnet Dashboard<br>
-Knowledge First • Decision Later
-</div>
-
-</div>
+<footer>
+    TITANOVA © 2026 | Decentralized Matrix Ecosystem
+</footer>
 
 
 <script>
 
-/* =====================================================
-   CONTRACT
-===================================================== */
+/* ==========================================
+   TITANOVA CONFIGURATION
+========================================== */
 
-const CONTRACT_ADDRESS =
-"0x1Dc24B48364cE513397db87C71708d722bfABcc1";
+const TITANOVA_CONFIG = {
 
+    /* Contract address yahan baad me dalenge */
+    CONTRACT_ADDRESS:
+        "0x0000000000000000000000000000000000000000",
 
-/* =====================================================
-   ACTUAL TITANOVA CORE ABI
-===================================================== */
+    /* BNB Smart Chain */
+    MAINNET_CHAIN_ID: "0x38",
 
-const CORE_ABI = [
+    /* BNB Testnet */
+    TESTNET_CHAIN_ID: "0x61"
 
-"function BTCB() view returns(address)",
-
-"function LAST_LEVEL() view returns(uint8)",
-
-"function MATRIX_SIZE() view returns(uint8)",
-
-"function REGISTRATION_PASS() view returns(address)",
-
-"function ROYALTY_CARD() view returns(address)",
-
-"function registrationPassAddress() view returns(address)",
-
-"function royaltyCardAddress() view returns(address)",
-
-"function levelTokenCost(uint8) view returns(uint256)",
-
-"function idToAddress(uint256) view returns(address)",
-
-"function addressToId(address) view returns(uint256)",
-
-"function isUserExists(address) view returns(bool)",
-
-"function getUserId(address) view returns(uint256)",
-
-"function getUserDetails(uint256) view returns(address,address,uint256,uint256,uint8,uint256,uint256,uint256)",
-
-"function getDirectPartnerIds(uint256) view returns(uint256[])",
-
-"function getMatrix(address,uint8) view returns(address,uint256,uint256,uint256,uint256,uint256)",
-
-"function getMatrixReferrals(address,uint8) view returns(address[])",
-
-"function registration(uint256) external",
-
-"function contractTokenBalance() view returns(uint256)",
-
-"function currentNFTPrice() view returns(uint256)",
-
-"function lastUserId() view returns(uint256)"
-
-];
+};
 
 
-/* =====================================================
-   ERC20 ABI
-===================================================== */
+/* ==========================================
+   WALLET CONNECT
+========================================== */
 
-const ERC20_ABI = [
-
-"function approve(address,uint256) external returns(bool)",
-
-"function allowance(address,address) view returns(uint256)",
-
-"function balanceOf(address) view returns(uint256)",
-
-"function decimals() view returns(uint8)",
-
-"function symbol() view returns(string)"
-
-];
-
-
-/* =====================================================
-   REGISTRATION PASS ABI
-===================================================== */
-
-const PASS_ABI = [
-
-"function ownerOf(uint256) view returns(address)",
-
-"function balanceOf(address) view returns(uint256)",
-
-"function tokenURI(uint256) view returns(string)"
-
-];
-
-
-/* =====================================================
-   ROYALTY CARD ABI
-===================================================== */
-
-const ROYALTY_ABI = [
-
-"function balanceOf(address) view returns(uint256)",
-
-"function ownerOf(uint256) view returns(address)"
-
-];
-
-
-let provider = null;
-let signer = null;
-let core = null;
-let btcb = null;
-let pass = null;
-let royalty = null;
-let currentAccount = null;
-let btcbAddress = null;
-let decimals = 18;
-
-
-/* =====================================================
-   CONNECT WALLET
-===================================================== */
+let connectedAccount = null;
 
 async function connectWallet(){
 
-try{
+    if(!window.ethereum){
 
-if(!window.ethereum){
+        alert(
+            "Please open TITANOVA in MetaMask or a Web3 wallet."
+        );
 
-document.getElementById("status").innerHTML =
-"<span class='error'>" +
-"Wallet extension detect nahi hua. Laptop par MetaMask/compatible wallet browser extension install aur unlock karein." +
-"</span>";
+        return;
+    }
 
-return;
+    try{
 
+        const accounts =
+            await window.ethereum.request({
+                method:"eth_requestAccounts"
+            });
+
+        connectedAccount = accounts[0];
+
+        showWallet(connectedAccount);
+
+        const chainId =
+            await window.ethereum.request({
+                method:"eth_chainId"
+            });
+
+        updateNetwork(chainId);
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "Wallet connection cancelled or failed."
+        );
+    }
 }
 
-provider =
-new ethers.BrowserProvider(window.ethereum);
 
-await provider.send(
-"eth_requestAccounts",
-[]
-);
+/* ==========================================
+   DISPLAY WALLET
+========================================== */
 
-signer =
-await provider.getSigner();
+function showWallet(address){
 
-currentAccount =
-await signer.getAddress();
+    const short =
+        address.substring(0,6)
+        + "..."
+        + address.substring(address.length-4);
 
-core =
-new ethers.Contract(
-CONTRACT_ADDRESS,
-CORE_ABI,
-signer
-);
+    document.getElementById(
+        "walletAddress"
+    ).innerText = short;
 
-
-/* BTCB address */
-
-btcbAddress =
-await core.BTCB();
-
-btcb =
-new ethers.Contract(
-btcbAddress,
-ERC20_ABI,
-signer
-);
-
-
-/* NFT contracts */
-
-let passAddress =
-await core.registrationPassAddress();
-
-let royaltyAddress =
-await core.royaltyCardAddress();
-
-pass =
-new ethers.Contract(
-passAddress,
-PASS_ABI,
-provider
-);
-
-royalty =
-new ethers.Contract(
-royaltyAddress,
-ROYALTY_ABI,
-provider
-);
-
-
-/* decimals */
-
-try{
-
-decimals =
-Number(await btcb.decimals());
-
-}catch(e){
-
-decimals = 18;
+    document.getElementById(
+        "connectBtn"
+    ).innerText = short;
 
 }
 
 
-let network =
-await provider.getNetwork();
+/* ==========================================
+   NETWORK
+========================================== */
 
+function updateNetwork(chainId){
 
-document.getElementById("walletAddress").innerText =
-currentAccount;
+    const status =
+        document.getElementById(
+            "networkStatus"
+        );
 
-document.getElementById("connectBtn").innerText =
-"WALLET CONNECTED";
+    if(chainId === TITANOVA_CONFIG.MAINNET_CHAIN_ID){
 
-document.getElementById("status").innerHTML =
-"<span class='success'>" +
-"Wallet connected • Chain ID: " +
-network.chainId.toString() +
-"</span>";
+        status.innerText =
+            "BNB Smart Chain Mainnet";
 
+    }
+    else if(
+        chainId === TITANOVA_CONFIG.TESTNET_CHAIN_ID
+    ){
 
-await loadMyDashboard();
+        status.innerText =
+            "BNB Smart Chain Testnet";
 
+    }
+    else{
 
-}catch(error){
+        status.innerText =
+            "Unsupported Network";
 
-console.error(error);
-
-document.getElementById("status").innerHTML =
-"<span class='error'>" +
-getError(error) +
-"</span>";
-
-}
-
-}
-
-
-/* =====================================================
-   MY DASHBOARD
-===================================================== */
-
-async function loadMyDashboard(){
-
-try{
-
-let id =
-await core.addressToId(currentAccount);
-
-let userId =
-Number(id);
-
-
-if(userId === 0){
-
-document.getElementById("status").innerHTML =
-"<span class='gold'>" +
-"Wallet connected hai, lekin is wallet ka TITANOVA ID abhi registered nahi hai." +
-"</span>";
-
-return;
-
+    }
 }
 
 
-await displayUser(
-userId,
-"my"
-);
-
-
-}catch(error){
-
-console.error(error);
-
-document.getElementById("status").innerHTML =
-"<span class='error'>" +
-"Dashboard load error: " +
-getError(error) +
-"</span>";
-
-}
-
-}
-
-
-/* =====================================================
-   CHECK REFERRER
-===================================================== */
-
-async function prepareRegistration(){
-
-try{
-
-if(!core){
-
-await connectWallet();
-
-if(!core) return;
-
-}
-
-
-let refId =
-Number(
-document.getElementById("referrerInput").value
-);
-
-
-if(refId < 1){
-
-throw new Error(
-"Valid Referrer ID enter karein."
-);
-
-}
-
-
-let refAddress =
-await core.idToAddress(refId);
-
-
-if(
-!refAddress ||
-refAddress === ethers.ZeroAddress
-){
-
-throw new Error(
-"Referrer ID exist nahi karta."
-);
-
-}
-
-
-let exists =
-await core.isUserExists(refAddress);
-
-
-if(!exists){
-
-throw new Error(
-"Referrer user exist nahi karta."
-);
-
-}
-
-
-document.getElementById("registrationInfo").innerHTML =
-"<span class='success'>" +
-"Referrer ID " +
-refId +
-" valid hai.<br>" +
-"Wallet: " +
-shortAddress(refAddress) +
-"<br>" +
-"Registration cost: 0.001 BTCB" +
-"</span>";
-
-
-document.getElementById("approveBtn").style.display =
-"block";
-
-document.getElementById("registerBtn").style.display =
-"block";
-
-
-}catch(error){
-
-document.getElementById("registrationInfo").innerHTML =
-"<span class='error'>" +
-getError(error) +
-"</span>";
-
-}
-
-}
-
-
-/* =====================================================
-   APPROVE BTCB
-===================================================== */
-
-async function approveBTCB(){
-
-try{
-
-if(!btcb){
-
-throw new Error(
-"Wallet connect karein."
-);
-
-}
-
-
-let cost =
-await core.levelTokenCost(1);
-
-
-/*
-  Exact L1 cost = 0.001 BTCB
-*/
-
-document.getElementById("registerStatus").innerHTML =
-"BTCB approval transaction prepare ho raha hai...";
-
-
-let tx =
-await btcb.approve(
-CONTRACT_ADDRESS,
-cost
-);
-
-
-document.getElementById("registerStatus").innerHTML =
-"Approval transaction confirm hone ka wait...";
-
-
-await tx.wait();
-
-
-document.getElementById("registerStatus").innerHTML =
-"<span class='success'>" +
-"BTCB Approved successfully. Ab REGISTER button dabayein." +
-"</span>";
-
-
-}catch(error){
-
-document.getElementById("registerStatus").innerHTML =
-"<span class='error'>" +
-getError(error) +
-"</span>";
-
-}
-
-}
-
-
-/* =====================================================
+/* ==========================================
    REGISTER
-===================================================== */
+========================================== */
 
 async function registerUser(){
 
-try{
+    if(!connectedAccount){
 
-if(!core){
+        alert("Please connect wallet first.");
 
-throw new Error(
-"Wallet connect karein."
-);
+        return;
+    }
 
+    const referrer =
+        document.getElementById(
+            "referrerId"
+        ).value;
+
+    if(!referrer){
+
+        alert("Please enter Referrer ID.");
+
+        return;
+    }
+
+    /*
+       Actual smart contract transaction
+       yahan contract ABI + address add
+       karne ke baad connect hoga.
+    */
+
+    alert(
+        "Registration function is ready for smart-contract integration.\n\n" +
+        "Referrer ID: " + referrer
+    );
 }
 
 
-let refId =
-Number(
-document.getElementById("referrerInput").value
-);
-
-
-if(refId < 1){
-
-throw new Error(
-"Referrer ID enter karein."
-);
-
-}
-
-
-let cost =
-await core.levelTokenCost(1);
-
-
-let allowance =
-await btcb.allowance(
-currentAccount,
-CONTRACT_ADDRESS
-);
-
-
-if(allowance < cost){
-
-throw new Error(
-"Pehle APPROVE BTCB karein."
-);
-
-}
-
-
-document.getElementById("registerStatus").innerHTML =
-"Registration transaction confirm hone ka wait...";
-
-
-let tx =
-await core.registration(
-refId
-);
-
-
-document.getElementById("registerStatus").innerHTML =
-"Registration transaction mining mein hai...";
-
-
-let receipt =
-await tx.wait();
-
-
-document.getElementById("registerStatus").innerHTML =
-"<span class='success'>" +
-"🎉 Registration successful!<br>" +
-"Transaction: " +
-receipt.hash +
-"</span>";
-
-
-await loadMyDashboard();
-
-
-}catch(error){
-
-console.error(error);
-
-document.getElementById("registerStatus").innerHTML =
-"<span class='error'>" +
-getError(error) +
-"</span>";
-
-}
-
-}
-
-
-/* =====================================================
-   CHECK ANY ID
-===================================================== */
-
-async function checkAnyId(){
-
-try{
-
-if(!core){
-
-throw new Error(
-"Pehle wallet connect karein."
-);
-
-}
-
-
-let id =
-Number(
-document.getElementById("searchId").value
-);
-
-
-if(id < 1){
-
-throw new Error(
-"Valid User ID enter karein."
-);
-
-}
-
-
-document.getElementById("searchStatus").innerText =
-"Loading ID " + id + "...";
-
-
-await displayUser(
-id,
-"search"
-);
-
-
-document.getElementById("searchStatus").innerHTML =
-"<span class='success'>" +
-"ID " + id + " found." +
-"</span>";
-
-
-}catch(error){
-
-document.getElementById("searchedProfile").style.display =
-"none";
-
-document.getElementById("searchStatus").innerHTML =
-"<span class='error'>" +
-getError(error) +
-"</span>";
-
-}
-
-}
-
-
-/* =====================================================
-   DISPLAY USER
-===================================================== */
-
-async function displayUser(
-userId,
-type
-){
-
-let data =
-await core.getUserDetails(userId);
-
-
-let userAddress =
-data[0];
-
-if(
-!userAddress ||
-userAddress === ethers.ZeroAddress
-){
-
-throw new Error(
-"User ID not found."
-);
-
-}
-
-
-let referrerId =
-Number(data[2]);
-
-let directCount =
-Number(data[3]);
-
-let activeLevels =
-Number(data[4]);
-
-let teamSize =
-Number(data[5]);
-
-let timestamp =
-Number(data[6]);
-
-let totalIncome =
-data[7];
-
-
-/* NFT data */
-
-let passBalance =
-await pass.balanceOf(userAddress);
-
-let royaltyBalance =
-await royalty.balanceOf(userAddress);
-
-
-let hasPass =
-Number(passBalance) > 0;
-
-let hasRoyalty =
-Number(royaltyBalance) > 0;
-
-
-if(type === "my"){
-
-document.getElementById("myId").innerText =
-userId;
-
-document.getElementById("myReferrer").innerText =
-referrerId;
-
-document.getElementById("myLevels").innerText =
-activeLevels + " / 12";
-
-document.getElementById("myTeam").innerText =
-teamSize;
-
-document.getElementById("myDirect").innerText =
-directCount;
-
-document.getElementById("myIncome").innerText =
-formatToken(totalIncome);
-
-document.getElementById("myPass").innerText =
-hasPass ? "YES" : "NO";
-
-document.getElementById("myRoyalty").innerText =
-hasRoyalty ? "YES" : "NO";
-
-
-await buildLevels(
-userAddress,
-"myLevelsMatrix"
-);
-
-
-}else{
-
-document.getElementById("searchedProfile").style.display =
-"block";
-
-document.getElementById("sId").innerText =
-userId;
-
-document.getElementById("sAddress").innerText =
-shortAddress(userAddress);
-
-document.getElementById("sReferrer").innerText =
-referrerId;
-
-document.getElementById("sDirect").innerText =
-directCount;
-
-document.getElementById("sLevels").innerText =
-activeLevels + " / 12";
-
-document.getElementById("sTeam").innerText =
-teamSize;
-
-document.getElementById("sIncome").innerText =
-formatToken(totalIncome);
-
-document.getElementById("sDate").innerText =
-formatDate(timestamp);
-
-document.getElementById("sPass").innerText =
-hasPass ? "YES" : "NO";
-
-document.getElementById("sRoyalty").innerText =
-hasRoyalty ? "YES" : "NO";
-
-
-await buildLevels(
-userAddress,
-"searchedLevels"
-);
-
-}
-
-}
-
-
-/* =====================================================
-   LEVEL MATRIX
-===================================================== */
-
-async function buildLevels(
-userAddress,
-containerId
-){
-
-let container =
-document.getElementById(containerId);
-
-container.innerHTML =
-"<div class='message'>Loading 12 levels...</div>";
-
-
-let html = "";
-
-
-for(
-let level = 1;
-level <= 12;
-level++
-){
-
-try{
-
-let matrix =
-await core.getMatrix(
-userAddress,
-level
-);
-
-
-let referralCount =
-Number(matrix[1]);
-
-let reinvestCount =
-Number(matrix[2]);
-
-let heldUpgrade =
-matrix[3];
-
-let teamSize =
-Number(matrix[4]);
-
-let earning =
-matrix[5];
-
-
-let referrals =
-await core.getMatrixReferrals(
-userAddress,
-level
-);
-
-
-html +=
-createLevelCard(
-level,
-referralCount,
-reinvestCount,
-heldUpgrade,
-teamSize,
-earning,
-referrals
-);
-
-
-}catch(error){
-
-html +=
-createLevelCard(
-level,
-0,
-0,
-0,
-0,
-0,
-[]
-);
-
-}
-
-}
-
-
-container.innerHTML =
-html;
-
-}
-
-
-/* =====================================================
-   LEVEL CARD
-===================================================== */
-
-function createLevelCard(
-level,
-referralCount,
-reinvestCount,
-heldUpgrade,
-teamSize,
-earning,
-referrals
-){
-
-let filled =
-Math.min(
-14,
-referralCount
-);
-
-
-let slots = "";
-
-
-for(
-let i = 1;
-i <= 14;
-i++
-){
-
-let filledClass =
-i <= filled
-? "filled"
-: "";
-
-slots +=
-"<div class='slot " +
-filledClass +
-"'>" +
-i +
-"</div>";
-
-}
-
-
-let cost =
-Math.pow(2,level-1) * 0.001;
-
-
-return `
-
-<div class="levelCard">
-
-<div class="levelHead">
-
-<div class="levelName">
-LEVEL ${level}
-</div>
-
-<div class="${
-filled > 0
-? "active"
-: "inactive"
-}">
-${
-filled > 0
-? "ACTIVE"
-: "NOT ACTIVE"
-}
-</div>
-
-</div>
-
-<div class="levelInfo">
-
-Cost:
-<span class="gold">
-${cost.toFixed(3)} BTCB
-</span>
-
-<br>
-
-Matrix:
-${filled} / 14
-
-<br>
-
-Reinvest:
-${reinvestCount}
-
-<br>
-
-Team:
-${teamSize}
-
-<br>
-
-Held Upgrade:
-${formatToken(heldUpgrade)}
-
-<br>
-
-Earning:
-${formatToken(earning)}
-
-</div>
-
-<div class="slots">
-${slots}
-</div>
-
-</div>
-
-`;
-
-}
-
-
-/* =====================================================
-   HELPERS
-===================================================== */
-
-function shortAddress(address){
-
-if(!address) return "—";
-
-return (
-address.slice(0,6) +
-"..." +
-address.slice(-4)
-);
-
-}
-
-
-function formatToken(value){
-
-try{
-
-let n =
-Number(
-ethers.formatUnits(
-value,
-decimals
-)
-);
-
-if(!isFinite(n)) return "0 BTCB";
-
-return (
-n.toLocaleString(
-"en-US",
-{
-maximumFractionDigits:6
-}
-) +
-" BTCB"
-);
-
-}catch(e){
-
-return "0 BTCB";
-
-}
-
-}
-
-
-function formatDate(timestamp){
-
-if(!timestamp) return "—";
-
-return new Date(
-timestamp * 1000
-).toLocaleString();
-
-}
-
-
-function getError(error){
-
-console.error(error);
-
-if(
-error?.reason
-){
-
-return error.reason;
-
-}
-
-if(
-error?.shortMessage
-){
-
-return error.shortMessage;
-
-}
-
-if(
-error?.info?.error?.message
-){
-
-return error.info.error.message;
-
-}
-
-if(
-error?.message
-){
-
-return error.message;
-
-}
-
-return "Transaction / contract error.";
-
-}
-
-
-/* =====================================================
+/* ==========================================
    WALLET EVENTS
-===================================================== */
+========================================== */
 
 if(window.ethereum){
 
-window.ethereum.on(
-"accountsChanged",
-function(accounts){
+    window.ethereum.on(
+        "accountsChanged",
+        function(accounts){
 
-if(accounts.length === 0){
+            if(accounts.length === 0){
 
-location.reload();
+                connectedAccount = null;
 
-}else{
+                document.getElementById(
+                    "walletAddress"
+                ).innerText = "Not Connected";
 
-connectWallet();
+                document.getElementById(
+                    "connectBtn"
+                ).innerText = "Connect Wallet";
 
-}
+            }
+            else{
 
-});
+                connectedAccount = accounts[0];
+
+                showWallet(
+                    connectedAccount
+                );
+            }
+        }
+    );
 
 
-window.ethereum.on(
-"chainChanged",
-function(){
+    window.ethereum.on(
+        "chainChanged",
+        function(chainId){
 
-location.reload();
+            updateNetwork(chainId);
 
-});
+        }
+    );
 
 }
 
