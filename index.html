@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TITANOVA | Testnet Dashboard</title>
 
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
@@ -28,8 +27,8 @@ body:before{
   inset:0;
   pointer-events:none;
   background:
-  radial-gradient(circle at 20% 0%,rgba(255,200,0,.14),transparent 32%),
-  radial-gradient(circle at 100% 30%,rgba(255,170,0,.10),transparent 30%);
+    radial-gradient(circle at 15% 0%,rgba(255,200,0,.12),transparent 30%),
+    radial-gradient(circle at 100% 30%,rgba(255,160,0,.08),transparent 30%);
 }
 
 .container{
@@ -41,11 +40,11 @@ body:before{
 }
 
 .header{
-  border:1px solid #9b7518;
-  border-radius:22px;
+  border:1px solid #8d6914;
+  border-radius:20px;
   padding:20px;
-  background:linear-gradient(145deg,#171717,#080808);
-  box-shadow:0 0 35px rgba(255,200,0,.08);
+  background:linear-gradient(145deg,#181818,#080808);
+  box-shadow:0 0 30px rgba(255,190,0,.08);
 }
 
 .brand{
@@ -57,32 +56,36 @@ body:before{
 
 .logo{
   color:#ffd84d;
-  font-size:34px;
+  font-size:32px;
   font-weight:900;
   letter-spacing:4px;
 }
 
-.tagline{
+.subtitle{
   color:#999;
-  font-size:12px;
+  font-size:11px;
   margin-top:5px;
 }
 
 button{
-  cursor:pointer;
   border:0;
+  cursor:pointer;
   font-weight:900;
 }
 
 .gold{
-  background:linear-gradient(135deg,#ffe36a,#d89d00);
+  background:linear-gradient(135deg,#ffe06a,#d99b00);
   color:#000;
+  border-radius:11px;
   padding:13px 18px;
-  border-radius:12px;
 }
 
-.gold:hover{
-  transform:translateY(-1px);
+.darkBtn{
+  background:#171717;
+  border:1px solid #675116;
+  color:#ffd84d;
+  border-radius:11px;
+  padding:13px 18px;
 }
 
 .wallet{
@@ -94,18 +97,19 @@ button{
 
 .status{
   margin-top:10px;
-  padding:11px;
+  background:#101010;
+  border:1px solid #2d2612;
   border-radius:10px;
-  background:#111;
+  padding:10px;
   color:#ffd84d;
   font-size:12px;
 }
 
 .section{
   margin-top:15px;
-  border:1px solid #3e3215;
-  border-radius:20px;
   padding:18px;
+  border-radius:18px;
+  border:1px solid #3d3215;
   background:linear-gradient(145deg,#121212,#080808);
 }
 
@@ -116,22 +120,16 @@ button{
   margin-bottom:13px;
 }
 
-.subtitle{
-  color:#777;
-  font-size:11px;
-  margin-bottom:12px;
-}
-
-.grid{
+.cards{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:11px;
+  gap:10px;
 }
 
 .card{
-  background:#0c0c0c;
-  border:1px solid #332a13;
-  border-radius:14px;
+  background:#0b0b0b;
+  border:1px solid #302712;
+  border-radius:13px;
   padding:15px;
 }
 
@@ -143,116 +141,91 @@ button{
 
 .value{
   color:#ffd84d;
-  font-size:20px;
+  font-size:21px;
   font-weight:900;
   margin-top:7px;
   word-break:break-word;
 }
 
-.form{
-  display:grid;
-  gap:10px;
-}
-
 input{
   width:100%;
   background:#050505;
-  border:1px solid #4b3d18;
+  border:1px solid #514316;
   color:#fff;
-  border-radius:11px;
   padding:14px;
-  font-size:15px;
+  border-radius:11px;
   outline:none;
+  font-size:15px;
 }
 
 input:focus{
   border-color:#ffd84d;
 }
 
-.action{
-  display:grid;
-  grid-template-columns:1fr 1fr;
+.row{
+  display:flex;
   gap:10px;
 }
 
-.notice{
-  background:#0c0c0c;
-  border:1px solid #302812;
-  border-radius:11px;
-  padding:12px;
-  color:#aaa;
+.row input{
+  flex:1;
+}
+
+.registerBox{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.note{
+  color:#888;
   font-size:11px;
   line-height:1.7;
+  margin-top:10px;
+}
+
+.message{
+  margin-top:10px;
+  font-size:12px;
+  line-height:1.6;
 }
 
 .success{
-  color:#62ff91;
+  color:#63ff91;
 }
 
 .error{
-  color:#ff7272;
-}
-
-.loading{
-  color:#ffd84d;
-}
-
-.hidden{
-  display:none;
+  color:#ff6868;
 }
 
 .matrix{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:5px;
-  margin-top:12px;
-}
-
-.slot{
-  height:31px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#101010;
-  border:1px solid #29220f;
-  border-radius:6px;
-  color:#666;
-  font-size:9px;
-}
-
-.slot.filled{
-  background:#513d06;
-  border-color:#b68b16;
-  color:#ffe36a;
-}
-
-.levels{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:12px;
 }
 
 .level{
-  border:1px solid #3d3217;
+  background:#0a0a0a;
+  border:1px solid #3c3217;
   border-radius:15px;
   padding:14px;
-  background:#0b0b0b;
 }
 
 .levelTop{
   display:flex;
   justify-content:space-between;
+  align-items:center;
   margin-bottom:9px;
 }
 
 .levelName{
   color:#ffd84d;
+  font-size:18px;
   font-weight:900;
-  font-size:17px;
 }
 
 .active{
-  color:#62ff91;
+  color:#5fff8c;
   font-size:10px;
   font-weight:bold;
 }
@@ -263,62 +236,125 @@ input:focus{
   font-weight:bold;
 }
 
-.levelData{
+.stats{
   color:#999;
-  font-size:11px;
+  font-size:10px;
   line-height:1.8;
 }
 
-.address{
+.slots{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:4px;
+  margin-top:10px;
+}
+
+.slot{
+  height:28px;
+  border-radius:5px;
+  background:#111;
+  border:1px solid #25200f;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#555;
+  font-size:9px;
+}
+
+.slot.filled{
+  background:#4c3a05;
+  border-color:#b78a16;
   color:#ffd84d;
-  word-break:break-all;
+}
+
+.searchResult{
+  display:none;
+}
+
+.infoGrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.info{
+  background:#090909;
+  border:1px solid #292313;
+  border-radius:11px;
+  padding:12px;
+}
+
+.info small{
+  display:block;
+  color:#777;
+  font-size:9px;
+  margin-bottom:5px;
+}
+
+.info b{
+  font-size:13px;
+  word-break:break-word;
+}
+
+.goldText{
+  color:#ffd84d;
 }
 
 .footer{
   text-align:center;
-  color:#666;
-  font-size:11px;
+  color:#555;
   padding:25px 0;
+  font-size:10px;
 }
 
 @media(max-width:800px){
-  .grid{
+  .cards,
+  .infoGrid{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .levels{
+  .matrix{
     grid-template-columns:1fr;
   }
 
   .brand{
     flex-direction:column;
-    align-items:flex-start;
+    align-items:stretch;
   }
 
-  .gold{
+  .brand button{
     width:100%;
+  }
+
+  .registerBox{
+    grid-template-columns:1fr;
   }
 }
 
-@media(max-width:500px){
+@media(max-width:480px){
   .container{
     padding:9px;
   }
 
   .logo{
-    font-size:27px;
+    font-size:25px;
   }
 
-  .action{
-    grid-template-columns:1fr;
-  }
-
-  .grid{
+  .cards,
+  .infoGrid{
     grid-template-columns:repeat(2,1fr);
+  }
+
+  .card{
+    padding:11px;
   }
 
   .value{
     font-size:17px;
+  }
+
+  .row{
+    flex-direction:column;
   }
 }
 </style>
@@ -329,85 +365,85 @@ input:focus{
 <div class="container">
 
 <!-- HEADER -->
+
 <div class="header">
 
   <div class="brand">
 
     <div>
       <div class="logo">TITANOVA</div>
-      <div class="tagline">
+      <div class="subtitle">
         DECENTRALIZED MATRIX ECOSYSTEM • TESTNET
       </div>
     </div>
 
-    <button
-      id="connectBtn"
-      class="gold"
-      onclick="connectWallet()">
+    <button class="gold" id="connectBtn" onclick="connectWallet()">
       CONNECT WALLET
     </button>
 
   </div>
 
-  <div id="walletAddress" class="wallet">
+  <div class="wallet" id="wallet">
     Wallet not connected
   </div>
 
-  <div id="status" class="status">
-    Ready
+  <div class="status" id="status">
+    Connect wallet to start
   </div>
 
 </div>
 
 
 <!-- REGISTER -->
+
 <div class="section">
 
-  <div class="title">🚀 REGISTER NEW ID</div>
-
-  <div class="subtitle">
-    Existing user ka Referrer ID enter karke registration start karein.
+  <div class="title">
+    🚀 REGISTER / JOIN TITANOVA
   </div>
 
-  <div class="form">
+  <div class="registerBox">
 
-    <input
-      id="referrerId"
-      type="number"
-      min="1"
-      placeholder="Enter Referrer ID e.g. 1">
-
-    <div class="action">
-
-      <button
-        class="gold"
-        onclick="approveBTCB()">
-        1. APPROVE BTCB
-      </button>
-
-      <button
-        class="gold"
-        onclick="registerUser()">
-        2. REGISTER ID
-      </button>
-
+    <div>
+      <input
+        id="referrerId"
+        type="number"
+        min="1"
+        placeholder="Enter Referrer ID"
+      >
     </div>
 
-    <div id="registerStatus" class="notice">
-      Registration ke liye pehle wallet connect karein.
+    <div>
+      <button
+        class="gold"
+        style="width:100%;"
+        onclick="approveAndRegister()"
+      >
+        APPROVE BTCB & REGISTER
+      </button>
     </div>
 
   </div>
+
+  <div class="note">
+    Registration fee: <b class="goldText">0.001 BTCB</b><br>
+    Pehle BTCB approval hoga, uske baad registration transaction.
+  </div>
+
+  <div id="registerMessage" class="message"></div>
 
 </div>
 
 
 <!-- MY DASHBOARD -->
+
 <div class="section">
 
-  <div class="title">⚡ MY DASHBOARD</div>
+  <div class="title">
+    ⚡ MY DASHBOARD
+  </div>
 
-  <div class="grid">
+  <div class="cards">
 
     <div class="card">
       <div class="label">My ID</div>
@@ -455,85 +491,86 @@ input:focus{
 
 
 <!-- CHECK ANY ID -->
+
 <div class="section">
 
-  <div class="title">🔎 CHECK ANY USER ID</div>
-
-  <div class="subtitle">
-    Wallet connect ki zarurat nahi. Kisi bhi registered ID ka public data check karein.
+  <div class="title">
+    🔎 CHECK ANY USER ID
   </div>
 
-  <div class="action">
+  <div class="row">
 
     <input
       id="searchId"
       type="number"
       min="1"
-      placeholder="Enter User ID e.g. 1">
+      placeholder="Enter User ID e.g. 1"
+    >
 
-    <button
-      class="gold"
-      onclick="checkAnyId()">
+    <button class="gold" onclick="checkAnyId()">
       CHECK ID
     </button>
 
   </div>
 
-  <div id="searchStatus" class="notice" style="margin-top:10px;">
-    User ID enter karke CHECK ID dabayein.
-  </div>
+  <div id="searchMessage" class="message"></div>
 
-  <div id="searchProfile" class="hidden">
 
-    <div class="grid" style="margin-top:15px;">
+  <div class="searchResult" id="searchResult">
 
-      <div class="card">
-        <div class="label">USER ID</div>
-        <div class="value" id="sId">—</div>
+    <div class="infoGrid" style="margin-top:14px;">
+
+      <div class="info">
+        <small>USER ID</small>
+        <b id="sId">—</b>
       </div>
 
-      <div class="card">
-        <div class="label">WALLET</div>
-        <div class="value address" id="sAddress">—</div>
+      <div class="info">
+        <small>WALLET</small>
+        <b class="goldText" id="sAddress">—</b>
       </div>
 
-      <div class="card">
-        <div class="label">REFERRER ID</div>
-        <div class="value" id="sReferrer">—</div>
+      <div class="info">
+        <small>REFERRER ID</small>
+        <b id="sReferrer">—</b>
       </div>
 
-      <div class="card">
-        <div class="label">DIRECT</div>
-        <div class="value" id="sDirect">—</div>
+      <div class="info">
+        <small>DIRECT PARTNERS</small>
+        <b id="sDirect">—</b>
       </div>
 
-      <div class="card">
-        <div class="label">ACTIVE LEVELS</div>
-        <div class="value" id="sLevels">—</div>
+      <div class="info">
+        <small>ACTIVE LEVELS</small>
+        <b id="sLevels">—</b>
       </div>
 
-      <div class="card">
-        <div class="label">TEAM SIZE</div>
-        <div class="value" id="sTeam">—</div>
+      <div class="info">
+        <small>TEAM SIZE</small>
+        <b id="sTeam">—</b>
       </div>
 
-      <div class="card">
-        <div class="label">TOTAL INCOME</div>
-        <div class="value" id="sIncome">—</div>
+      <div class="info">
+        <small>TOTAL INCOME</small>
+        <b id="sIncome">—</b>
       </div>
 
-      <div class="card">
-        <div class="label">REGISTRATION</div>
-        <div class="value" id="sDate">—</div>
+      <div class="info">
+        <small>REGISTRATION DATE</small>
+        <b id="sDate">—</b>
       </div>
 
     </div>
 
-    <div class="title" style="margin-top:20px;font-size:16px;">
-      USER 12 LEVEL MATRIX
-    </div>
+    <div style="margin-top:16px;">
 
-    <div id="searchLevels" class="levels"></div>
+      <div class="title" style="font-size:15px;">
+        USER MATRIX
+      </div>
+
+      <div id="searchedMatrix" class="matrix"></div>
+
+    </div>
 
   </div>
 
@@ -541,15 +578,18 @@ input:focus{
 
 
 <!-- MY MATRIX -->
+
 <div class="section">
 
-  <div class="title">🧩 MY 12 LEVEL MATRIX</div>
-
-  <div class="subtitle">
-    Har level mein 14 positions. Filled slots blockchain se read honge.
+  <div class="title">
+    🧩 MY 12 LEVEL MATRIX
   </div>
 
-  <div id="myLevelsMatrix" class="levels"></div>
+  <div class="note">
+    Har level mein 14 matrix positions.
+  </div>
+
+  <div id="myMatrix" class="matrix" style="margin-top:14px;"></div>
 
 </div>
 
@@ -565,18 +605,19 @@ input:focus{
 <script>
 
 /* =====================================================
-   TITANOVA CONTRACT
+                    CONTRACT
 ===================================================== */
 
 const CONTRACT_ADDRESS =
 "0x1Dc24B48364cE513397db87C71708d722bfABcc1";
 
 
-/* =====================================================
-   REAL ABI FROM YOUR CONTRACT
-===================================================== */
+/*
+  YE ABI AAPKE DIYE HUE TITANOVA CORE
+  CONTRACT KE FUNCTIONS KE ACCORDING HAI.
+*/
 
-const CORE_ABI = [
+const ABI = [
 
   "function BTCB() view returns(address)",
 
@@ -584,15 +625,15 @@ const CORE_ABI = [
 
   "function MATRIX_SIZE() view returns(uint8)",
 
-  "function owner() view returns(address)",
+  "function MAX_REGISTRATION_PASSES() view returns(uint256)",
 
   "function lastUserId() view returns(uint256)",
 
-  "function levelTokenCost(uint8) view returns(uint256)",
-
-  "function idToAddress(uint256) view returns(address)",
+  "function owner() view returns(address)",
 
   "function addressToId(address) view returns(uint256)",
+
+  "function idToAddress(uint256) view returns(address)",
 
   "function isUserExists(address) view returns(bool)",
 
@@ -606,6 +647,10 @@ const CORE_ABI = [
 
   "function getMatrixReferrals(address,uint8) view returns(address[])",
 
+  "function getLevelCost(uint8) view returns(uint256)",
+
+  "function levelTokenCost(uint8) view returns(uint256)",
+
   "function registration(uint256) external",
 
   "function registrationPassAddress() view returns(address)",
@@ -613,6 +658,10 @@ const CORE_ABI = [
   "function royaltyCardAddress() view returns(address)",
 
   "function contractTokenBalance() view returns(uint256)",
+
+  "function totalProjectInvestment() view returns(uint256)",
+
+  "function currentNFTPrice() view returns(uint256)",
 
   "function treasuryAddress() view returns(address)"
 
@@ -625,26 +674,20 @@ const ERC20_ABI = [
 
   "function allowance(address,address) view returns(uint256)",
 
-  "function balanceOf(address) view returns(uint256)",
-
-  "function decimals() view returns(uint8)"
+  "function balanceOf(address) view returns(uint256)"
 
 ];
 
 
-/* =====================================================
-   VARIABLES
-===================================================== */
-
 let provider = null;
 let signer = null;
 let core = null;
-let btcb = null;
-let currentAccount = null;
+let btc = null;
+let account = null;
 
 
 /* =====================================================
-   CONNECT WALLET
+                    CONNECT
 ===================================================== */
 
 async function connectWallet(){
@@ -654,17 +697,15 @@ async function connectWallet(){
     if(!window.ethereum){
 
       setStatus(
-        "MetaMask ya compatible Web3 wallet install karein.",
-        "error"
+        "Wallet extension nahi mila. MetaMask/compatible wallet use karein.",
+        true
       );
 
       return;
     }
 
     provider =
-      new ethers.BrowserProvider(
-        window.ethereum
-      );
+      new ethers.BrowserProvider(window.ethereum);
 
     await provider.send(
       "eth_requestAccounts",
@@ -674,20 +715,20 @@ async function connectWallet(){
     signer =
       await provider.getSigner();
 
-    currentAccount =
+    account =
       await signer.getAddress();
 
     core =
       new ethers.Contract(
         CONTRACT_ADDRESS,
-        CORE_ABI,
+        ABI,
         signer
       );
 
     const btcAddress =
       await core.BTCB();
 
-    btcb =
+    btc =
       new ethers.Contract(
         btcAddress,
         ERC20_ABI,
@@ -697,20 +738,15 @@ async function connectWallet(){
     const network =
       await provider.getNetwork();
 
-    document.getElementById(
-      "walletAddress"
-    ).innerText =
-      currentAccount;
+    document.getElementById("wallet").innerText =
+      account;
 
-    document.getElementById(
-      "connectBtn"
-    ).innerText =
+    document.getElementById("connectBtn").innerText =
       "CONNECTED";
 
     setStatus(
       "Wallet connected • Chain ID: " +
-      network.chainId,
-      "success"
+      network.chainId
     );
 
     await loadMyDashboard();
@@ -720,8 +756,8 @@ async function connectWallet(){
     console.error(error);
 
     setStatus(
-      getError(error),
-      "error"
+      readableError(error),
+      true
     );
 
   }
@@ -730,197 +766,33 @@ async function connectWallet(){
 
 
 /* =====================================================
-   APPROVE BTCB
-===================================================== */
-
-async function approveBTCB(){
-
-  try{
-
-    if(!core || !btcb){
-
-      alert("Pehle wallet connect karein.");
-      return;
-    }
-
-    const referrer =
-      Number(
-        document.getElementById(
-          "referrerId"
-        ).value
-      );
-
-    if(!referrer || referrer < 1){
-
-      alert("Referrer ID enter karein.");
-      return;
-    }
-
-    const cost =
-      await core.levelTokenCost(1);
-
-    const decimals =
-      await btcb.decimals();
-
-    const readable =
-      ethers.formatUnits(
-        cost,
-        decimals
-      );
-
-    document.getElementById(
-      "registerStatus"
-    ).innerHTML =
-      "Approving " +
-      readable +
-      " BTCB...";
-
-    const tx =
-      await btcb.approve(
-        CONTRACT_ADDRESS,
-        cost
-      );
-
-    document.getElementById(
-      "registerStatus"
-    ).innerHTML =
-      "Approval transaction sent...<br>" +
-      tx.hash;
-
-    await tx.wait();
-
-    document.getElementById(
-      "registerStatus"
-    ).innerHTML =
-      "<span class='success'>" +
-      "BTCB approved successfully.<br>" +
-      "Ab REGISTER ID dabayein." +
-      "</span>";
-
-  }catch(error){
-
-    console.error(error);
-
-    document.getElementById(
-      "registerStatus"
-    ).innerHTML =
-      "<span class='error'>" +
-      getError(error) +
-      "</span>";
-
-  }
-
-}
-
-
-/* =====================================================
-   REGISTER
-===================================================== */
-
-async function registerUser(){
-
-  try{
-
-    if(!core){
-
-      alert("Pehle wallet connect karein.");
-      return;
-    }
-
-    const referrer =
-      Number(
-        document.getElementById(
-          "referrerId"
-        ).value
-      );
-
-    if(!referrer || referrer < 1){
-
-      alert("Referrer ID enter karein.");
-      return;
-    }
-
-    document.getElementById(
-      "registerStatus"
-    ).innerHTML =
-      "Registration transaction confirm karein...";
-
-    const tx =
-      await core.registration(
-        referrer
-      );
-
-    document.getElementById(
-      "registerStatus"
-    ).innerHTML =
-      "Registration sent...<br>" +
-      tx.hash;
-
-    await tx.wait();
-
-    document.getElementById(
-      "registerStatus"
-    ).innerHTML =
-      "<span class='success'>" +
-      "🎉 Registration successful!<br>" +
-      "Dashboard loading..." +
-      "</span>";
-
-    await loadMyDashboard();
-
-  }catch(error){
-
-    console.error(error);
-
-    document.getElementById(
-      "registerStatus"
-    ).innerHTML =
-      "<span class='error'>" +
-      getError(error) +
-      "</span>";
-
-  }
-
-}
-
-
-/* =====================================================
-   MY DASHBOARD
+                  MY DASHBOARD
 ===================================================== */
 
 async function loadMyDashboard(){
 
-  if(!core || !currentAccount)
-    return;
+  if(!core || !account) return;
 
   try{
 
     const id =
-      await core.addressToId(
-        currentAccount
-      );
+      await core.getUserId(account);
 
     const userId =
       Number(id);
 
     if(userId === 0){
 
-      document.getElementById(
-        "myId"
-      ).innerText =
-        "Not Registered";
+      document.getElementById("myId").innerText =
+        "NOT REGISTERED";
 
-      document.getElementById(
-        "status"
-      ).innerHTML =
-        "<span class='error'>" +
-        "Is wallet ki TITANOVA ID abhi registered nahi hai." +
-        "</span>";
+      document.getElementById("myMatrix").innerHTML =
+        "";
 
       return;
     }
 
-    await displayUser(
+    await showUser(
       userId,
       "my"
     );
@@ -930,8 +802,9 @@ async function loadMyDashboard(){
     console.error(error);
 
     setStatus(
-      "Dashboard data load nahi hua.",
-      "error"
+      "Dashboard load error: " +
+      readableError(error),
+      true
     );
 
   }
@@ -940,83 +813,61 @@ async function loadMyDashboard(){
 
 
 /* =====================================================
-   CHECK ANY ID
+                  CHECK ANY ID
 ===================================================== */
 
 async function checkAnyId(){
 
+  const id =
+    Number(
+      document.getElementById("searchId").value
+    );
+
+  const message =
+    document.getElementById("searchMessage");
+
+  if(!id || id < 1){
+
+    message.innerHTML =
+      "<span class='error'>Valid User ID enter karein.</span>";
+
+    return;
+  }
+
+  if(!core){
+
+    message.innerHTML =
+      "<span class='error'>Pehle wallet connect karein.</span>";
+
+    return;
+  }
+
   try{
 
-    const id =
-      Number(
-        document.getElementById(
-          "searchId"
-        ).value
-      );
+    message.innerHTML =
+      "Loading User ID " + id + "...";
 
-    if(!id || id < 1){
-
-      document.getElementById(
-        "searchStatus"
-      ).innerHTML =
-        "<span class='error'>" +
-        "Valid ID enter karein." +
-        "</span>";
-
-      return;
-    }
-
-    if(!provider){
-
-      provider =
-        new ethers.JsonRpcProvider(
-          "https://data-seed-prebsc-1-s1.binance.org:8545"
-        );
-
-      core =
-        new ethers.Contract(
-          CONTRACT_ADDRESS,
-          CORE_ABI,
-          provider
-        );
-
-    }
-
-    document.getElementById(
-      "searchStatus"
-    ).innerHTML =
-      "Blockchain se ID " +
-      id +
-      " check ho rahi hai...";
-
-    await displayUser(
+    await showUser(
       id,
       "search"
     );
 
-    document.getElementById(
-      "searchStatus"
-    ).innerHTML =
-      "<span class='success'>" +
-      "ID " +
+    message.innerHTML =
+      "<span class='success'>User ID " +
       id +
-      " found." +
-      "</span>";
+      " found.</span>";
 
   }catch(error){
 
     console.error(error);
 
-    document.getElementById(
-      "searchProfile"
-    ).classList.add("hidden");
+    document.getElementById("searchResult").style.display =
+      "none";
 
-    document.getElementById(
-      "searchStatus"
-    ).innerHTML =
-      "<span class='error'>" +
-      "ID nahi mili ya contract/Testnet connection available nahi hai." +
-      "</span>";
+    message.innerHTML =
+      "<span class='error'>User ID " +
+      id +
+      " nahi mila.</span>";
 
   }
 
@@ -1024,10 +875,10 @@ async function checkAnyId(){
 
 
 /* =====================================================
-   DISPLAY USER
+                    SHOW USER
 ===================================================== */
 
-async function displayUser(
+async function showUser(
   userId,
   type
 ){
@@ -1046,9 +897,8 @@ async function displayUser(
   ){
 
     throw new Error(
-      "USER_NOT_FOUND"
+      "USER NOT FOUND"
     );
-
   }
 
   const referrerId =
@@ -1072,107 +922,64 @@ async function displayUser(
 
   if(type === "my"){
 
-    document.getElementById(
-      "myId"
-    ).innerText =
+    document.getElementById("myId").innerText =
       userId;
 
-    document.getElementById(
-      "myReferrer"
-    ).innerText =
+    document.getElementById("myReferrer").innerText =
       referrerId;
 
-    document.getElementById(
-      "myLevels"
-    ).innerText =
-      activeLevels +
-      " / 12";
+    document.getElementById("myLevels").innerText =
+      activeLevels + " / 12";
 
-    document.getElementById(
-      "myTeam"
-    ).innerText =
+    document.getElementById("myTeam").innerText =
       teamSize;
 
-    document.getElementById(
-      "myDirect"
-    ).innerText =
+    document.getElementById("myDirect").innerText =
       directCount;
 
-    document.getElementById(
-      "myIncome"
-    ).innerText =
-      formatBTCB(
-        income
-      );
+    document.getElementById("myIncome").innerText =
+      formatBTCB(income);
 
-    document.getElementById(
-      "myDate"
-    ).innerText =
-      formatDate(
-        timestamp
-      );
+    document.getElementById("myDate").innerText =
+      formatDate(timestamp);
 
-    await buildLevels(
+    await buildMatrix(
       userAddress,
-      "myLevelsMatrix"
+      "myMatrix"
     );
 
   }else{
 
-    document.getElementById(
-      "searchProfile"
-    ).classList.remove(
-      "hidden"
-    );
+    document.getElementById("searchResult").style.display =
+      "block";
 
-    document.getElementById(
-      "sId"
-    ).innerText =
+    document.getElementById("sId").innerText =
       userId;
 
-    document.getElementById(
-      "sAddress"
-    ).innerText =
+    document.getElementById("sAddress").innerText =
       userAddress;
 
-    document.getElementById(
-      "sReferrer"
-    ).innerText =
+    document.getElementById("sReferrer").innerText =
       referrerId;
 
-    document.getElementById(
-      "sDirect"
-    ).innerText =
+    document.getElementById("sDirect").innerText =
       directCount;
 
-    document.getElementById(
-      "sLevels"
-    ).innerText =
-      activeLevels +
-      " / 12";
+    document.getElementById("sLevels").innerText =
+      activeLevels + " / 12";
 
-    document.getElementById(
-      "sTeam"
-    ).innerText =
+    document.getElementById("sTeam").innerText =
       teamSize;
 
-    document.getElementById(
-      "sIncome"
-    ).innerText =
-      formatBTCB(
-        income
-      );
+    document.getElementById("sIncome").innerText =
+      formatBTCB(income);
 
-    document.getElementById(
-      "sDate"
-    ).innerText =
-      formatDate(
-        timestamp
-      );
+    document.getElementById("sDate").innerText =
+      formatDate(timestamp);
 
-    await buildLevels(
+    await buildMatrix(
       userAddress,
-      "searchLevels"
+      "searchedMatrix"
     );
 
   }
@@ -1181,10 +988,10 @@ async function displayUser(
 
 
 /* =====================================================
-   BUILD 12 LEVELS
+                    MATRIX
 ===================================================== */
 
-async function buildLevels(
+async function buildMatrix(
   userAddress,
   containerId
 ){
@@ -1195,7 +1002,7 @@ async function buildLevels(
     );
 
   container.innerHTML =
-    "<div class='loading'>Loading 12 levels...</div>";
+    "<div class='note'>Loading 12 levels...</div>";
 
   let html = "";
 
@@ -1209,12 +1016,6 @@ async function buildLevels(
 
       const matrix =
         await core.getMatrix(
-          userAddress,
-          level
-        );
-
-      const referrals =
-        await core.getMatrixReferrals(
           userAddress,
           level
         );
@@ -1234,9 +1035,14 @@ async function buildLevels(
       const earning =
         matrix[5];
 
+      const referrals =
+        await core.getMatrixReferrals(
+          userAddress,
+          level
+        );
+
       const active =
         referralCount > 0 ||
-        reinvestCount > 0 ||
         level === 1;
 
       html +=
@@ -1276,7 +1082,7 @@ async function buildLevels(
 
 
 /* =====================================================
-   LEVEL CARD
+                LEVEL CARD
 ===================================================== */
 
 function createLevel(
@@ -1307,10 +1113,10 @@ function createLevel(
       "'>" +
       i +
       "</div>";
-
   }
 
   return `
+
     <div class="level">
 
       <div class="levelTop">
@@ -1319,68 +1125,205 @@ function createLevel(
           LEVEL ${level}
         </div>
 
-        <div class="${active ? "active" : "inactive"}">
-          ${active ? "ACTIVE" : "INACTIVE"}
+        <div class="${
+          active ? "active" : "inactive"
+        }">
+          ${
+            active
+            ? "ACTIVE"
+            : "INACTIVE"
+          }
         </div>
 
       </div>
 
-      <div class="levelData">
+      <div class="stats">
 
-        Slots:
-        <b>${referralCount} / 14</b><br>
+        Slots: ${referralCount} / 14<br>
 
-        Recycle:
-        <b>${reinvestCount}</b><br>
+        Recycle: ${reinvestCount}<br>
 
-        Team:
-        <b>${team}</b><br>
+        Team: ${team}<br>
 
-        Held Upgrade:
-        <b>${formatBTCB(held)}</b><br>
+        Hold:
+        ${formatBTCB(held)} BTCB<br>
 
         Earning:
-        <b>${formatBTCB(earning)}</b>
+        ${formatBTCB(earning)} BTCB
 
       </div>
 
-      <div class="matrix">
+      <div class="slots">
         ${slots}
       </div>
 
     </div>
+
   `;
 
 }
 
 
 /* =====================================================
-   FORMAT
+                APPROVE + REGISTER
+===================================================== */
+
+async function approveAndRegister(){
+
+  const message =
+    document.getElementById(
+      "registerMessage"
+    );
+
+  try{
+
+    if(!core || !btc){
+
+      message.innerHTML =
+        "<span class='error'>Pehle wallet connect karein.</span>";
+
+      return;
+    }
+
+    const referrerId =
+      Number(
+        document.getElementById(
+          "referrerId"
+        ).value
+      );
+
+    if(
+      !referrerId ||
+      referrerId < 1
+    ){
+
+      message.innerHTML =
+        "<span class='error'>Referrer ID enter karein.</span>";
+
+      return;
+    }
+
+
+    message.innerHTML =
+      "Checking registration cost...";
+
+
+    const cost =
+      await core.getLevelCost(1);
+
+
+    /*
+      Check BTCB balance
+    */
+
+    const balance =
+      await btc.balanceOf(
+        account
+      );
+
+    if(balance < cost){
+
+      message.innerHTML =
+        "<span class='error'>" +
+        "Wallet mein sufficient BTCB nahi hai.<br>" +
+        "Required: " +
+        formatBTCB(cost) +
+        " BTCB" +
+        "</span>";
+
+      return;
+    }
+
+
+    /*
+      Check existing allowance
+    */
+
+    const allowance =
+      await btc.allowance(
+        account,
+        CONTRACT_ADDRESS
+      );
+
+
+    if(allowance < cost){
+
+      message.innerHTML =
+        "Step 1/2: BTCB approval confirm karein...";
+
+      const approveTx =
+        await btc.approve(
+          CONTRACT_ADDRESS,
+          cost
+        );
+
+      message.innerHTML =
+        "BTCB approval transaction waiting...";
+
+      await approveTx.wait();
+
+      message.innerHTML =
+        "<span class='success'>" +
+        "BTCB approved. Step 2/2: Registration..." +
+        "</span>";
+
+    }
+
+
+    /*
+      Registration
+    */
+
+    const tx =
+      await core.registration(
+        referrerId
+      );
+
+    message.innerHTML =
+      "Registration transaction waiting...<br>" +
+      tx.hash;
+
+    await tx.wait();
+
+    message.innerHTML =
+      "<span class='success'>" +
+      "🎉 Registration successful! Dashboard loading..." +
+      "</span>";
+
+    await loadMyDashboard();
+
+  }catch(error){
+
+    console.error(error);
+
+    message.innerHTML =
+      "<span class='error'>" +
+      readableError(error) +
+      "</span>";
+
+  }
+
+}
+
+
+/* =====================================================
+                    HELPERS
 ===================================================== */
 
 function formatBTCB(value){
 
   try{
 
-    if(
-      value === undefined ||
-      value === null
-    )
-      return "0 BTCB";
+    return Number(
+      ethers.formatUnits(
+        value,
+        18
+      )
+    ).toFixed(6);
 
-    return (
-      Number(
-        ethers.formatUnits(
-          value,
-          18
-        )
-      ).toFixed(6)
-      + " BTCB"
-    );
+  }catch(e){
 
-  }catch{
-
-    return "0 BTCB";
+    return "0";
 
   }
 
@@ -1389,8 +1332,7 @@ function formatBTCB(value){
 
 function formatDate(timestamp){
 
-  if(!timestamp)
-    return "—";
+  if(!timestamp) return "—";
 
   return new Date(
     timestamp * 1000
@@ -1401,60 +1343,82 @@ function formatDate(timestamp){
 }
 
 
-function setStatus(
-  message,
-  type
-){
+function shortAddress(address){
 
-  const el =
-    document.getElementById(
-      "status"
-    );
+  if(!address) return "—";
 
-  el.innerHTML =
-    "<span class='" +
-    type +
-    "'>" +
-    message +
-    "</span>";
+  return (
+    address.slice(0,6) +
+    "..." +
+    address.slice(-4)
+  );
 
 }
 
 
-function getError(error){
+function setStatus(
+  text,
+  error=false
+){
+
+  document.getElementById(
+    "status"
+  ).innerHTML =
+    error
+    ? "<span class='error'>" +
+      text +
+      "</span>"
+    : text;
+
+}
+
+
+function readableError(error){
+
+  if(!error) return "Unknown error";
 
   if(
-    error?.reason
-  )
-    return error.reason;
-
-  if(
-    error?.shortMessage
-  )
-    return error.shortMessage;
-
-  if(
-    error?.message
+    error.code === 4001 ||
+    error.info?.error?.code === 4001
   ){
 
-    if(
-      error.message.includes(
-        "user rejected"
-      )
-    )
-      return "Transaction rejected.";
-
-    return error.message.substring(
-      0,
-      180
-    );
+    return "Transaction cancelled by user.";
 
   }
 
-  return "Transaction failed.";
+  const message =
+    error.shortMessage ||
+    error.reason ||
+    error.info?.error?.message ||
+    error.message ||
+    "Transaction failed.";
+
+  return message
+    .replace(
+      "execution reverted:",
+      ""
+    )
+    .trim();
 
 }
 
+
+/* =====================================================
+              WALLET ACCOUNT CHANGE
+===================================================== */
+
+if(window.ethereum){
+
+  window.ethereum.on(
+    "accountsChanged",
+    async function(){
+
+      location.reload();
+
+    }
+  );
+
+}
 
 </script>
 
