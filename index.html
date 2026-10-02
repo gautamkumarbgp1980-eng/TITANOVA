@@ -3,22 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TITANOVA | Testnet</title>
+
+<title>TITANOVA Testnet</title>
 
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script>
 
 <style>
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
 }
 
 body{
-    font-family:Arial,sans-serif;
-    background:#080808;
+    margin:0;
+    background:#070707;
     color:#fff;
-    min-height:100vh;
+    font-family:Arial,sans-serif;
 }
 
 .container{
@@ -30,32 +29,25 @@ body{
 
 .header{
     text-align:center;
-    padding:20px 10px;
+    padding:25px 0;
 }
 
-.logo{
-    width:90px;
-    height:90px;
-    object-fit:contain;
-    margin-bottom:10px;
-}
-
-h1{
-    font-size:30px;
+.header h1{
+    margin:0;
     color:#f5c542;
-    letter-spacing:2px;
+    font-size:34px;
+    letter-spacing:3px;
 }
 
-.subtitle{
-    color:#aaa;
-    margin-top:6px;
-    font-size:14px;
+.header p{
+    color:#999;
+    margin:8px 0;
 }
 
-.testnet{
+.badge{
     display:inline-block;
-    margin-top:10px;
-    padding:6px 12px;
+    margin-top:8px;
+    padding:7px 14px;
     border:1px solid #f5c542;
     border-radius:20px;
     color:#f5c542;
@@ -68,113 +60,122 @@ h1{
     border-radius:16px;
     padding:18px;
     margin-top:15px;
-    box-shadow:0 5px 25px rgba(0,0,0,.35);
 }
 
 .card h2{
-    font-size:18px;
     color:#f5c542;
-    margin-bottom:14px;
+    font-size:19px;
+    margin:0 0 15px;
 }
 
 button{
     width:100%;
+    padding:15px;
+    margin-top:10px;
     border:0;
     border-radius:10px;
-    padding:14px;
-    margin-top:10px;
+    background:#f5c542;
+    color:#000;
     font-size:16px;
     font-weight:bold;
     cursor:pointer;
-    background:#f5c542;
-    color:#000;
 }
 
 button:disabled{
-    opacity:.5;
+    opacity:.45;
     cursor:not-allowed;
 }
 
 input{
     width:100%;
     padding:14px;
+    margin-top:7px;
     border-radius:10px;
     border:1px solid #333;
     background:#050505;
     color:#fff;
     font-size:16px;
     outline:none;
-    margin-top:7px;
 }
 
 label{
     display:block;
+    margin-top:10px;
     color:#aaa;
     font-size:13px;
-    margin-top:10px;
-}
-
-.info{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-top:10px;
-}
-
-.box{
-    background:#090909;
-    border:1px solid #292929;
-    border-radius:10px;
-    padding:12px;
-}
-
-.box span{
-    display:block;
-    color:#888;
-    font-size:12px;
-}
-
-.box strong{
-    display:block;
-    margin-top:5px;
-    color:#fff;
-    word-break:break-word;
 }
 
 .status{
     margin-top:12px;
     padding:12px;
     border-radius:10px;
-    background:#090909;
+    background:#080808;
     border:1px solid #292929;
-    color:#bbb;
+    color:#aaa;
     font-size:13px;
     line-height:1.5;
+    word-break:break-word;
+    white-space:pre-wrap;
+}
+
+.green{
+    color:#55e68a;
+}
+
+.red{
+    color:#ff6666;
+}
+
+.yellow{
+    color:#f5c542;
+}
+
+.info{
+    margin-top:12px;
+    background:#080808;
+    border:1px solid #292929;
+    border-radius:10px;
+    padding:10px;
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:9px 0;
+    border-bottom:1px solid #222;
+}
+
+.row:last-child{
+    border-bottom:0;
+}
+
+.row span{
+    color:#888;
+}
+
+.row strong{
+    text-align:right;
     word-break:break-word;
 }
 
 .address{
-    font-size:12px;
+    margin-top:10px;
     color:#aaa;
+    font-size:12px;
     word-break:break-all;
-    margin-top:8px;
 }
 
-.success{
-    color:#58e391;
-}
-
-.error{
-    color:#ff6868;
-}
-
-.warning{
-    color:#f5c542;
+.contract{
+    color:#777;
+    font-size:11px;
+    line-height:1.6;
+    word-break:break-all;
 }
 
 .footer{
     text-align:center;
-    color:#666;
+    color:#555;
     font-size:11px;
     padding:25px 0;
 }
@@ -185,262 +186,283 @@ label{
 
 <div class="container">
 
-    <div class="header">
-        <img src="logo.png" class="logo" onerror="this.style.display='none'">
+<div class="header">
+    <h1>TITANOVA</h1>
+    <p>Decentralized Matrix Ecosystem</p>
+    <div class="badge">BSC TESTNET</div>
+</div>
 
-        <h1>TITANOVA</h1>
 
-        <div class="subtitle">
-            Decentralized Matrix Ecosystem
-        </div>
+<!-- WALLET -->
 
-        <div class="testnet">
-            BSC TESTNET
-        </div>
+<div class="card">
+
+    <h2>🔐 Wallet</h2>
+
+    <button id="connectButton">
+        CONNECT WALLET
+    </button>
+
+    <div id="walletStatus" class="status">
+        Wallet not connected.
     </div>
 
+    <div class="info">
 
-    <!-- WALLET -->
-    <div class="card">
-
-        <h2>🔐 Wallet</h2>
-
-        <button id="connectBtn" onclick="connectWallet()">
-            Connect Wallet
-        </button>
-
-        <div id="walletAddress" class="address">
-            Wallet not connected
+        <div class="row">
+            <span>Network</span>
+            <strong id="network">---</strong>
         </div>
 
-        <div class="info">
-
-            <div class="box">
-                <span>Network</span>
-                <strong id="network">---</strong>
-            </div>
-
-            <div class="box">
-                <span>BTCB Balance</span>
-                <strong id="btcBalance">---</strong>
-            </div>
-
+        <div class="row">
+            <span>BTCB Balance</span>
+            <strong id="balance">---</strong>
         </div>
 
     </div>
 
+</div>
 
-    <!-- REGISTRATION -->
-    <div class="card">
 
-        <h2>🚀 Activate ID</h2>
+<!-- REGISTRATION -->
 
-        <label>
-            Referrer ID
-        </label>
+<div class="card">
 
-        <input
-            type="number"
-            id="referrerId"
-            placeholder="Enter Referrer ID"
-            min="1"
-        >
+    <h2>🚀 Activate ID</h2>
 
-        <button id="approveBtn" onclick="approveBTCB()" disabled>
-            1. Approve BTCB
-        </button>
+    <label>Referrer ID</label>
 
-        <button id="registerBtn" onclick="registerUser()" disabled>
-            2. Activate ID
-        </button>
+    <input
+        id="referrerId"
+        type="number"
+        min="1"
+        placeholder="Enter Referrer ID"
+    >
 
-        <div id="registerStatus" class="status">
-            Connect your wallet first.
+    <button id="approveButton" disabled>
+        1. APPROVE BTCB
+    </button>
+
+    <button id="registerButton" disabled>
+        2. ACTIVATE ID
+    </button>
+
+    <div id="registerStatus" class="status">
+        Connect wallet first.
+    </div>
+
+</div>
+
+
+<!-- USER DETAILS -->
+
+<div class="card">
+
+    <h2>📊 My Details</h2>
+
+    <button id="detailsButton" disabled>
+        CHECK MY DETAILS
+    </button>
+
+    <div class="info">
+
+        <div class="row">
+            <span>User ID</span>
+            <strong id="userId">---</strong>
+        </div>
+
+        <div class="row">
+            <span>Referrer ID</span>
+            <strong id="referrer">---</strong>
+        </div>
+
+        <div class="row">
+            <span>Direct Partners</span>
+            <strong id="direct">---</strong>
+        </div>
+
+        <div class="row">
+            <span>Active Levels</span>
+            <strong id="levels">---</strong>
+        </div>
+
+        <div class="row">
+            <span>Team Size</span>
+            <strong id="team">---</strong>
+        </div>
+
+        <div class="row">
+            <span>Total Income</span>
+            <strong id="income">---</strong>
         </div>
 
     </div>
 
+    <div id="detailsStatus" class="status">
+        No details loaded.
+    </div>
 
-    <!-- USER DETAILS -->
-    <div class="card">
+</div>
 
-        <h2>📊 My TITANOVA Details</h2>
 
-        <button id="detailsBtn" onclick="loadMyDetails()" disabled>
-            Check My Details
-        </button>
+<!-- CONTRACT INFO -->
 
-        <div class="info">
+<div class="card">
 
-            <div class="box">
-                <span>User ID</span>
-                <strong id="userId">---</strong>
-            </div>
+    <h2>🔗 Testnet Contract</h2>
 
-            <div class="box">
-                <span>Referrer ID</span>
-                <strong id="myReferrer">---</strong>
-            </div>
+    <div class="contract">
 
-            <div class="box">
-                <span>Active Levels</span>
-                <strong id="activeLevels">---</strong>
-            </div>
+        TITANOVA Contract:<br>
+        0x1Dc24B48364cE513397db87C71708d722bfABcc1
 
-            <div class="box">
-                <span>Direct Partners</span>
-                <strong id="directCount">---</strong>
-            </div>
+        <br><br>
 
-            <div class="box">
-                <span>Team Size</span>
-                <strong id="teamSize">---</strong>
-            </div>
+        BTCB Token:<br>
+        0x6ce8dA28E2f864420840cF74474eFf5fD80E65B8
 
-            <div class="box">
-                <span>Total Income</span>
-                <strong id="income">---</strong>
-            </div>
+        <br><br>
 
-        </div>
-
-        <div id="detailsStatus" class="status">
-            No data loaded.
-        </div>
+        BSC Testnet<br>
+        Chain ID: 97
 
     </div>
 
-
-    <!-- LEVELS -->
-    <div class="card">
-
-        <h2>📈 Level Costs</h2>
-
-        <div id="levels" class="info"></div>
-
-    </div>
+</div>
 
 
-    <div class="footer">
-        TITANOVA Testnet • For testing purposes only
-    </div>
+<div class="footer">
+    TITANOVA • TESTNET
+</div>
 
 </div>
 
 
 <script>
 
+/* =====================================================
+   CONTRACT SETTINGS
+===================================================== */
+
 const CONTRACT_ADDRESS =
-"0x91F34af97B978a63b35f84A876A6f07D9d651154";
+"0x1Dc24B48364cE513397db87C71708d722bfABcc1";
 
 const BTCB_ADDRESS =
 "0x6ce8dA28E2f864420840cF74474eFf5fD80E65B8";
 
 const BSC_TESTNET_CHAIN_ID = 97;
 
-const BTCB_DECIMALS = 18;
 
-
-/*
-==================================================
-TITANOVA ABI
-==================================================
-*/
+/* =====================================================
+   TITANOVA ABI
+===================================================== */
 
 const TITANOVA_ABI = [
 
-    "function registration(uint256 referrerId) external",
-
-    "function getUserId(address account) view returns (uint256)",
+    "function registration(uint256 referrerId)",
 
     "function isUserExists(address account) view returns (bool)",
+
+    "function getUserId(address account) view returns (uint256)",
 
     "function getUserDetails(uint256 userId) view returns (address userAddress,address referrer,uint256 referrerId,uint256 directCount,uint8 activeLevelCount,uint256 teamSize,uint256 registrationTimestamp,uint256 totalIncome)",
 
     "function getLevelCost(uint8 level) view returns (uint256)",
 
-    "function levelTokenCost(uint8) view returns (uint256)",
+    "function levelTokenCost(uint8 level) view returns (uint256)"
 
-    "function LAST_LEVEL() view returns (uint8)",
-
-    "function MATRIX_SIZE() view returns (uint8)",
-
-    "function totalProjectInvestment() view returns (uint256)",
-
-    "function BTCB() view returns (address)"
 ];
 
 
-/*
-==================================================
-BTCB ABI
-==================================================
-*/
+/* =====================================================
+   BTCB ABI
+===================================================== */
 
 const BTCB_ABI = [
 
-    "function approve(address spender,uint256 amount) external returns (bool)",
+    "function approve(address spender,uint256 amount) returns (bool)",
 
     "function allowance(address owner,address spender) view returns (uint256)",
 
     "function balanceOf(address account) view returns (uint256)",
 
-    "function decimals() view returns (uint8)",
+    "function decimals() view returns (uint8)"
 
-    "function symbol() view returns (string)"
 ];
 
 
-let provider;
-let signer;
-let userAddress;
+/* =====================================================
+   VARIABLES
+===================================================== */
 
-let titanova;
-let btcb;
+let provider = null;
+let signer = null;
+let titanova = null;
+let btcb = null;
+let account = null;
 
 
-/*
-==================================================
-CONNECT WALLET
-==================================================
-*/
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
-async function connectWallet(){
+const connectButton =
+document.getElementById("connectButton");
+
+const approveButton =
+document.getElementById("approveButton");
+
+const registerButton =
+document.getElementById("registerButton");
+
+const detailsButton =
+document.getElementById("detailsButton");
+
+
+/* =====================================================
+   CONNECT WALLET
+===================================================== */
+
+connectButton.onclick = async function(){
 
     try{
 
         if(!window.ethereum){
 
-            showStatus(
-                "registerStatus",
-                "Wallet not found. Please open this website in MetaMask or TokenPocket.",
-                "error"
+            setStatus(
+                "walletStatus",
+                "Wallet नहीं मिला। TokenPocket या MetaMask में website खोलें।",
+                "red"
             );
 
             return;
         }
 
 
+        setStatus(
+            "walletStatus",
+            "Connecting wallet...",
+            "yellow"
+        );
+
+
         provider =
-            new ethers.BrowserProvider(window.ethereum);
+            new ethers.BrowserProvider(
+                window.ethereum
+            );
 
 
-        const accounts =
-            await provider.send("eth_requestAccounts",[]);
-
-
-        if(!accounts.length){
-
-            throw new Error("Wallet connection cancelled.");
-
-        }
+        await provider.send(
+            "eth_requestAccounts",
+            []
+        );
 
 
         signer =
             await provider.getSigner();
 
 
-        userAddress =
+        account =
             await signer.getAddress();
 
 
@@ -454,17 +476,22 @@ async function connectWallet(){
 
         if(chainId !== BSC_TESTNET_CHAIN_ID){
 
-            showStatus(
-                "registerStatus",
-                "Please switch wallet network to BSC Testnet (Chain ID 97).",
-                "warning"
-            );
-
             document.getElementById("network").innerText =
-                "Wrong Network";
+                "WRONG NETWORK";
+
+
+            setStatus(
+                "walletStatus",
+                "Please switch wallet to BSC Testnet.\nChain ID: 97",
+                "red"
+            );
 
             return;
         }
+
+
+        document.getElementById("network").innerText =
+            "BSC TESTNET";
 
 
         titanova =
@@ -483,114 +510,130 @@ async function connectWallet(){
             );
 
 
-        document.getElementById("walletAddress").innerText =
-            userAddress;
-
-
-        document.getElementById("network").innerText =
-            "BSC Testnet";
-
-
-        document.getElementById("approveBtn").disabled =
-            false;
-
-        document.getElementById("registerBtn").disabled =
-            false;
-
-        document.getElementById("detailsBtn").disabled =
-            false;
-
-
-        await loadBTCBBalance();
-
-        await loadLevels();
-
-        await checkExistingUser();
-
-
-        showStatus(
-            "registerStatus",
-            "Wallet connected successfully. Enter Referrer ID.",
-            "success"
+        setStatus(
+            "walletStatus",
+            "Wallet connected ✓\n\n" + account,
+            "green"
         );
+
+
+        connectButton.innerText =
+            "WALLET CONNECTED";
+
+
+        approveButton.disabled = false;
+
+        registerButton.disabled = false;
+
+        detailsButton.disabled = false;
+
+
+        await loadBalance();
+
+
+        await checkUser();
+
 
     }
 
     catch(error){
 
-        console.error(error);
+        console.log(error);
 
-        showStatus(
-            "registerStatus",
+        setStatus(
+            "walletStatus",
             getErrorMessage(error),
-            "error"
+            "red"
         );
 
     }
 
-}
+};
 
 
-/*
-==================================================
-BTCB BALANCE
-==================================================
-*/
+/* =====================================================
+   BALANCE
+===================================================== */
 
-async function loadBTCBBalance(){
+async function loadBalance(){
 
     try{
 
         const balance =
-            await btcb.balanceOf(userAddress);
+            await btcb.balanceOf(account);
+
 
         const formatted =
             ethers.formatUnits(
                 balance,
-                BTCB_DECIMALS
+                18
             );
 
-        document.getElementById("btcBalance").innerText =
-            Number(formatted).toFixed(6) + " BTCB";
+
+        document.getElementById("balance").innerText =
+            Number(formatted).toFixed(8) + " BTCB";
 
     }
 
     catch(error){
 
-        document.getElementById("btcBalance").innerText =
-            "Unable to read";
+        console.log(error);
 
-        console.error(error);
+        document.getElementById("balance").innerText =
+            "Unable to read";
 
     }
 
 }
 
 
-/*
-==================================================
-APPROVE BTCB
-==================================================
-*/
+/* =====================================================
+   GET LEVEL 1 COST
+===================================================== */
 
-async function approveBTCB(){
+async function getLevel1Cost(){
 
     try{
 
-        if(!signer){
+        return await titanova.getLevelCost(1);
 
-            throw new Error("Connect wallet first.");
+    }
+
+    catch(error){
+
+        return await titanova.levelTokenCost(1);
+
+    }
+
+}
+
+
+/* =====================================================
+   APPROVE BTCB
+===================================================== */
+
+approveButton.onclick = async function(){
+
+    try{
+
+        if(!btcb){
+
+            throw new Error(
+                "Please connect wallet first."
+            );
 
         }
 
 
-        const referrerId =
+        const referrer =
             document.getElementById("referrerId").value;
 
 
-        if(!referrerId || Number(referrerId) < 1){
+        if(!referrer){
 
-            throw new Error("Please enter Referrer ID.");
+            throw new Error(
+                "Please enter Referrer ID."
+            );
 
         }
 
@@ -599,10 +642,10 @@ async function approveBTCB(){
             await getLevel1Cost();
 
 
-        showStatus(
+        setStatus(
             "registerStatus",
-            "Approval transaction is opening in your wallet...",
-            "warning"
+            "Approve transaction opening...",
+            "yellow"
         );
 
 
@@ -613,83 +656,86 @@ async function approveBTCB(){
             );
 
 
-        showStatus(
+        setStatus(
             "registerStatus",
-            "Approval submitted. Waiting for confirmation...",
-            "warning"
+            "Approval submitted.\nWaiting for confirmation...",
+            "yellow"
         );
 
 
         await tx.wait();
 
 
-        showStatus(
+        setStatus(
             "registerStatus",
-            "BTCB approved successfully. Now click Activate ID.",
-            "success"
+            "BTCB APPROVED ✓\nअब ACTIVATE ID दबाएँ।",
+            "green"
         );
 
     }
 
     catch(error){
 
-        console.error(error);
+        console.log(error);
 
-        showStatus(
+        setStatus(
             "registerStatus",
             getErrorMessage(error),
-            "error"
+            "red"
         );
 
     }
 
-}
+};
 
 
-/*
-==================================================
-REGISTER
-==================================================
-*/
+/* =====================================================
+   REGISTRATION
+===================================================== */
 
-async function registerUser(){
+registerButton.onclick = async function(){
 
     try{
 
-        if(!signer){
+        if(!titanova){
 
-            throw new Error("Connect wallet first.");
+            throw new Error(
+                "Please connect wallet first."
+            );
 
         }
 
 
-        const referrerId =
+        const referrer =
             document.getElementById("referrerId").value;
 
 
-        if(!referrerId || Number(referrerId) < 1){
+        if(!referrer){
 
-            throw new Error("Please enter Referrer ID.");
+            throw new Error(
+                "Please enter Referrer ID."
+            );
 
         }
 
 
         const exists =
-            await titanova.isUserExists(userAddress);
+            await titanova.isUserExists(
+                account
+            );
 
 
         if(exists){
 
-            showStatus(
+            setStatus(
                 "registerStatus",
-                "This wallet is already registered.",
-                "warning"
+                "यह wallet पहले से registered है।",
+                "yellow"
             );
 
-            await loadMyDetails();
+            await loadDetails();
 
             return;
-
         }
 
 
@@ -699,190 +745,212 @@ async function registerUser(){
 
         const allowance =
             await btcb.allowance(
-                userAddress,
+                account,
                 CONTRACT_ADDRESS
             );
 
 
         if(allowance < cost){
 
-            showStatus(
+            setStatus(
                 "registerStatus",
-                "BTCB allowance is insufficient. Please approve BTCB first.",
-                "warning"
+                "BTCB approval नहीं है। पहले APPROVE BTCB दबाएँ।",
+                "yellow"
             );
 
             return;
-
         }
 
 
-        showStatus(
+        setStatus(
             "registerStatus",
-            "Registration transaction is opening in your wallet...",
-            "warning"
+            "Activate transaction opening...",
+            "yellow"
         );
 
 
         const tx =
             await titanova.registration(
-                referrerId
+                Number(referrer)
             );
 
 
-        showStatus(
+        setStatus(
             "registerStatus",
-            "Registration submitted. Waiting for confirmation...",
-            "warning"
+            "Transaction submitted.\nConfirmation का इंतजार करें...",
+            "yellow"
         );
 
 
-        const receipt =
-            await tx.wait();
+        await tx.wait();
 
 
-        showStatus(
+        setStatus(
             "registerStatus",
-            "🎉 Registration successful! Transaction: " +
-            receipt.hash,
-            "success"
+            "🎉 ID ACTIVATED SUCCESSFULLY!",
+            "green"
         );
 
 
-        await loadMyDetails();
+        await loadBalance();
 
-        await loadBTCBBalance();
+        await loadDetails();
 
     }
 
     catch(error){
 
-        console.error(error);
+        console.log(error);
 
-        showStatus(
+        setStatus(
             "registerStatus",
             getErrorMessage(error),
-            "error"
+            "red"
         );
 
     }
 
-}
+};
 
 
-/*
-==================================================
-LEVEL 1 COST
-==================================================
-*/
+/* =====================================================
+   CHECK USER
+===================================================== */
 
-async function getLevel1Cost(){
+async function checkUser(){
 
     try{
 
-        const cost =
-            await titanova.getLevelCost(1);
+        const exists =
+            await titanova.isUserExists(
+                account
+            );
 
-        return cost;
+
+        if(exists){
+
+            setStatus(
+                "registerStatus",
+                "यह wallet पहले से registered है।",
+                "yellow"
+            );
+
+            await loadDetails();
+
+        }
 
     }
 
     catch(error){
 
-        const cost =
-            await titanova.levelTokenCost(1);
-
-        return cost;
+        console.log(error);
 
     }
 
 }
 
 
-/*
-==================================================
-USER DETAILS
-==================================================
-*/
+/* =====================================================
+   USER DETAILS
+===================================================== */
 
-async function loadMyDetails(){
+detailsButton.onclick = async function(){
+
+    await loadDetails();
+
+};
+
+
+async function loadDetails(){
 
     try{
 
-        if(!titanova || !userAddress){
+        if(!titanova || !account){
 
-            throw new Error("Connect wallet first.");
+            throw new Error(
+                "Please connect wallet first."
+            );
 
         }
 
 
+        setStatus(
+            "detailsStatus",
+            "Loading details...",
+            "yellow"
+        );
+
+
         const id =
-            await titanova.getUserId(userAddress);
+            await titanova.getUserId(
+                account
+            );
 
 
-        if(id == 0){
+        if(Number(id) === 0){
 
             document.getElementById("userId").innerText =
                 "---";
 
-            showStatus(
+            setStatus(
                 "detailsStatus",
                 "This wallet is not registered yet.",
-                "warning"
+                "yellow"
             );
 
             return;
-
         }
 
 
         const data =
-            await titanova.getUserDetails(id);
+            await titanova.getUserDetails(
+                id
+            );
 
 
         document.getElementById("userId").innerText =
-            data[0] ? id.toString() : "---";
+            id.toString();
 
 
-        document.getElementById("myReferrer").innerText =
+        document.getElementById("referrer").innerText =
             data[2].toString();
 
 
-        document.getElementById("activeLevels").innerText =
-            data[4].toString() + " / 12";
-
-
-        document.getElementById("directCount").innerText =
+        document.getElementById("direct").innerText =
             data[3].toString();
 
 
-        document.getElementById("teamSize").innerText =
+        document.getElementById("levels").innerText =
+            data[4].toString() + " / 12";
+
+
+        document.getElementById("team").innerText =
             data[5].toString();
 
 
         document.getElementById("income").innerText =
             ethers.formatUnits(
                 data[7],
-                BTCB_DECIMALS
+                18
             ) + " BTCB";
 
 
-        showStatus(
+        setStatus(
             "detailsStatus",
-            "User details loaded successfully.",
-            "success"
+            "Details loaded successfully ✓",
+            "green"
         );
 
     }
 
     catch(error){
 
-        console.error(error);
+        console.log(error);
 
-        showStatus(
+        setStatus(
             "detailsStatus",
             getErrorMessage(error),
-            "error"
+            "red"
         );
 
     }
@@ -890,193 +958,100 @@ async function loadMyDetails(){
 }
 
 
-/*
-==================================================
-CHECK EXISTING USER
-==================================================
-*/
+/* =====================================================
+   STATUS FUNCTION
+===================================================== */
 
-async function checkExistingUser(){
+function setStatus(
+    elementId,
+    message,
+    type
+){
 
-    try{
-
-        const exists =
-            await titanova.isUserExists(userAddress);
-
-
-        if(exists){
-
-            showStatus(
-                "registerStatus",
-                "This wallet is already registered.",
-                "warning"
-            );
-
-            await loadMyDetails();
-
-        }
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-    }
-
-}
-
-
-/*
-==================================================
-LEVEL COSTS
-==================================================
-*/
-
-async function loadLevels(){
-
-    const container =
-        document.getElementById("levels");
-
-    container.innerHTML = "";
-
-
-    for(let i = 1; i <= 12; i++){
-
-        try{
-
-            let cost;
-
-            try{
-
-                cost =
-                    await titanova.getLevelCost(i);
-
-            }
-
-            catch(e){
-
-                cost =
-                    await titanova.levelTokenCost(i);
-
-            }
-
-
-            const value =
-                ethers.formatUnits(
-                    cost,
-                    BTCB_DECIMALS
-                );
-
-
-            const box =
-                document.createElement("div");
-
-            box.className = "box";
-
-            box.innerHTML =
-                "<span>Level " + i + "</span>" +
-                "<strong>" +
-                value +
-                " BTCB" +
-                "</strong>";
-
-
-            container.appendChild(box);
-
-        }
-
-        catch(error){
-
-            console.error(
-                "Level " + i,
-                error
-            );
-
-        }
-
-    }
-
-}
-
-
-/*
-==================================================
-STATUS
-==================================================
-*/
-
-function showStatus(elementId,message,type){
-
-    const el =
+    const element =
         document.getElementById(elementId);
 
-    el.innerText =
+
+    element.innerText =
         message;
 
-    el.className =
+
+    element.className =
         "status " + type;
 
 }
 
 
-/*
-==================================================
-ERROR MESSAGE
-==================================================
-*/
+/* =====================================================
+   ERROR FUNCTION
+===================================================== */
 
 function getErrorMessage(error){
 
     if(!error){
+
         return "Unknown error.";
+
     }
 
 
     if(error.code === 4001){
-        return "Transaction rejected by wallet.";
+
+        return "Transaction wallet में reject कर दी गई।";
+
     }
 
 
     if(error.code === "ACTION_REJECTED"){
-        return "Transaction rejected by wallet.";
-    }
 
+        return "Transaction wallet में reject कर दी गई।";
 
-    if(error.reason){
-        return error.reason;
     }
 
 
     if(error.shortMessage){
+
         return error.shortMessage;
+
+    }
+
+
+    if(error.reason){
+
+        return error.reason;
+
     }
 
 
     if(error.message){
 
-        if(error.message.includes("insufficient funds")){
-            return "Insufficient test BNB for gas.";
+        if(
+            error.message.includes(
+                "insufficient funds"
+            )
+        ){
+
+            return "Gas के लिए Testnet BNB कम है.";
+
         }
 
-        if(error.message.includes("user rejected")){
-            return "Transaction rejected by wallet.";
-        }
 
-        return error.message.substring(0,300);
+        return error.message.substring(
+            0,
+            300
+        );
 
     }
 
 
-    return "Transaction failed. Please check the wallet and Testnet.";
+    return "Transaction failed.";
+
 }
 
 
-/*
-==================================================
-WALLET ACCOUNT CHANGE
-==================================================
-*/
+/* =====================================================
+   ACCOUNT / NETWORK CHANGE
+===================================================== */
 
 if(window.ethereum){
 
