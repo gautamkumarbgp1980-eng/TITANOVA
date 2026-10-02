@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>TITANOVA | Testnet Dashboard</title>
 
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -27,24 +29,26 @@ body:before{
   inset:0;
   pointer-events:none;
   background:
-    radial-gradient(circle at 15% 0%,rgba(255,200,0,.12),transparent 30%),
-    radial-gradient(circle at 100% 30%,rgba(255,160,0,.08),transparent 30%);
+  radial-gradient(circle at 15% 0%,rgba(255,210,40,.14),transparent 30%),
+  radial-gradient(circle at 100% 35%,rgba(255,170,0,.08),transparent 30%);
 }
 
 .container{
-  max-width:1150px;
+  max-width:1180px;
   margin:auto;
-  padding:14px;
+  padding:12px;
   position:relative;
   z-index:1;
 }
 
+/* ================= HEADER ================= */
+
 .header{
   border:1px solid #8d6914;
-  border-radius:20px;
-  padding:20px;
-  background:linear-gradient(145deg,#181818,#080808);
-  box-shadow:0 0 30px rgba(255,190,0,.08);
+  border-radius:22px;
+  padding:18px;
+  background:linear-gradient(145deg,#191919,#070707);
+  box-shadow:0 0 35px rgba(255,190,0,.10);
 }
 
 .brand{
@@ -54,9 +58,42 @@ body:before{
   gap:15px;
 }
 
+.brandLeft{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+/* LOGO */
+
 .logo{
+  width:72px;
+  height:72px;
+  object-fit:contain;
+  border-radius:16px;
+  border:1px solid #7d6015;
+  background:#000;
+  padding:5px;
+}
+
+.logoFallback{
+  width:72px;
+  height:72px;
+  border-radius:16px;
+  border:1px solid #7d6015;
+  display:none;
+  align-items:center;
+  justify-content:center;
   color:#ffd84d;
-  font-size:32px;
+  font-weight:900;
+  font-size:12px;
+  background:#0a0a0a;
+  text-align:center;
+}
+
+.logoText{
+  color:#ffd84d;
+  font-size:30px;
   font-weight:900;
   letter-spacing:4px;
 }
@@ -81,8 +118,8 @@ button{
 }
 
 .darkBtn{
-  background:#171717;
-  border:1px solid #675116;
+  background:#151515;
+  border:1px solid #685116;
   color:#ffd84d;
   border-radius:11px;
   padding:13px 18px;
@@ -97,18 +134,20 @@ button{
 
 .status{
   margin-top:10px;
-  background:#101010;
-  border:1px solid #2d2612;
-  border-radius:10px;
   padding:10px;
+  border-radius:10px;
+  background:#101010;
+  border:1px solid #302712;
   color:#ffd84d;
   font-size:12px;
 }
 
+/* ================= SECTIONS ================= */
+
 .section{
   margin-top:15px;
   padding:18px;
-  border-radius:18px;
+  border-radius:19px;
   border:1px solid #3d3215;
   background:linear-gradient(145deg,#121212,#080808);
 }
@@ -117,8 +156,23 @@ button{
   color:#ffd84d;
   font-size:19px;
   font-weight:900;
-  margin-bottom:13px;
+  margin-bottom:14px;
 }
+
+.subTitle{
+  color:#ffd84d;
+  font-size:15px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.note{
+  color:#888;
+  font-size:11px;
+  line-height:1.7;
+}
+
+/* ================= DASHBOARD CARDS ================= */
 
 .cards{
   display:grid;
@@ -129,7 +183,7 @@ button{
 .card{
   background:#0b0b0b;
   border:1px solid #302712;
-  border-radius:13px;
+  border-radius:14px;
   padding:15px;
 }
 
@@ -147,6 +201,14 @@ button{
   word-break:break-word;
 }
 
+/* ================= REGISTER ================= */
+
+.registerGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
 input{
   width:100%;
   background:#050505;
@@ -162,32 +224,10 @@ input:focus{
   border-color:#ffd84d;
 }
 
-.row{
-  display:flex;
-  gap:10px;
-}
-
-.row input{
-  flex:1;
-}
-
-.registerBox{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.note{
-  color:#888;
-  font-size:11px;
-  line-height:1.7;
-  margin-top:10px;
-}
-
 .message{
   margin-top:10px;
   font-size:12px;
-  line-height:1.6;
+  line-height:1.7;
 }
 
 .success{
@@ -197,6 +237,93 @@ input:focus{
 .error{
   color:#ff6868;
 }
+
+/* ================= NFT / ROYALTY ================= */
+
+.featureGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.feature{
+  background:#0a0a0a;
+  border:1px solid #3b3115;
+  border-radius:15px;
+  padding:16px;
+}
+
+.featureIcon{
+  font-size:25px;
+}
+
+.featureTitle{
+  color:#ffd84d;
+  font-size:15px;
+  font-weight:900;
+  margin-top:8px;
+}
+
+.featureValue{
+  font-size:19px;
+  font-weight:900;
+  margin-top:8px;
+}
+
+.featureSmall{
+  color:#888;
+  font-size:10px;
+  margin-top:7px;
+  line-height:1.6;
+  word-break:break-all;
+}
+
+/* ================= SEARCH ================= */
+
+.searchRow{
+  display:flex;
+  gap:10px;
+}
+
+.searchRow input{
+  flex:1;
+}
+
+.searchResult{
+  display:none;
+}
+
+.infoGrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:14px;
+}
+
+.info{
+  background:#090909;
+  border:1px solid #292313;
+  border-radius:11px;
+  padding:12px;
+}
+
+.info small{
+  display:block;
+  color:#777;
+  font-size:9px;
+  margin-bottom:5px;
+}
+
+.info b{
+  font-size:13px;
+  word-break:break-word;
+}
+
+.goldText{
+  color:#ffd84d;
+}
+
+/* ================= MATRIX ================= */
 
 .matrix{
   display:grid;
@@ -267,38 +394,7 @@ input:focus{
   color:#ffd84d;
 }
 
-.searchResult{
-  display:none;
-}
-
-.infoGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-
-.info{
-  background:#090909;
-  border:1px solid #292313;
-  border-radius:11px;
-  padding:12px;
-}
-
-.info small{
-  display:block;
-  color:#777;
-  font-size:9px;
-  margin-bottom:5px;
-}
-
-.info b{
-  font-size:13px;
-  word-break:break-word;
-}
-
-.goldText{
-  color:#ffd84d;
-}
+/* ================= FOOTER ================= */
 
 .footer{
   text-align:center;
@@ -307,8 +403,14 @@ input:focus{
   font-size:10px;
 }
 
-@media(max-width:800px){
-  .cards,
+/* ================= MOBILE ================= */
+
+@media(max-width:850px){
+
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
   .infoGrid{
     grid-template-columns:repeat(2,1fr);
   }
@@ -317,31 +419,50 @@ input:focus{
     grid-template-columns:1fr;
   }
 
+  .featureGrid{
+    grid-template-columns:1fr;
+  }
+
   .brand{
     flex-direction:column;
     align-items:stretch;
+  }
+
+  .brandLeft{
+    align-items:center;
   }
 
   .brand button{
     width:100%;
   }
 
-  .registerBox{
+  .registerGrid{
     grid-template-columns:1fr;
   }
+
 }
 
 @media(max-width:480px){
+
   .container{
-    padding:9px;
+    padding:8px;
   }
 
   .logo{
-    font-size:25px;
+    width:60px;
+    height:60px;
   }
 
-  .cards,
-  .infoGrid{
+  .logoFallback{
+    width:60px;
+    height:60px;
+  }
+
+  .logoText{
+    font-size:23px;
+  }
+
+  .cards{
     grid-template-columns:repeat(2,1fr);
   }
 
@@ -353,48 +474,94 @@ input:focus{
     font-size:17px;
   }
 
-  .row{
+  .searchRow{
     flex-direction:column;
   }
+
 }
+
 </style>
 </head>
+
 
 <body>
 
 <div class="container">
 
-<!-- HEADER -->
+
+<!-- =====================================================
+                         HEADER
+====================================================== -->
 
 <div class="header">
 
   <div class="brand">
 
-    <div>
-      <div class="logo">TITANOVA</div>
-      <div class="subtitle">
-        DECENTRALIZED MATRIX ECOSYSTEM • TESTNET
+    <div class="brandLeft">
+
+      <img
+        src="logo.png"
+        class="logo"
+        id="logoImage"
+        alt="TITANOVA"
+        onerror="logoError()"
+      >
+
+      <div
+        class="logoFallback"
+        id="logoFallback"
+      >
+        TITANOVA
       </div>
+
+      <div>
+
+        <div class="logoText">
+          TITANOVA
+        </div>
+
+        <div class="subtitle">
+          DECENTRALIZED MATRIX ECOSYSTEM • TESTNET
+        </div>
+
+      </div>
+
     </div>
 
-    <button class="gold" id="connectBtn" onclick="connectWallet()">
+
+    <button
+      class="gold"
+      id="connectBtn"
+      onclick="connectWallet()"
+    >
       CONNECT WALLET
     </button>
 
   </div>
 
-  <div class="wallet" id="wallet">
+
+  <div
+    class="wallet"
+    id="wallet"
+  >
     Wallet not connected
   </div>
 
-  <div class="status" id="status">
+
+  <div
+    class="status"
+    id="status"
+  >
     Connect wallet to start
   </div>
 
 </div>
 
 
-<!-- REGISTER -->
+
+<!-- =====================================================
+                    REGISTER / JOIN
+====================================================== -->
 
 <div class="section">
 
@@ -402,40 +569,49 @@ input:focus{
     🚀 REGISTER / JOIN TITANOVA
   </div>
 
-  <div class="registerBox">
+  <div class="registerGrid">
 
-    <div>
-      <input
-        id="referrerId"
-        type="number"
-        min="1"
-        placeholder="Enter Referrer ID"
-      >
-    </div>
+    <input
+      id="referrerId"
+      type="number"
+      min="1"
+      placeholder="Enter Referrer ID"
+    >
 
-    <div>
-      <button
-        class="gold"
-        style="width:100%;"
-        onclick="approveAndRegister()"
-      >
-        APPROVE BTCB & REGISTER
-      </button>
-    </div>
+    <button
+      class="gold"
+      onclick="approveAndRegister()"
+    >
+      APPROVE BTCB & REGISTER
+    </button>
 
   </div>
 
-  <div class="note">
-    Registration fee: <b class="goldText">0.001 BTCB</b><br>
-    Pehle BTCB approval hoga, uske baad registration transaction.
+  <div class="note" style="margin-top:10px;">
+
+    Registration Fee:
+    <b class="goldText">
+      0.001 BTCB
+    </b>
+
+    <br>
+
+    First BTCB approval → then registration transaction.
+
   </div>
 
-  <div id="registerMessage" class="message"></div>
+  <div
+    id="registerMessage"
+    class="message"
+  ></div>
 
 </div>
 
 
-<!-- MY DASHBOARD -->
+
+<!-- =====================================================
+                       MY DASHBOARD
+====================================================== -->
 
 <div class="section">
 
@@ -456,13 +632,13 @@ input:focus{
     </div>
 
     <div class="card">
-      <div class="label">Active Levels</div>
-      <div class="value" id="myLevels">—</div>
+      <div class="label">Rank</div>
+      <div class="value" id="myRank">—</div>
     </div>
 
     <div class="card">
-      <div class="label">Team Size</div>
-      <div class="value" id="myTeam">—</div>
+      <div class="label">Active Levels</div>
+      <div class="value" id="myLevels">—</div>
     </div>
 
     <div class="card">
@@ -471,13 +647,13 @@ input:focus{
     </div>
 
     <div class="card">
-      <div class="label">Total Income</div>
-      <div class="value" id="myIncome">—</div>
+      <div class="label">Team Size</div>
+      <div class="value" id="myTeam">—</div>
     </div>
 
     <div class="card">
-      <div class="label">Registration</div>
-      <div class="value" id="myDate">—</div>
+      <div class="label">Total Income</div>
+      <div class="value" id="myIncome">—</div>
     </div>
 
     <div class="card">
@@ -490,937 +666,56 @@ input:focus{
 </div>
 
 
-<!-- CHECK ANY ID -->
+
+<!-- =====================================================
+                       NFT / ROYALTY
+====================================================== -->
 
 <div class="section">
 
   <div class="title">
-    🔎 CHECK ANY USER ID
+    🏆 NFT • RANK • ROYALTY
   </div>
 
-  <div class="row">
-
-    <input
-      id="searchId"
-      type="number"
-      min="1"
-      placeholder="Enter User ID e.g. 1"
-    >
-
-    <button class="gold" onclick="checkAnyId()">
-      CHECK ID
-    </button>
-
-  </div>
-
-  <div id="searchMessage" class="message"></div>
+  <div class="featureGrid">
 
 
-  <div class="searchResult" id="searchResult">
+    <!-- REGISTRATION PASS -->
 
-    <div class="infoGrid" style="margin-top:14px;">
+    <div class="feature">
 
-      <div class="info">
-        <small>USER ID</small>
-        <b id="sId">—</b>
+      <div class="featureIcon">
+        🎫
       </div>
 
-      <div class="info">
-        <small>WALLET</small>
-        <b class="goldText" id="sAddress">—</b>
+      <div class="featureTitle">
+        REGISTRATION PASS NFT
       </div>
 
-      <div class="info">
-        <small>REFERRER ID</small>
-        <b id="sReferrer">—</b>
+      <div
+        class="featureValue"
+        id="passStatus"
+      >
+        —
       </div>
 
-      <div class="info">
-        <small>DIRECT PARTNERS</small>
-        <b id="sDirect">—</b>
-      </div>
-
-      <div class="info">
-        <small>ACTIVE LEVELS</small>
-        <b id="sLevels">—</b>
-      </div>
-
-      <div class="info">
-        <small>TEAM SIZE</small>
-        <b id="sTeam">—</b>
-      </div>
-
-      <div class="info">
-        <small>TOTAL INCOME</small>
-        <b id="sIncome">—</b>
-      </div>
-
-      <div class="info">
-        <small>REGISTRATION DATE</small>
-        <b id="sDate">—</b>
+      <div
+        class="featureSmall"
+        id="passInfo"
+      >
+        Checking...
       </div>
 
     </div>
 
-    <div style="margin-top:16px;">
 
-      <div class="title" style="font-size:15px;">
-        USER MATRIX
+    <!-- RANK -->
+
+    <div class="feature">
+
+      <div class="featureIcon">
+        🏅
       </div>
 
-      <div id="searchedMatrix" class="matrix"></div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- MY MATRIX -->
-
-<div class="section">
-
-  <div class="title">
-    🧩 MY 12 LEVEL MATRIX
-  </div>
-
-  <div class="note">
-    Har level mein 14 matrix positions.
-  </div>
-
-  <div id="myMatrix" class="matrix" style="margin-top:14px;"></div>
-
-</div>
-
-
-<div class="footer">
-  TITANOVA • Testnet Dashboard<br>
-  Knowledge First • Decision Later
-</div>
-
-</div>
-
-
-<script>
-
-/* =====================================================
-                    CONTRACT
-===================================================== */
-
-const CONTRACT_ADDRESS =
-"0x1Dc24B48364cE513397db87C71708d722bfABcc1";
-
-
-/*
-  YE ABI AAPKE DIYE HUE TITANOVA CORE
-  CONTRACT KE FUNCTIONS KE ACCORDING HAI.
-*/
-
-const ABI = [
-
-  "function BTCB() view returns(address)",
-
-  "function LAST_LEVEL() view returns(uint8)",
-
-  "function MATRIX_SIZE() view returns(uint8)",
-
-  "function MAX_REGISTRATION_PASSES() view returns(uint256)",
-
-  "function lastUserId() view returns(uint256)",
-
-  "function owner() view returns(address)",
-
-  "function addressToId(address) view returns(uint256)",
-
-  "function idToAddress(uint256) view returns(address)",
-
-  "function isUserExists(address) view returns(bool)",
-
-  "function getUserId(address) view returns(uint256)",
-
-  "function getUserDetails(uint256) view returns(address,address,uint256,uint256,uint8,uint256,uint256,uint256)",
-
-  "function getDirectPartnerIds(uint256) view returns(uint256[])",
-
-  "function getMatrix(address,uint8) view returns(address,uint256,uint256,uint256,uint256,uint256)",
-
-  "function getMatrixReferrals(address,uint8) view returns(address[])",
-
-  "function getLevelCost(uint8) view returns(uint256)",
-
-  "function levelTokenCost(uint8) view returns(uint256)",
-
-  "function registration(uint256) external",
-
-  "function registrationPassAddress() view returns(address)",
-
-  "function royaltyCardAddress() view returns(address)",
-
-  "function contractTokenBalance() view returns(uint256)",
-
-  "function totalProjectInvestment() view returns(uint256)",
-
-  "function currentNFTPrice() view returns(uint256)",
-
-  "function treasuryAddress() view returns(address)"
-
-];
-
-
-const ERC20_ABI = [
-
-  "function approve(address,uint256) returns(bool)",
-
-  "function allowance(address,address) view returns(uint256)",
-
-  "function balanceOf(address) view returns(uint256)"
-
-];
-
-
-let provider = null;
-let signer = null;
-let core = null;
-let btc = null;
-let account = null;
-
-
-/* =====================================================
-                    CONNECT
-===================================================== */
-
-async function connectWallet(){
-
-  try{
-
-    if(!window.ethereum){
-
-      setStatus(
-        "Wallet extension nahi mila. MetaMask/compatible wallet use karein.",
-        true
-      );
-
-      return;
-    }
-
-    provider =
-      new ethers.BrowserProvider(window.ethereum);
-
-    await provider.send(
-      "eth_requestAccounts",
-      []
-    );
-
-    signer =
-      await provider.getSigner();
-
-    account =
-      await signer.getAddress();
-
-    core =
-      new ethers.Contract(
-        CONTRACT_ADDRESS,
-        ABI,
-        signer
-      );
-
-    const btcAddress =
-      await core.BTCB();
-
-    btc =
-      new ethers.Contract(
-        btcAddress,
-        ERC20_ABI,
-        signer
-      );
-
-    const network =
-      await provider.getNetwork();
-
-    document.getElementById("wallet").innerText =
-      account;
-
-    document.getElementById("connectBtn").innerText =
-      "CONNECTED";
-
-    setStatus(
-      "Wallet connected • Chain ID: " +
-      network.chainId
-    );
-
-    await loadMyDashboard();
-
-  }catch(error){
-
-    console.error(error);
-
-    setStatus(
-      readableError(error),
-      true
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-                  MY DASHBOARD
-===================================================== */
-
-async function loadMyDashboard(){
-
-  if(!core || !account) return;
-
-  try{
-
-    const id =
-      await core.getUserId(account);
-
-    const userId =
-      Number(id);
-
-    if(userId === 0){
-
-      document.getElementById("myId").innerText =
-        "NOT REGISTERED";
-
-      document.getElementById("myMatrix").innerHTML =
-        "";
-
-      return;
-    }
-
-    await showUser(
-      userId,
-      "my"
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    setStatus(
-      "Dashboard load error: " +
-      readableError(error),
-      true
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-                  CHECK ANY ID
-===================================================== */
-
-async function checkAnyId(){
-
-  const id =
-    Number(
-      document.getElementById("searchId").value
-    );
-
-  const message =
-    document.getElementById("searchMessage");
-
-  if(!id || id < 1){
-
-    message.innerHTML =
-      "<span class='error'>Valid User ID enter karein.</span>";
-
-    return;
-  }
-
-  if(!core){
-
-    message.innerHTML =
-      "<span class='error'>Pehle wallet connect karein.</span>";
-
-    return;
-  }
-
-  try{
-
-    message.innerHTML =
-      "Loading User ID " + id + "...";
-
-    await showUser(
-      id,
-      "search"
-    );
-
-    message.innerHTML =
-      "<span class='success'>User ID " +
-      id +
-      " found.</span>";
-
-  }catch(error){
-
-    console.error(error);
-
-    document.getElementById("searchResult").style.display =
-      "none";
-
-    message.innerHTML =
-      "<span class='error'>User ID " +
-      id +
-      " nahi mila.</span>";
-
-  }
-
-}
-
-
-/* =====================================================
-                    SHOW USER
-===================================================== */
-
-async function showUser(
-  userId,
-  type
-){
-
-  const data =
-    await core.getUserDetails(
-      userId
-    );
-
-  const userAddress =
-    data[0];
-
-  if(
-    !userAddress ||
-    userAddress === ethers.ZeroAddress
-  ){
-
-    throw new Error(
-      "USER NOT FOUND"
-    );
-  }
-
-  const referrerId =
-    Number(data[2]);
-
-  const directCount =
-    Number(data[3]);
-
-  const activeLevels =
-    Number(data[4]);
-
-  const teamSize =
-    Number(data[5]);
-
-  const timestamp =
-    Number(data[6]);
-
-  const income =
-    data[7];
-
-
-  if(type === "my"){
-
-    document.getElementById("myId").innerText =
-      userId;
-
-    document.getElementById("myReferrer").innerText =
-      referrerId;
-
-    document.getElementById("myLevels").innerText =
-      activeLevels + " / 12";
-
-    document.getElementById("myTeam").innerText =
-      teamSize;
-
-    document.getElementById("myDirect").innerText =
-      directCount;
-
-    document.getElementById("myIncome").innerText =
-      formatBTCB(income);
-
-    document.getElementById("myDate").innerText =
-      formatDate(timestamp);
-
-    await buildMatrix(
-      userAddress,
-      "myMatrix"
-    );
-
-  }else{
-
-    document.getElementById("searchResult").style.display =
-      "block";
-
-    document.getElementById("sId").innerText =
-      userId;
-
-    document.getElementById("sAddress").innerText =
-      userAddress;
-
-    document.getElementById("sReferrer").innerText =
-      referrerId;
-
-    document.getElementById("sDirect").innerText =
-      directCount;
-
-    document.getElementById("sLevels").innerText =
-      activeLevels + " / 12";
-
-    document.getElementById("sTeam").innerText =
-      teamSize;
-
-    document.getElementById("sIncome").innerText =
-      formatBTCB(income);
-
-    document.getElementById("sDate").innerText =
-      formatDate(timestamp);
-
-    await buildMatrix(
-      userAddress,
-      "searchedMatrix"
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-                    MATRIX
-===================================================== */
-
-async function buildMatrix(
-  userAddress,
-  containerId
-){
-
-  const container =
-    document.getElementById(
-      containerId
-    );
-
-  container.innerHTML =
-    "<div class='note'>Loading 12 levels...</div>";
-
-  let html = "";
-
-  for(
-    let level = 1;
-    level <= 12;
-    level++
-  ){
-
-    try{
-
-      const matrix =
-        await core.getMatrix(
-          userAddress,
-          level
-        );
-
-      const referralCount =
-        Number(matrix[1]);
-
-      const reinvestCount =
-        Number(matrix[2]);
-
-      const held =
-        matrix[3];
-
-      const team =
-        Number(matrix[4]);
-
-      const earning =
-        matrix[5];
-
-      const referrals =
-        await core.getMatrixReferrals(
-          userAddress,
-          level
-        );
-
-      const active =
-        referralCount > 0 ||
-        level === 1;
-
-      html +=
-        createLevel(
-          level,
-          active,
-          referralCount,
-          reinvestCount,
-          held,
-          team,
-          earning,
-          referrals
-        );
-
-    }catch(error){
-
-      html +=
-        createLevel(
-          level,
-          false,
-          0,
-          0,
-          0,
-          0,
-          0,
-          []
-        );
-
-    }
-
-  }
-
-  container.innerHTML =
-    html;
-
-}
-
-
-/* =====================================================
-                LEVEL CARD
-===================================================== */
-
-function createLevel(
-  level,
-  active,
-  referralCount,
-  reinvestCount,
-  held,
-  team,
-  earning,
-  referrals
-){
-
-  let slots = "";
-
-  for(
-    let i = 1;
-    i <= 14;
-    i++
-  ){
-
-    const filled =
-      i <= referrals.length;
-
-    slots +=
-      "<div class='slot " +
-      (filled ? "filled" : "") +
-      "'>" +
-      i +
-      "</div>";
-  }
-
-  return `
-
-    <div class="level">
-
-      <div class="levelTop">
-
-        <div class="levelName">
-          LEVEL ${level}
-        </div>
-
-        <div class="${
-          active ? "active" : "inactive"
-        }">
-          ${
-            active
-            ? "ACTIVE"
-            : "INACTIVE"
-          }
-        </div>
-
-      </div>
-
-      <div class="stats">
-
-        Slots: ${referralCount} / 14<br>
-
-        Recycle: ${reinvestCount}<br>
-
-        Team: ${team}<br>
-
-        Hold:
-        ${formatBTCB(held)} BTCB<br>
-
-        Earning:
-        ${formatBTCB(earning)} BTCB
-
-      </div>
-
-      <div class="slots">
-        ${slots}
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-
-/* =====================================================
-                APPROVE + REGISTER
-===================================================== */
-
-async function approveAndRegister(){
-
-  const message =
-    document.getElementById(
-      "registerMessage"
-    );
-
-  try{
-
-    if(!core || !btc){
-
-      message.innerHTML =
-        "<span class='error'>Pehle wallet connect karein.</span>";
-
-      return;
-    }
-
-    const referrerId =
-      Number(
-        document.getElementById(
-          "referrerId"
-        ).value
-      );
-
-    if(
-      !referrerId ||
-      referrerId < 1
-    ){
-
-      message.innerHTML =
-        "<span class='error'>Referrer ID enter karein.</span>";
-
-      return;
-    }
-
-
-    message.innerHTML =
-      "Checking registration cost...";
-
-
-    const cost =
-      await core.getLevelCost(1);
-
-
-    /*
-      Check BTCB balance
-    */
-
-    const balance =
-      await btc.balanceOf(
-        account
-      );
-
-    if(balance < cost){
-
-      message.innerHTML =
-        "<span class='error'>" +
-        "Wallet mein sufficient BTCB nahi hai.<br>" +
-        "Required: " +
-        formatBTCB(cost) +
-        " BTCB" +
-        "</span>";
-
-      return;
-    }
-
-
-    /*
-      Check existing allowance
-    */
-
-    const allowance =
-      await btc.allowance(
-        account,
-        CONTRACT_ADDRESS
-      );
-
-
-    if(allowance < cost){
-
-      message.innerHTML =
-        "Step 1/2: BTCB approval confirm karein...";
-
-      const approveTx =
-        await btc.approve(
-          CONTRACT_ADDRESS,
-          cost
-        );
-
-      message.innerHTML =
-        "BTCB approval transaction waiting...";
-
-      await approveTx.wait();
-
-      message.innerHTML =
-        "<span class='success'>" +
-        "BTCB approved. Step 2/2: Registration..." +
-        "</span>";
-
-    }
-
-
-    /*
-      Registration
-    */
-
-    const tx =
-      await core.registration(
-        referrerId
-      );
-
-    message.innerHTML =
-      "Registration transaction waiting...<br>" +
-      tx.hash;
-
-    await tx.wait();
-
-    message.innerHTML =
-      "<span class='success'>" +
-      "🎉 Registration successful! Dashboard loading..." +
-      "</span>";
-
-    await loadMyDashboard();
-
-  }catch(error){
-
-    console.error(error);
-
-    message.innerHTML =
-      "<span class='error'>" +
-      readableError(error) +
-      "</span>";
-
-  }
-
-}
-
-
-/* =====================================================
-                    HELPERS
-===================================================== */
-
-function formatBTCB(value){
-
-  try{
-
-    return Number(
-      ethers.formatUnits(
-        value,
-        18
-      )
-    ).toFixed(6);
-
-  }catch(e){
-
-    return "0";
-
-  }
-
-}
-
-
-function formatDate(timestamp){
-
-  if(!timestamp) return "—";
-
-  return new Date(
-    timestamp * 1000
-  ).toLocaleString(
-    "en-IN"
-  );
-
-}
-
-
-function shortAddress(address){
-
-  if(!address) return "—";
-
-  return (
-    address.slice(0,6) +
-    "..." +
-    address.slice(-4)
-  );
-
-}
-
-
-function setStatus(
-  text,
-  error=false
-){
-
-  document.getElementById(
-    "status"
-  ).innerHTML =
-    error
-    ? "<span class='error'>" +
-      text +
-      "</span>"
-    : text;
-
-}
-
-
-function readableError(error){
-
-  if(!error) return "Unknown error";
-
-  if(
-    error.code === 4001 ||
-    error.info?.error?.code === 4001
-  ){
-
-    return "Transaction cancelled by user.";
-
-  }
-
-  const message =
-    error.shortMessage ||
-    error.reason ||
-    error.info?.error?.message ||
-    error.message ||
-    "Transaction failed.";
-
-  return message
-    .replace(
-      "execution reverted:",
-      ""
-    )
-    .trim();
-
-}
-
-
-/* =====================================================
-              WALLET ACCOUNT CHANGE
-===================================================== */
-
-if(window.ethereum){
-
-  window.ethereum.on(
-    "accountsChanged",
-    async function(){
-
-      location.reload();
-
-    }
-  );
-
-}
-
-</script>
-
-</body>
-</html>
+      <div class="featureTitle">
+        CURRENT
