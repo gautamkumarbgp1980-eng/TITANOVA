@@ -2,2089 +2,1102 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#050505">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TITANOVA | Testnet</title>
 
-<title>TITANOVA — Decentralized Matrix Ecosystem</title>
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script>
 
 <style>
-
-:root{
---bg:#040506;
---panel:#090c0f;
---panel2:#101419;
---gold:#f4bd3f;
---gold2:#ffe7a0;
---white:#f7f7f7;
---muted:#a8adb4;
---line:#2a2f35;
---blue:#53c7ff;
---green:#55d68b;
---purple:#b879e8;
---red:#ff6868;
-}
-
 *{
-box-sizing:border-box;
-}
-
-html{
-scroll-behavior:smooth;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-margin:0;
-background:
-radial-gradient(circle at 50% -15%,#392807 0,#080909 32%,#040506 72%);
-color:var(--white);
-font-family:Inter,Arial,sans-serif;
+    font-family:Arial,sans-serif;
+    background:#080808;
+    color:#fff;
+    min-height:100vh;
 }
 
-a{
-text-decoration:none;
-color:inherit;
+.container{
+    width:100%;
+    max-width:520px;
+    margin:auto;
+    padding:18px;
 }
 
-button,
-input{
-font-family:inherit;
+.header{
+    text-align:center;
+    padding:20px 10px;
 }
 
-.wrap{
-width:min(1180px,92%);
-margin:auto;
-}
-
-/* ================= HEADER ================= */
-
-header{
-position:sticky;
-top:0;
-z-index:100;
-background:rgba(4,5,6,.90);
-backdrop-filter:blur(16px);
-border-bottom:1px solid #20252a;
-}
-
-.nav{
-height:72px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-}
-
-.brand{
-display:flex;
-align-items:center;
-gap:10px;
-font-size:23px;
-font-weight:900;
-letter-spacing:1.5px;
-color:var(--gold);
-}
-
-.brandmark{
-width:35px;
-height:35px;
-display:grid;
-place-items:center;
-border:2px solid var(--gold);
-clip-path:polygon(
-50% 0,
-100% 22%,
-82% 100%,
-18% 100%,
-0 22%
-);
-font-size:17px;
-}
-
-.navlinks{
-display:flex;
-gap:22px;
-color:#ddd;
-font-size:13px;
-}
-
-.navlinks a:hover{
-color:var(--gold);
-}
-
-.navbtn{
-padding:11px 17px;
-border-radius:9px;
-border:1px solid #8d681e;
-background:linear-gradient(135deg,#ffe38a,#e3a72c);
-color:#111;
-font-weight:900;
-}
-
-.hamb{
-display:none;
-background:#111;
-border:1px solid #444;
-color:#fff;
-padding:8px 10px;
-border-radius:8px;
-font-size:18px;
-}
-
-/* ================= HERO ================= */
-
-.hero{
-min-height:610px;
-display:flex;
-align-items:center;
-padding:75px 0 55px;
-position:relative;
-overflow:hidden;
-}
-
-.hero:after{
-content:"₿";
-position:absolute;
-right:4%;
-top:3%;
-font-size:430px;
-font-weight:900;
-color:#f4bd3f0b;
-z-index:-1;
-}
-
-.badge{
-display:inline-block;
-padding:8px 13px;
-border:1px solid #735819;
-border-radius:99px;
-color:var(--gold2);
-background:#171207;
-font-size:10px;
-letter-spacing:1.5px;
-text-transform:uppercase;
+.logo{
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    margin-bottom:10px;
 }
 
 h1{
-font-size:clamp(52px,8vw,96px);
-line-height:.90;
-letter-spacing:-4px;
-margin:24px 0 20px;
+    font-size:30px;
+    color:#f5c542;
+    letter-spacing:2px;
 }
 
-.gold{
-color:var(--gold);
-text-shadow:0 0 35px #f4bd3f30;
+.subtitle{
+    color:#aaa;
+    margin-top:6px;
+    font-size:14px;
 }
 
-.hero p{
-max-width:690px;
-color:#c8ccd1;
-font-size:18px;
-line-height:1.65;
-}
-
-.actions{
-display:flex;
-gap:12px;
-flex-wrap:wrap;
-margin-top:28px;
-}
-
-.btn{
-display:inline-block;
-padding:13px 21px;
-border-radius:10px;
-font-weight:900;
-cursor:pointer;
-}
-
-.primary{
-background:linear-gradient(135deg,#ffe18a,#d99b22);
-color:#111;
-}
-
-.secondary{
-border:1px solid #4c9fc4;
-background:#0a1115;
-color:#dff5ff;
-}
-
-/* ================= STATS ================= */
-
-.stats{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:1px;
-background:#343a40;
-border:1px solid #343a40;
-border-radius:17px;
-overflow:hidden;
-}
-
-.stat{
-padding:22px;
-background:#090c0f;
-}
-
-.stat b{
-display:block;
-margin:4px 0;
-color:var(--gold);
-font-size:24px;
-}
-
-.stat small{
-color:#999;
-}
-
-/* ================= GENERAL ================= */
-
-section{
-padding:82px 0;
-}
-
-.title{
-text-align:center;
-margin-bottom:42px;
-}
-
-.kicker{
-color:var(--gold);
-font-size:11px;
-letter-spacing:2px;
-font-weight:900;
-text-transform:uppercase;
-}
-
-.title h2{
-font-size:clamp(32px,5vw,52px);
-margin:8px 0;
-}
-
-.sub{
-max-width:730px;
-margin:auto;
-color:#9ea4aa;
-line-height:1.6;
-}
-
-/* ================= CARDS ================= */
-
-.grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:17px;
+.testnet{
+    display:inline-block;
+    margin-top:10px;
+    padding:6px 12px;
+    border:1px solid #f5c542;
+    border-radius:20px;
+    color:#f5c542;
+    font-size:12px;
 }
 
 .card{
-background:linear-gradient(145deg,#101419,#080a0c);
-border:1px solid var(--line);
-border-radius:17px;
-padding:25px;
+    background:#111;
+    border:1px solid #292929;
+    border-radius:16px;
+    padding:18px;
+    margin-top:15px;
+    box-shadow:0 5px 25px rgba(0,0,0,.35);
 }
 
-.ico{
-font-size:28px;
-color:var(--gold);
+.card h2{
+    font-size:18px;
+    color:#f5c542;
+    margin-bottom:14px;
 }
 
-.card h3{
-margin:10px 0 6px;
+button{
+    width:100%;
+    border:0;
+    border-radius:10px;
+    padding:14px;
+    margin-top:10px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    background:#f5c542;
+    color:#000;
 }
 
-.card p{
-color:#999;
-font-size:14px;
-line-height:1.6;
+button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
 }
 
-/* ================= WORKFLOW ================= */
-
-.steps{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:14px;
+input{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    border:1px solid #333;
+    background:#050505;
+    color:#fff;
+    font-size:16px;
+    outline:none;
+    margin-top:7px;
 }
 
-.step{
-border:1px solid var(--line);
-border-radius:16px;
-background:#090c0f;
-padding:23px;
+label{
+    display:block;
+    color:#aaa;
+    font-size:13px;
+    margin-top:10px;
 }
 
-.num{
-width:36px;
-height:36px;
-display:grid;
-place-items:center;
-border-radius:50%;
-background:#251d0c;
-color:var(--gold);
-font-weight:900;
-}
-
-.step h3{
-margin-bottom:7px;
-}
-
-.step p{
-color:#999;
-font-size:14px;
-line-height:1.55;
-}
-
-/* ================= MATRIX ================= */
-
-.matrix-header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:20px;
-margin-bottom:25px;
-}
-
-.matrix-badge{
-border:1px solid #6d541c;
-background:#171207;
-color:var(--gold);
-padding:9px 13px;
-border-radius:9px;
-font-size:11px;
-font-weight:900;
-white-space:nowrap;
-}
-
-.flow-note{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px;
-margin-bottom:22px;
-}
-
-.flow-note-box{
-background:#090c0f;
-border:1px solid #3a3425;
-border-radius:14px;
-padding:17px 12px;
-text-align:center;
-}
-
-.flow-note-box b{
-display:block;
-color:var(--gold);
-font-size:15px;
-}
-
-.flow-note-box span{
-display:block;
-color:#aaa;
-font-size:12px;
-margin-top:6px;
-}
-
-/* 14 SPOTS */
-
-.flow-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:13px;
-}
-
-.flow-card{
-display:grid;
-grid-template-columns:58px 1fr;
-gap:14px;
-align-items:center;
-background:linear-gradient(145deg,#101419,#080a0c);
-border:1px solid #30343a;
-border-radius:15px;
-padding:15px;
-transition:.2s;
-}
-
-.flow-card:hover{
-transform:translateY(-2px);
-box-shadow:0 8px 28px #0008;
-}
-
-.flow-number{
-width:48px;
-height:48px;
-display:grid;
-place-items:center;
-border-radius:12px;
-background:#171207;
-border:1px solid #7b5d1d;
-color:var(--gold);
-font-size:21px;
-font-weight:900;
-}
-
-.flow-card h3{
-margin:0 0 5px;
-font-size:16px;
-}
-
-.flow-card p{
-margin:0;
-color:#999;
-font-size:12px;
-line-height:1.5;
-}
-
-.flow-tag{
-display:inline-block;
-margin-top:8px;
-padding:4px 9px;
-border-radius:99px;
-background:#15181b;
-color:#ddd;
-font-size:9px;
-font-weight:800;
-text-transform:uppercase;
-letter-spacing:.7px;
-}
-
-/* FLOW TYPES */
-
-.flow-upline{
-border-color:#3b6e8a;
-}
-
-.flow-self{
-border-color:#3b4147;
-}
-
-.flow-hold{
-border-color:#75601d;
-}
-
-.flow-upgrade{
-border-color:#a47b25;
-}
-
-.flow-downline{
-border-color:#3f6b55;
-}
-
-.flow-recycle{
-border-color:#784c7b;
-}
-
-/* SUMMARY */
-
-.cycle-summary{
-margin-top:22px;
-border:1px solid #343a40;
-border-radius:17px;
-overflow:hidden;
-background:#090c0f;
-}
-
-.summary-title{
-padding:17px 19px;
-color:var(--gold);
-font-weight:900;
-border-bottom:1px solid #292e33;
-}
-
-.summary-row{
-display:flex;
-gap:9px;
-flex-wrap:wrap;
-align-items:center;
-padding:12px 18px;
-border-bottom:1px solid #1f2429;
-}
-
-.summary-row:last-child{
-border-bottom:0;
-}
-
-.summary-label{
-min-width:115px;
-color:#888;
-font-size:10px;
-font-weight:900;
-text-transform:uppercase;
-letter-spacing:.8px;
-}
-
-.summary-item{
-font-size:11px;
-color:#ddd;
-background:#11161a;
-border:1px solid #2c3339;
-border-radius:8px;
-padding:7px 9px;
-}
-
-/* ================= LEVEL TABLE ================= */
-
-.level-box{
-margin-top:24px;
-border:1px solid #343a40;
-border-radius:17px;
-overflow:hidden;
-background:#090c0f;
-}
-
-.level-title{
-padding:17px 19px;
-font-weight:900;
-color:var(--gold);
-border-bottom:1px solid #292e33;
-}
-
-.level-grid{
-display:grid;
-grid-template-columns:repeat(6,1fr);
-}
-
-.level{
-padding:14px 8px;
-text-align:center;
-border-right:1px solid #24292e;
-border-bottom:1px solid #24292e;
-}
-
-.level:nth-child(6n){
-border-right:0;
-}
-
-.level b{
-display:block;
-font-size:12px;
-color:#ddd;
-}
-
-.level span{
-display:block;
-margin-top:5px;
-font-size:11px;
-color:var(--gold);
-}
-
-/* ================= CONTRACT ================= */
-
-.contract{
-display:grid;
-grid-template-columns:1.2fr .8fr;
-gap:18px;
+.info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:10px;
 }
 
 .box{
-border:1px solid #343a40;
-background:#090c0f;
-border-radius:18px;
-padding:28px;
+    background:#090909;
+    border:1px solid #292929;
+    border-radius:10px;
+    padding:12px;
 }
 
-.box h3{
-margin-top:0;
+.box span{
+    display:block;
+    color:#888;
+    font-size:12px;
 }
 
-.address{
-display:flex;
-gap:8px;
-margin:18px 0;
-}
-
-.address input{
-flex:1;
-min-width:0;
-background:#050607;
-color:#ddd;
-border:1px solid #343a40;
-border-radius:9px;
-padding:12px;
-font-size:12px;
-}
-
-.copy{
-border:1px solid #745819;
-background:#171207;
-color:var(--gold);
-border-radius:9px;
-padding:0 15px;
-cursor:pointer;
+.box strong{
+    display:block;
+    margin-top:5px;
+    color:#fff;
+    word-break:break-word;
 }
 
 .status{
-color:#999;
-margin:12px 0;
+    margin-top:12px;
+    padding:12px;
+    border-radius:10px;
+    background:#090909;
+    border:1px solid #292929;
+    color:#bbb;
+    font-size:13px;
+    line-height:1.5;
+    word-break:break-word;
 }
 
-/* ================= NFT ================= */
-
-.nft{
-border:1px solid #604b1b;
-background:linear-gradient(145deg,#171208,#090b0d);
-border-radius:18px;
-padding:30px;
-text-align:center;
+.address{
+    font-size:12px;
+    color:#aaa;
+    word-break:break-all;
+    margin-top:8px;
 }
 
-.nftbadge{
-width:130px;
-height:160px;
-margin:0 auto 18px;
-border:1px solid #b88828;
-border-radius:12px;
-display:grid;
-place-items:center;
-color:var(--gold);
-font-weight:900;
-background:
-radial-gradient(circle,#5b40100f,#080808);
-box-shadow:0 0 35px #f4bd3f0b;
+.success{
+    color:#58e391;
 }
 
-/* ================= FAQ ================= */
-
-.faq{
-max-width:850px;
-margin:auto;
+.error{
+    color:#ff6868;
 }
 
-details{
-border-bottom:1px solid #292e33;
-padding:18px 5px;
+.warning{
+    color:#f5c542;
 }
 
-summary{
-cursor:pointer;
-font-weight:800;
+.footer{
+    text-align:center;
+    color:#666;
+    font-size:11px;
+    padding:25px 0;
 }
-
-details p{
-color:#999;
-margin:10px 0 0;
-line-height:1.6;
-}
-
-/* ================= CTA ================= */
-
-.cta{
-border:1px solid #604b1b;
-border-radius:22px;
-padding:45px;
-text-align:center;
-background:
-radial-gradient(circle at 80% 50%,#3a270a,#0a0c0f 55%);
-}
-
-.cta h2{
-font-size:clamp(30px,5vw,50px);
-margin:8px 0;
-}
-
-.disclaimer{
-font-size:11px;
-color:#777;
-margin-top:20px;
-line-height:1.6;
-}
-
-/* ================= FOOTER ================= */
-
-footer{
-border-top:1px solid #20252a;
-padding:28px 0;
-color:#777;
-font-size:12px;
-}
-
-/* ================= TOAST ================= */
-
-#toast{
-position:fixed;
-bottom:24px;
-left:50%;
-transform:translateX(-50%);
-background:var(--gold);
-color:#111;
-padding:10px 17px;
-border-radius:8px;
-font-weight:800;
-display:none;
-z-index:999;
-}
-
-/* ================= TABLET ================= */
-
-@media(max-width:900px){
-
-.navlinks{
-display:none;
-}
-
-.navbtn{
-display:none;
-}
-
-.hamb{
-display:block;
-}
-
-.stats{
-grid-template-columns:1fr 1fr;
-}
-
-.grid,
-.contract{
-grid-template-columns:1fr;
-}
-
-.steps{
-grid-template-columns:1fr 1fr;
-}
-
-.flow-grid{
-grid-template-columns:1fr;
-}
-
-.level-grid{
-grid-template-columns:repeat(4,1fr);
-}
-
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:600px){
-
-.hero{
-min-height:570px;
-padding:60px 0;
-}
-
-.hero:after{
-font-size:240px;
-right:-28%;
-top:10%;
-}
-
-h1{
-letter-spacing:-2px;
-}
-
-.hero p{
-font-size:16px;
-}
-
-.stats{
-grid-template-columns:1fr 1fr;
-}
-
-.steps{
-grid-template-columns:1fr;
-}
-
-.flow-note{
-grid-template-columns:1fr 1fr;
-}
-
-.flow-card{
-grid-template-columns:50px 1fr;
-}
-
-.flow-number{
-width:42px;
-height:42px;
-font-size:18px;
-}
-
-.summary-row{
-display:block;
-}
-
-.summary-label{
-display:block;
-margin-bottom:8px;
-}
-
-.level-grid{
-grid-template-columns:repeat(3,1fr);
-}
-
-.matrix-header{
-display:block;
-}
-
-.matrix-badge{
-display:inline-block;
-margin-top:12px;
-}
-
-section{
-padding:62px 0;
-}
-
-.cta{
-padding:30px 18px;
-}
-
-}
-
-/* ================= SMALL MOBILE ================= */
-
-@media(max-width:380px){
-
-.flow-note{
-grid-template-columns:1fr;
-}
-
-.level-grid{
-grid-template-columns:repeat(2,1fr);
-}
-
-.stats{
-grid-template-columns:1fr;
-}
-
-}
-
 </style>
 </head>
 
-
 <body>
 
+<div class="container">
 
-<!-- ================= HEADER ================= -->
+    <div class="header">
+        <img src="logo.png" class="logo" onerror="this.style.display='none'">
 
-<header>
+        <h1>TITANOVA</h1>
 
-<div class="wrap nav">
+        <div class="subtitle">
+            Decentralized Matrix Ecosystem
+        </div>
 
-<a class="brand" href="#">
-<span class="brandmark">T</span>
-TITANOVA
-</a>
+        <div class="testnet">
+            BSC TESTNET
+        </div>
+    </div>
 
-<nav class="navlinks">
 
-<a href="#about">About</a>
-<a href="#plan">Plan</a>
-<a href="#works">How It Works</a>
-<a href="#contract">Contract</a>
-<a href="#nft">NFT</a>
-<a href="#faq">FAQ</a>
+    <!-- WALLET -->
+    <div class="card">
 
-</nav>
+        <h2>🔐 Wallet</h2>
 
-<a class="navbtn" href="#join">
-Join Now
-</a>
+        <button id="connectBtn" onclick="connectWallet()">
+            Connect Wallet
+        </button>
 
-<button class="hamb" onclick="toggleMenu()">
-☰
-</button>
+        <div id="walletAddress" class="address">
+            Wallet not connected
+        </div>
 
-</div>
-
-</header>
-
-
-<main>
-
-
-<!-- ================= HERO ================= -->
-
-<section class="hero">
-
-<div class="wrap">
-
-<div class="badge">
-BNB SMART CHAIN • TITANOVA
-</div>
-
-<h1>
-THE NEXT<br>
-<span class="gold">TITANOVA</span>
-</h1>
-
-<p>
-A decentralized matrix ecosystem interface built around
-12 levels, a 14-spot Cycle 1 structure, smart-contract
-infrastructure and NFT technology.
-</p>
-
-<div class="actions">
-
-<a class="btn primary" href="#plan">
-Explore Matrix →
-</a>
-
-<a class="btn secondary" href="#contract">
-Smart Contract
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= STATS ================= -->
-
-<div class="wrap">
-
-<div class="stats">
-
-<div class="stat">
-<small>Network</small>
-<b>BNB Chain</b>
-<small>Smart-contract ecosystem</small>
-</div>
-
-<div class="stat">
-<small>Structure</small>
-<b>12 Levels</b>
-<small>14 Spots • Cycle 1</small>
-</div>
-
-<div class="stat">
-<small>Entry</small>
-<b>0.001 BTCB</b>
-<small>Level 1</small>
-</div>
-
-<div class="stat">
-<small>Pricing</small>
-<b>2×</b>
-<small>Every next level</small>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- ================= ABOUT ================= -->
-
-<section id="about">
-
-<div class="wrap">
-
-<div class="title">
-
-<div class="kicker">
-About TITANOVA
-</div>
-
-<h2>
-Built around a
-<span class="gold">clear structure</span>
-</h2>
-
-<p class="sub">
-TITANOVA is designed around a defined matrix structure,
-level-based pricing and smart-contract infrastructure on
-BNB Smart Chain. Always verify the final deployed contract
-before interacting with it.
-</p>
-
-</div>
-
-
-<div class="grid">
-
-<div class="card">
-
-<div class="ico">◈</div>
-
-<h3>
-Decentralized Logic
-</h3>
-
-<p>
-The matrix rules and user state can be implemented through
-smart contracts and recorded on-chain.
-</p>
-
-</div>
-
-
-<div class="card">
-
-<div class="ico">⬡</div>
-
-<h3>
-12 Level Structure
-</h3>
-
-<p>
-The level pricing begins at 0.001 BTCB and follows a
-2× progression for each next level.
-</p>
-
-</div>
-
-
-<div class="card">
-
-<div class="ico">✓</div>
-
-<h3>
-Verify Before Signing
-</h3>
-
-<p>
-Always verify the contract address, network, transaction
-amount and gas fee before confirming any transaction.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= HOW IT WORKS ================= -->
-
-<section id="works">
-
-<div class="wrap">
-
-<div class="title">
-
-<div class="kicker">
-Workflow
-</div>
-
-<h2>
-How TITANOVA Works
-</h2>
-
-<p class="sub">
-The website explains the intended structure. Actual on-chain
-behavior is determined by the final deployed smart contract.
-</p>
-
-</div>
-
-
-<div class="steps">
-
-<div class="step">
-
-<div class="num">1</div>
-
-<h3>
-Connect Wallet
-</h3>
-
-<p>
-Connect a compatible Web3 wallet when the final contract
-interface is available.
-</p>
-
-</div>
-
-
-<div class="step">
-
-<div class="num">2</div>
-
-<h3>
-Select Level
-</h3>
-
-<p>
-Review the level, required BTCB amount and applicable
-matrix rules before continuing.
-</p>
-
-</div>
-
-
-<div class="step">
-
-<div class="num">3</div>
-
-<h3>
-Confirm
-</h3>
-
-<p>
-Check the transaction details carefully before signing
-the blockchain transaction.
-</p>
-
-</div>
-
-
-<div class="step">
-
-<div class="num">4</div>
-
-<h3>
-Verify
-</h3>
-
-<p>
-After confirmation, verify the transaction hash and
-contract state on-chain.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= MATRIX PLAN ================= -->
-
-<section id="plan">
-
-<div class="wrap">
-
-
-<div class="title">
-
-<div class="kicker">
-Matrix Flow
-</div>
-
-<h2>
-14 Spot
-<span class="gold">Cycle 1</span>
-</h2>
-
-<p class="sub">
-This is the defined Cycle 1 flow. There are 14 spots in
-the cycle and 12 levels in the overall structure.
-</p>
-
-</div>
-
-
-<div class="matrix-header">
-
-<div>
-
-<strong style="color:#ddd">
-Cycle 1 • 14 Spots
-</strong>
-
-<div style="color:#888;font-size:12px;margin-top:5px">
-Upline → Self → Hold → Upgrade → Downline → Recycle
-</div>
-
-</div>
-
-<div class="matrix-badge">
-14 SPOTS
-</div>
-
-</div>
-
-
-<!-- LEVEL PRICING -->
-
-<div class="flow-note">
-
-<div class="flow-note-box">
-
-<b>LEVEL 1</b>
-
-<span>
-0.001 BTCB
-</span>
-
-</div>
-
-
-<div class="flow-note-box">
-
-<b>LEVEL 2</b>
-
-<span>
-0.002 BTCB
-</span>
-
-</div>
-
-
-<div class="flow-note-box">
-
-<b>LEVEL 3</b>
-
-<span>
-0.004 BTCB
-</span>
-
-</div>
-
-
-<div class="flow-note-box">
-
-<b>LEVEL 4–12</b>
-
-<span>
-2× Previous Level
-</span>
-
-</div>
-
-</div>
-
-
-<!-- 14 SPOT FLOW -->
-
-<div class="flow-grid" id="matrixFlow">
-</div>
+        <div class="info">
 
+            <div class="box">
+                <span>Network</span>
+                <strong id="network">---</strong>
+            </div>
 
-<!-- FLOW SUMMARY -->
+            <div class="box">
+                <span>BTCB Balance</span>
+                <strong id="btcBalance">---</strong>
+            </div>
 
-<div class="cycle-summary">
+        </div>
 
-<div class="summary-title">
-Cycle 1 — Flow Summary
-</div>
-
-
-<div class="summary-row">
-
-<span class="summary-label">
-Upline
-</span>
-
-<span class="summary-item">
-Spot 1 → Upline 1 Level
-</span>
-
-<span class="summary-item">
-Spot 2 → Upline 2 Level
-</span>
-
-</div>
-
-
-<div class="summary-row">
-
-<span class="summary-label">
-Self
-</span>
-
-<span class="summary-item">
-Spot 3
-</span>
-
-<span class="summary-item">
-Spot 6
-</span>
-
-<span class="summary-item">
-Spot 8
-</span>
-
-<span class="summary-item">
-Spot 9
-</span>
-
-<span class="summary-item">
-Spot 11
-</span>
-
-<span class="summary-item">
-Spot 12
-</span>
-
-</div>
-
-
-<div class="summary-row">
-
-<span class="summary-label">
-Hold / Upgrade
-</span>
-
-<span class="summary-item">
-Spot 4 → Hold
-</span>
-
-<span class="summary-item">
-Spot 5 → Upgrade • 2 Level
-</span>
-
-</div>
-
-
-<div class="summary-row">
-
-<span class="summary-label">
-Downline
-</span>
-
-<span class="summary-item">
-Spot 7 → 1st Downline • 1 Level
-</span>
-
-<span class="summary-item">
-Spot 10 → 2nd Downline • 1 Level
-</span>
-
-<span class="summary-item">
-Spot 13 → 1st Downline • 2 Level
-</span>
-
-</div>
-
-
-<div class="summary-row">
-
-<span class="summary-label">
-Recycle
-</span>
-
-<span class="summary-item">
-Spot 14 → Recycle
-</span>
-
-</div>
-
-</div>
-
-
-<!-- LEVEL PRICES -->
-
-<div class="level-box">
-
-<div class="level-title">
-12 Level Pricing • 2× Progression
-</div>
-
-<div class="level-grid" id="levelGrid">
-</div>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- ================= CONTRACT ================= -->
-
-<section id="contract">
-
-<div class="wrap">
-
-<div class="title">
-
-<div class="kicker">
-On-Chain
-</div>
-
-<h2>
-Smart Contract
-</h2>
-
-<p class="sub">
-The final deployed contract address should be inserted only
-after deployment and verification.
-</p>
-
-</div>
-
-
-<div class="contract">
-
-
-<div class="box">
-
-<h3>
-Contract Address
-</h3>
-
-<div class="address">
-
-<input
-id="contractAddress"
-value="0xYOUR_MAINNET_CONTRACT_ADDRESS"
-readonly
->
-
-<button
-class="copy"
-onclick="copyAddress()"
->
-Copy
-</button>
-
-</div>
-
-
-<a
-class="btn primary"
-href="#"
-onclick="explorerAlert();return false"
->
-View on BNB Explorer ↗
-</a>
-
-
-<p class="disclaimer">
-Never send BTCB or BNB to an address copied from an
-unofficial source. Verify the final contract address
-independently.
-</p>
-
-</div>
-
-
-<div class="box">
-
-<h3>
-Wallet Connection
-</h3>
-
-<p
-id="walletStatus"
-class="status"
->
-Wallet not connected
-</p>
-
-<button
-class="btn primary"
-onclick="connectWallet()"
->
-Connect Wallet
-</button>
+    </div>
 
-<p class="disclaimer">
-Wallet connection is currently a basic Web3 provider
-demo. Final contract interaction requires the verified
-contract ABI and deployed address.
-</p>
 
-</div>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= NFT ================= -->
-
-<section id="nft">
-
-<div class="wrap">
-
-<div class="title">
-
-<div class="kicker">
-Digital Asset
-</div>
-
-<h2>
-NFT Welcome Pass
-</h2>
-
-<p class="sub">
-The NFT layer is presented separately from the matrix
-logic.
-</p>
-
-</div>
-
-
-<div class="nft">
-
-<div class="nftbadge">
-TITANOVA<br>
-NFT PASS
-</div>
-
-<h3>
-Membership / Utility Layer
-</h3>
-
-<p style="color:#999;max-width:650px;margin:10px auto;line-height:1.6">
-
-NFT transferability, utility, ownership and rank behavior
-must follow the final deployed NFT and matrix contracts.
-
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= FAQ ================= -->
-
-<section id="faq">
-
-<div class="wrap">
-
-<div class="title">
-
-<div class="kicker">
-FAQ
-</div>
-
-<h2>
-Frequently Asked Questions
-</h2>
-
-</div>
-
-
-<div class="faq">
-
+    <!-- REGISTRATION -->
+    <div class="card">
 
-<details open>
+        <h2>🚀 Activate ID</h2>
 
-<summary>
-What is TITANOVA?
-</summary>
+        <label>
+            Referrer ID
+        </label>
 
-<p>
-TITANOVA is a decentralized matrix ecosystem interface
-designed around a 12-level structure and a 14-spot Cycle 1.
-</p>
+        <input
+            type="number"
+            id="referrerId"
+            placeholder="Enter Referrer ID"
+            min="1"
+        >
 
-</details>
+        <button id="approveBtn" onclick="approveBTCB()" disabled>
+            1. Approve BTCB
+        </button>
 
+        <button id="registerBtn" onclick="registerUser()" disabled>
+            2. Activate ID
+        </button>
 
-<details>
+        <div id="registerStatus" class="status">
+            Connect your wallet first.
+        </div>
 
-<summary>
-What is the Level 1 entry amount?
-</summary>
+    </div>
 
-<p>
-The defined Level 1 amount is 0.001 BTCB. Each next level
-follows a 2× progression.
-</p>
 
-</details>
+    <!-- USER DETAILS -->
+    <div class="card">
 
+        <h2>📊 My TITANOVA Details</h2>
 
-<details>
+        <button id="detailsBtn" onclick="loadMyDetails()" disabled>
+            Check My Details
+        </button>
 
-<summary>
-How many spots are in Cycle 1?
-</summary>
+        <div class="info">
 
-<p>
-Cycle 1 contains 14 spots. Spot 14 completes the cycle
-through the defined Recycle step.
-</p>
+            <div class="box">
+                <span>User ID</span>
+                <strong id="userId">---</strong>
+            </div>
 
-</details>
+            <div class="box">
+                <span>Referrer ID</span>
+                <strong id="myReferrer">---</strong>
+            </div>
 
+            <div class="box">
+                <span>Active Levels</span>
+                <strong id="activeLevels">---</strong>
+            </div>
 
-<details>
+            <div class="box">
+                <span>Direct Partners</span>
+                <strong id="directCount">---</strong>
+            </div>
 
-<summary>
-Is income guaranteed?
-</summary>
+            <div class="box">
+                <span>Team Size</span>
+                <strong id="teamSize">---</strong>
+            </div>
 
-<p>
-No. The website does not guarantee income, profit or
-financial returns. Blockchain and digital-asset activities
-involve risks.
-</p>
+            <div class="box">
+                <span>Total Income</span>
+                <strong id="income">---</strong>
+            </div>
 
-</details>
+        </div>
 
+        <div id="detailsStatus" class="status">
+            No data loaded.
+        </div>
 
-<details>
+    </div>
 
-<summary>
-How should I verify the contract?
-</summary>
 
-<p>
-Verify the final contract address, source code, network,
-transaction amount and transaction history before signing.
-</p>
+    <!-- LEVELS -->
+    <div class="card">
 
-</details>
+        <h2>📈 Level Costs</h2>
 
+        <div id="levels" class="info"></div>
 
-<details>
+    </div>
 
-<summary>
-Will NFT and rank transfer together?
-</summary>
 
-<p>
-This depends on the final deployed contract logic. NFT
-ownership and rank state should be checked separately
-against the verified contract.
-</p>
+    <div class="footer">
+        TITANOVA Testnet • For testing purposes only
+    </div>
 
-</details>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================= JOIN ================= -->
-
-<section id="join">
-
-<div class="wrap">
-
-<div class="cta">
-
-<div class="kicker">
-TITANOVA
-</div>
-
-<h2>
-Explore • Verify • Build
-</h2>
-
-<p style="color:#999;max-width:680px;margin:auto;line-height:1.6">
-
-Explore the matrix structure, understand the smart-contract
-logic and verify every blockchain transaction before
-participating.
-
-</p>
-
-
-<div
-class="actions"
-style="justify-content:center"
->
-
-<a
-class="btn primary"
-href="#plan"
->
-View Matrix
-</a>
-
-<a
-class="btn secondary"
-href="#contract"
->
-View Contract
-</a>
-
 </div>
-
-
-<div class="disclaimer">
-
-Informational website only. No guarantee of profit or
-financial return is made. Users should independently
-review smart contracts, transaction fees, risks and
-applicable laws before participating.
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-</main>
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-<div class="wrap">
-
-© 2026 TITANOVA • Decentralized Matrix Ecosystem
-
-</div>
-
-</footer>
-
-
-<div id="toast"></div>
 
 
 <script>
 
-/* =========================================
-   TITANOVA — 14 SPOT CYCLE 1
-   ========================================= */
+const CONTRACT_ADDRESS =
+"0x91F34af97B978a63b35f84A876A6f07D9d651154";
 
-const flowData = [
+const BTCB_ADDRESS =
+"0x6ce8dA28E2f864420840cF74474eFf5fD80E65B8";
 
-{
-n:1,
-title:"Upline — 1 Level",
-desc:"First upline routing",
-tag:"Upline • 1 Level",
-cls:"flow-upline"
-},
+const BSC_TESTNET_CHAIN_ID = 97;
 
-{
-n:2,
-title:"Upline — 2 Level",
-desc:"Second upline routing",
-tag:"Upline • 2 Level",
-cls:"flow-upline"
-},
+const BTCB_DECIMALS = 18;
 
-{
-n:3,
-title:"Self",
-desc:"Self-directed spot",
-tag:"Self",
-cls:"flow-self"
-},
 
-{
-n:4,
-title:"Hold",
-desc:"Amount is held for the defined upgrade step",
-tag:"Hold",
-cls:"flow-hold"
-},
+/*
+==================================================
+TITANOVA ABI
+==================================================
+*/
 
-{
-n:5,
-title:"Upgrade — 2 Level",
-desc:"Upgrade step according to the matrix flow",
-tag:"Upgrade • 2 Level",
-cls:"flow-upgrade"
-},
+const TITANOVA_ABI = [
 
-{
-n:6,
-title:"Self",
-desc:"Self-directed spot",
-tag:"Self",
-cls:"flow-self"
-},
+    "function registration(uint256 referrerId) external",
 
-{
-n:7,
-title:"1st Downline — 1 Level",
-desc:"First downline routing",
-tag:"1st Downline • 1 Level",
-cls:"flow-downline"
-},
+    "function getUserId(address account) view returns (uint256)",
 
-{
-n:8,
-title:"Self",
-desc:"Self-directed spot",
-tag:"Self",
-cls:"flow-self"
-},
+    "function isUserExists(address account) view returns (bool)",
 
-{
-n:9,
-title:"Self",
-desc:"Self-directed spot",
-tag:"Self",
-cls:"flow-self"
-},
+    "function getUserDetails(uint256 userId) view returns (address userAddress,address referrer,uint256 referrerId,uint256 directCount,uint8 activeLevelCount,uint256 teamSize,uint256 registrationTimestamp,uint256 totalIncome)",
 
-{
-n:10,
-title:"2nd Downline — 1 Level",
-desc:"Second downline routing",
-tag:"2nd Downline • 1 Level",
-cls:"flow-downline"
-},
+    "function getLevelCost(uint8 level) view returns (uint256)",
 
-{
-n:11,
-title:"Self",
-desc:"Self-directed spot",
-tag:"Self",
-cls:"flow-self"
-},
+    "function levelTokenCost(uint8) view returns (uint256)",
 
-{
-n:12,
-title:"Self",
-desc:"Self-directed spot",
-tag:"Self",
-cls:"flow-self"
-},
+    "function LAST_LEVEL() view returns (uint8)",
 
-{
-n:13,
-title:"1st Downline — 2 Level",
-desc:"First downline routing at 2-level depth",
-tag:"1st Downline • 2 Level",
-cls:"flow-downline"
-},
+    "function MATRIX_SIZE() view returns (uint8)",
 
-{
-n:14,
-title:"Recycle",
-desc:"Cycle completes and enters the recycle step",
-tag:"Recycle",
-cls:"flow-recycle"
-}
+    "function totalProjectInvestment() view returns (uint256)",
 
+    "function BTCB() view returns (address)"
 ];
 
 
-const flow =
-document.getElementById("matrixFlow");
+/*
+==================================================
+BTCB ABI
+==================================================
+*/
+
+const BTCB_ABI = [
+
+    "function approve(address spender,uint256 amount) external returns (bool)",
+
+    "function allowance(address owner,address spender) view returns (uint256)",
+
+    "function balanceOf(address account) view returns (uint256)",
+
+    "function decimals() view returns (uint8)",
+
+    "function symbol() view returns (string)"
+];
 
 
-flowData.forEach(item=>{
+let provider;
+let signer;
+let userAddress;
 
-const card =
-document.createElement("div");
-
-card.className =
-"flow-card " + item.cls;
-
-card.innerHTML = `
-
-<div class="flow-number">
-${item.n}
-</div>
-
-<div>
-
-<h3>
-Spot ${item.n} — ${item.title}
-</h3>
-
-<p>
-${item.desc}
-</p>
-
-<span class="flow-tag">
-${item.tag}
-</span>
-
-</div>
-
-`;
-
-flow.appendChild(card);
-
-});
+let titanova;
+let btcb;
 
 
-/* =========================================
-   LEVEL PRICING
-   ========================================= */
-
-const levelGrid =
-document.getElementById("levelGrid");
-
-const basePrice = 0.001;
-
-for(let level=1;level<=12;level++){
-
-const amount =
-basePrice * Math.pow(2,level-1);
-
-const div =
-document.createElement("div");
-
-div.className="level";
-
-div.innerHTML=`
-
-<b>
-Level ${level}
-</b>
-
-<span>
-${formatBTCB(amount)} BTCB
-</span>
-
-`;
-
-levelGrid.appendChild(div);
-
-}
-
-
-function formatBTCB(value){
-
-if(value < 1){
-
-return value.toFixed(3);
-
-}
-
-return value.toLocaleString(
-"en-US",
-{
-maximumFractionDigits:3
-}
-);
-
-}
-
-
-/* =========================================
-   COPY CONTRACT
-   ========================================= */
-
-function copyAddress(){
-
-const address =
-document.getElementById(
-"contractAddress"
-).value;
-
-if(navigator.clipboard){
-
-navigator.clipboard.writeText(address);
-
-toast("Contract address copied");
-
-}else{
-
-toast("Copy not supported");
-
-}
-
-}
-
-
-/* =========================================
-   TOAST
-   ========================================= */
-
-function toast(message){
-
-const box =
-document.getElementById("toast");
-
-box.textContent=message;
-
-box.style.display="block";
-
-setTimeout(()=>{
-
-box.style.display="none";
-
-},1800);
-
-}
-
-
-/* =========================================
-   WALLET
-   ========================================= */
+/*
+==================================================
+CONNECT WALLET
+==================================================
+*/
 
 async function connectWallet(){
 
-if(!window.ethereum){
+    try{
 
-toast("No Web3 wallet detected");
+        if(!window.ethereum){
 
-return;
+            showStatus(
+                "registerStatus",
+                "Wallet not found. Please open this website in MetaMask or TokenPocket.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        provider =
+            new ethers.BrowserProvider(window.ethereum);
+
+
+        const accounts =
+            await provider.send("eth_requestAccounts",[]);
+
+
+        if(!accounts.length){
+
+            throw new Error("Wallet connection cancelled.");
+
+        }
+
+
+        signer =
+            await provider.getSigner();
+
+
+        userAddress =
+            await signer.getAddress();
+
+
+        const network =
+            await provider.getNetwork();
+
+
+        const chainId =
+            Number(network.chainId);
+
+
+        if(chainId !== BSC_TESTNET_CHAIN_ID){
+
+            showStatus(
+                "registerStatus",
+                "Please switch wallet network to BSC Testnet (Chain ID 97).",
+                "warning"
+            );
+
+            document.getElementById("network").innerText =
+                "Wrong Network";
+
+            return;
+        }
+
+
+        titanova =
+            new ethers.Contract(
+                CONTRACT_ADDRESS,
+                TITANOVA_ABI,
+                signer
+            );
+
+
+        btcb =
+            new ethers.Contract(
+                BTCB_ADDRESS,
+                BTCB_ABI,
+                signer
+            );
+
+
+        document.getElementById("walletAddress").innerText =
+            userAddress;
+
+
+        document.getElementById("network").innerText =
+            "BSC Testnet";
+
+
+        document.getElementById("approveBtn").disabled =
+            false;
+
+        document.getElementById("registerBtn").disabled =
+            false;
+
+        document.getElementById("detailsBtn").disabled =
+            false;
+
+
+        await loadBTCBBalance();
+
+        await loadLevels();
+
+        await checkExistingUser();
+
+
+        showStatus(
+            "registerStatus",
+            "Wallet connected successfully. Enter Referrer ID.",
+            "success"
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showStatus(
+            "registerStatus",
+            getErrorMessage(error),
+            "error"
+        );
+
+    }
 
 }
 
-try{
 
-const accounts =
-await window.ethereum.request({
-method:"eth_requestAccounts"
-});
+/*
+==================================================
+BTCB BALANCE
+==================================================
+*/
 
-if(accounts && accounts.length){
+async function loadBTCBBalance(){
 
-document.getElementById(
-"walletStatus"
-).textContent =
-"Connected: "
-+
-accounts[0].slice(0,6)
-+
-"..."
-+
-accounts[0].slice(-4);
+    try{
 
-toast("Wallet connected");
+        const balance =
+            await btcb.balanceOf(userAddress);
 
-}
+        const formatted =
+            ethers.formatUnits(
+                balance,
+                BTCB_DECIMALS
+            );
 
-}catch(error){
+        document.getElementById("btcBalance").innerText =
+            Number(formatted).toFixed(6) + " BTCB";
 
-toast("Connection cancelled");
+    }
 
-}
+    catch(error){
 
-}
+        document.getElementById("btcBalance").innerText =
+            "Unable to read";
 
+        console.error(error);
 
-/* =========================================
-   EXPLORER
-   ========================================= */
-
-function explorerAlert(){
-
-toast(
-"Add the final verified contract address first"
-);
+    }
 
 }
 
 
-/* =========================================
-   MOBILE MENU
-   ========================================= */
+/*
+==================================================
+APPROVE BTCB
+==================================================
+*/
 
-function toggleMenu(){
+async function approveBTCB(){
 
-const menu =
-document.querySelector(".navlinks");
+    try{
 
-if(menu.style.display==="flex"){
+        if(!signer){
 
-menu.style.display="none";
+            throw new Error("Connect wallet first.");
 
-}else{
+        }
 
-menu.style.display="flex";
 
-menu.style.position="absolute";
+        const referrerId =
+            document.getElementById("referrerId").value;
 
-menu.style.top="72px";
 
-menu.style.left="0";
+        if(!referrerId || Number(referrerId) < 1){
 
-menu.style.right="0";
+            throw new Error("Please enter Referrer ID.");
 
-menu.style.padding="20px";
+        }
 
-menu.style.background="#080909";
 
-menu.style.flexDirection="column";
+        const cost =
+            await getLevel1Cost();
+
+
+        showStatus(
+            "registerStatus",
+            "Approval transaction is opening in your wallet...",
+            "warning"
+        );
+
+
+        const tx =
+            await btcb.approve(
+                CONTRACT_ADDRESS,
+                cost
+            );
+
+
+        showStatus(
+            "registerStatus",
+            "Approval submitted. Waiting for confirmation...",
+            "warning"
+        );
+
+
+        await tx.wait();
+
+
+        showStatus(
+            "registerStatus",
+            "BTCB approved successfully. Now click Activate ID.",
+            "success"
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showStatus(
+            "registerStatus",
+            getErrorMessage(error),
+            "error"
+        );
+
+    }
 
 }
+
+
+/*
+==================================================
+REGISTER
+==================================================
+*/
+
+async function registerUser(){
+
+    try{
+
+        if(!signer){
+
+            throw new Error("Connect wallet first.");
+
+        }
+
+
+        const referrerId =
+            document.getElementById("referrerId").value;
+
+
+        if(!referrerId || Number(referrerId) < 1){
+
+            throw new Error("Please enter Referrer ID.");
+
+        }
+
+
+        const exists =
+            await titanova.isUserExists(userAddress);
+
+
+        if(exists){
+
+            showStatus(
+                "registerStatus",
+                "This wallet is already registered.",
+                "warning"
+            );
+
+            await loadMyDetails();
+
+            return;
+
+        }
+
+
+        const cost =
+            await getLevel1Cost();
+
+
+        const allowance =
+            await btcb.allowance(
+                userAddress,
+                CONTRACT_ADDRESS
+            );
+
+
+        if(allowance < cost){
+
+            showStatus(
+                "registerStatus",
+                "BTCB allowance is insufficient. Please approve BTCB first.",
+                "warning"
+            );
+
+            return;
+
+        }
+
+
+        showStatus(
+            "registerStatus",
+            "Registration transaction is opening in your wallet...",
+            "warning"
+        );
+
+
+        const tx =
+            await titanova.registration(
+                referrerId
+            );
+
+
+        showStatus(
+            "registerStatus",
+            "Registration submitted. Waiting for confirmation...",
+            "warning"
+        );
+
+
+        const receipt =
+            await tx.wait();
+
+
+        showStatus(
+            "registerStatus",
+            "🎉 Registration successful! Transaction: " +
+            receipt.hash,
+            "success"
+        );
+
+
+        await loadMyDetails();
+
+        await loadBTCBBalance();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showStatus(
+            "registerStatus",
+            getErrorMessage(error),
+            "error"
+        );
+
+    }
+
+}
+
+
+/*
+==================================================
+LEVEL 1 COST
+==================================================
+*/
+
+async function getLevel1Cost(){
+
+    try{
+
+        const cost =
+            await titanova.getLevelCost(1);
+
+        return cost;
+
+    }
+
+    catch(error){
+
+        const cost =
+            await titanova.levelTokenCost(1);
+
+        return cost;
+
+    }
+
+}
+
+
+/*
+==================================================
+USER DETAILS
+==================================================
+*/
+
+async function loadMyDetails(){
+
+    try{
+
+        if(!titanova || !userAddress){
+
+            throw new Error("Connect wallet first.");
+
+        }
+
+
+        const id =
+            await titanova.getUserId(userAddress);
+
+
+        if(id == 0){
+
+            document.getElementById("userId").innerText =
+                "---";
+
+            showStatus(
+                "detailsStatus",
+                "This wallet is not registered yet.",
+                "warning"
+            );
+
+            return;
+
+        }
+
+
+        const data =
+            await titanova.getUserDetails(id);
+
+
+        document.getElementById("userId").innerText =
+            data[0] ? id.toString() : "---";
+
+
+        document.getElementById("myReferrer").innerText =
+            data[2].toString();
+
+
+        document.getElementById("activeLevels").innerText =
+            data[4].toString() + " / 12";
+
+
+        document.getElementById("directCount").innerText =
+            data[3].toString();
+
+
+        document.getElementById("teamSize").innerText =
+            data[5].toString();
+
+
+        document.getElementById("income").innerText =
+            ethers.formatUnits(
+                data[7],
+                BTCB_DECIMALS
+            ) + " BTCB";
+
+
+        showStatus(
+            "detailsStatus",
+            "User details loaded successfully.",
+            "success"
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showStatus(
+            "detailsStatus",
+            getErrorMessage(error),
+            "error"
+        );
+
+    }
+
+}
+
+
+/*
+==================================================
+CHECK EXISTING USER
+==================================================
+*/
+
+async function checkExistingUser(){
+
+    try{
+
+        const exists =
+            await titanova.isUserExists(userAddress);
+
+
+        if(exists){
+
+            showStatus(
+                "registerStatus",
+                "This wallet is already registered.",
+                "warning"
+            );
+
+            await loadMyDetails();
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/*
+==================================================
+LEVEL COSTS
+==================================================
+*/
+
+async function loadLevels(){
+
+    const container =
+        document.getElementById("levels");
+
+    container.innerHTML = "";
+
+
+    for(let i = 1; i <= 12; i++){
+
+        try{
+
+            let cost;
+
+            try{
+
+                cost =
+                    await titanova.getLevelCost(i);
+
+            }
+
+            catch(e){
+
+                cost =
+                    await titanova.levelTokenCost(i);
+
+            }
+
+
+            const value =
+                ethers.formatUnits(
+                    cost,
+                    BTCB_DECIMALS
+                );
+
+
+            const box =
+                document.createElement("div");
+
+            box.className = "box";
+
+            box.innerHTML =
+                "<span>Level " + i + "</span>" +
+                "<strong>" +
+                value +
+                " BTCB" +
+                "</strong>";
+
+
+            container.appendChild(box);
+
+        }
+
+        catch(error){
+
+            console.error(
+                "Level " + i,
+                error
+            );
+
+        }
+
+    }
+
+}
+
+
+/*
+==================================================
+STATUS
+==================================================
+*/
+
+function showStatus(elementId,message,type){
+
+    const el =
+        document.getElementById(elementId);
+
+    el.innerText =
+        message;
+
+    el.className =
+        "status " + type;
+
+}
+
+
+/*
+==================================================
+ERROR MESSAGE
+==================================================
+*/
+
+function getErrorMessage(error){
+
+    if(!error){
+        return "Unknown error.";
+    }
+
+
+    if(error.code === 4001){
+        return "Transaction rejected by wallet.";
+    }
+
+
+    if(error.code === "ACTION_REJECTED"){
+        return "Transaction rejected by wallet.";
+    }
+
+
+    if(error.reason){
+        return error.reason;
+    }
+
+
+    if(error.shortMessage){
+        return error.shortMessage;
+    }
+
+
+    if(error.message){
+
+        if(error.message.includes("insufficient funds")){
+            return "Insufficient test BNB for gas.";
+        }
+
+        if(error.message.includes("user rejected")){
+            return "Transaction rejected by wallet.";
+        }
+
+        return error.message.substring(0,300);
+
+    }
+
+
+    return "Transaction failed. Please check the wallet and Testnet.";
+}
+
+
+/*
+==================================================
+WALLET ACCOUNT CHANGE
+==================================================
+*/
+
+if(window.ethereum){
+
+    window.ethereum.on(
+        "accountsChanged",
+        function(){
+
+            location.reload();
+
+        }
+    );
+
+
+    window.ethereum.on(
+        "chainChanged",
+        function(){
+
+            location.reload();
+
+        }
+    );
 
 }
 
