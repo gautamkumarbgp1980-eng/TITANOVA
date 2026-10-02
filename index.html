@@ -4,44 +4,65 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#050505">
-<title>TITANOVA — Bitcoin Matrix Ecosystem</title>
+
+<title>TITANOVA — Decentralized Matrix Ecosystem</title>
 
 <style>
+
 :root{
 --bg:#040506;
---panel:#0a0d10;
+--panel:#090c0f;
+--panel2:#101419;
 --gold:#f4bd3f;
 --gold2:#ffe7a0;
 --white:#f7f7f7;
 --muted:#a8adb4;
 --line:#2a2f35;
---cyan:#53c7ff;
+--blue:#53c7ff;
+--green:#55d68b;
+--purple:#b879e8;
+--red:#ff6868;
 }
 
-*{box-sizing:border-box}
+*{
+box-sizing:border-box;
+}
 
-html{scroll-behavior:smooth}
+html{
+scroll-behavior:smooth;
+}
 
 body{
 margin:0;
-background:radial-gradient(circle at 50% -15%,#392807 0,#080909 34%,#040506 70%);
+background:
+radial-gradient(circle at 50% -15%,#392807 0,#080909 32%,#040506 72%);
 color:var(--white);
 font-family:Inter,Arial,sans-serif;
 }
 
-a{text-decoration:none;color:inherit}
+a{
+text-decoration:none;
+color:inherit;
+}
+
+button,
+input{
+font-family:inherit;
+}
 
 .wrap{
 width:min(1180px,92%);
 margin:auto;
 }
 
+/* ================= HEADER ================= */
+
 header{
 position:sticky;
 top:0;
-z-index:50;
-background:rgba(4,5,6,.88);
-backdrop-filter:blur(15px);
+z-index:100;
+background:rgba(4,5,6,.90);
+backdrop-filter:blur(16px);
 border-bottom:1px solid #20252a;
 }
 
@@ -56,27 +77,33 @@ justify-content:space-between;
 display:flex;
 align-items:center;
 gap:10px;
+font-size:23px;
 font-weight:900;
-font-size:24px;
 letter-spacing:1.5px;
 color:var(--gold);
 }
 
 .brandmark{
-width:34px;
-height:34px;
-border:2px solid var(--gold);
+width:35px;
+height:35px;
 display:grid;
 place-items:center;
-clip-path:polygon(50% 0,100% 22%,82% 100%,18% 100%,0 22%);
-font-size:18px;
+border:2px solid var(--gold);
+clip-path:polygon(
+50% 0,
+100% 22%,
+82% 100%,
+18% 100%,
+0 22%
+);
+font-size:17px;
 }
 
 .navlinks{
 display:flex;
-gap:23px;
+gap:22px;
 color:#ddd;
-font-size:14px;
+font-size:13px;
 }
 
 .navlinks a:hover{
@@ -84,11 +111,11 @@ color:var(--gold);
 }
 
 .navbtn{
+padding:11px 17px;
+border-radius:9px;
 border:1px solid #8d681e;
 background:linear-gradient(135deg,#ffe38a,#e3a72c);
 color:#111;
-padding:11px 17px;
-border-radius:9px;
 font-weight:900;
 }
 
@@ -97,12 +124,15 @@ display:none;
 background:#111;
 border:1px solid #444;
 color:#fff;
-padding:8px;
+padding:8px 10px;
 border-radius:8px;
+font-size:18px;
 }
 
+/* ================= HERO ================= */
+
 .hero{
-min-height:620px;
+min-height:610px;
 display:flex;
 align-items:center;
 padding:75px 0 55px;
@@ -113,28 +143,29 @@ overflow:hidden;
 .hero:after{
 content:"₿";
 position:absolute;
-right:5%;
-top:4%;
+right:4%;
+top:3%;
 font-size:430px;
-color:#f4bd3f0c;
+font-weight:900;
+color:#f4bd3f0b;
 z-index:-1;
 }
 
 .badge{
 display:inline-block;
-padding:7px 12px;
+padding:8px 13px;
 border:1px solid #735819;
 border-radius:99px;
 color:var(--gold2);
 background:#171207;
-font-size:11px;
-letter-spacing:1.4px;
+font-size:10px;
+letter-spacing:1.5px;
 text-transform:uppercase;
 }
 
 h1{
 font-size:clamp(52px,8vw,96px);
-line-height:.9;
+line-height:.90;
 letter-spacing:-4px;
 margin:24px 0 20px;
 }
@@ -145,9 +176,10 @@ text-shadow:0 0 35px #f4bd3f30;
 }
 
 .hero p{
-max-width:680px;
+max-width:690px;
 color:#c8ccd1;
 font-size:18px;
+line-height:1.65;
 }
 
 .actions{
@@ -158,10 +190,11 @@ margin-top:28px;
 }
 
 .btn{
+display:inline-block;
 padding:13px 21px;
 border-radius:10px;
 font-weight:900;
-display:inline-block;
+cursor:pointer;
 }
 
 .primary{
@@ -175,30 +208,35 @@ background:#0a1115;
 color:#dff5ff;
 }
 
+/* ================= STATS ================= */
+
 .stats{
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:1px;
-border:1px solid #343a40;
 background:#343a40;
+border:1px solid #343a40;
 border-radius:17px;
 overflow:hidden;
 }
 
 .stat{
-padding:23px;
+padding:22px;
 background:#090c0f;
 }
 
 .stat b{
 display:block;
+margin:4px 0;
 color:var(--gold);
-font-size:25px;
+font-size:24px;
 }
 
 .stat small{
 color:#999;
 }
+
+/* ================= GENERAL ================= */
 
 section{
 padding:82px 0;
@@ -219,14 +257,17 @@ text-transform:uppercase;
 
 .title h2{
 font-size:clamp(32px,5vw,52px);
-margin:7px 0;
+margin:8px 0;
 }
 
 .sub{
-color:#9ea4aa;
 max-width:730px;
 margin:auto;
+color:#9ea4aa;
+line-height:1.6;
 }
+
+/* ================= CARDS ================= */
 
 .grid{
 display:grid;
@@ -253,7 +294,10 @@ margin:10px 0 6px;
 .card p{
 color:#999;
 font-size:14px;
+line-height:1.6;
 }
+
+/* ================= WORKFLOW ================= */
 
 .steps{
 display:grid;
@@ -269,22 +313,46 @@ padding:23px;
 }
 
 .num{
-width:35px;
-height:35px;
-border-radius:50%;
+width:36px;
+height:36px;
 display:grid;
 place-items:center;
+border-radius:50%;
 background:#251d0c;
 color:var(--gold);
 font-weight:900;
 }
 
+.step h3{
+margin-bottom:7px;
+}
+
 .step p{
 color:#999;
 font-size:14px;
+line-height:1.55;
 }
 
-/* MATRIX FLOW */
+/* ================= MATRIX ================= */
+
+.matrix-header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:20px;
+margin-bottom:25px;
+}
+
+.matrix-badge{
+border:1px solid #6d541c;
+background:#171207;
+color:var(--gold);
+padding:9px 13px;
+border-radius:9px;
+font-size:11px;
+font-weight:900;
+white-space:nowrap;
+}
 
 .flow-note{
 display:grid;
@@ -293,31 +361,33 @@ gap:12px;
 margin-bottom:22px;
 }
 
-.flow-note>div{
+.flow-note-box{
 background:#090c0f;
 border:1px solid #3a3425;
 border-radius:14px;
-padding:15px;
+padding:17px 12px;
 text-align:center;
 }
 
-.flow-note b{
+.flow-note-box b{
 display:block;
 color:var(--gold);
 font-size:15px;
 }
 
-.flow-note span{
+.flow-note-box span{
 display:block;
 color:#aaa;
 font-size:12px;
-margin-top:5px;
+margin-top:6px;
 }
+
+/* 14 SPOTS */
 
 .flow-grid{
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:12px;
+gap:13px;
 }
 
 .flow-card{
@@ -328,15 +398,21 @@ align-items:center;
 background:linear-gradient(145deg,#101419,#080a0c);
 border:1px solid #30343a;
 border-radius:15px;
-padding:14px;
+padding:15px;
+transition:.2s;
 }
 
-.flow-num{
+.flow-card:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 28px #0008;
+}
+
+.flow-number{
 width:48px;
 height:48px;
-border-radius:12px;
 display:grid;
 place-items:center;
+border-radius:12px;
 background:#171207;
 border:1px solid #7b5d1d;
 color:var(--gold);
@@ -345,7 +421,7 @@ font-weight:900;
 }
 
 .flow-card h3{
-margin:0 0 4px;
+margin:0 0 5px;
 font-size:16px;
 }
 
@@ -353,43 +429,52 @@ font-size:16px;
 margin:0;
 color:#999;
 font-size:12px;
-line-height:1.45;
+line-height:1.5;
 }
 
 .flow-tag{
 display:inline-block;
-margin-top:7px;
-padding:4px 8px;
+margin-top:8px;
+padding:4px 9px;
 border-radius:99px;
 background:#15181b;
-color:#d8d8d8;
-font-size:10px;
+color:#ddd;
+font-size:9px;
+font-weight:800;
 text-transform:uppercase;
 letter-spacing:.7px;
 }
 
-.flow-card.upline{
+/* FLOW TYPES */
+
+.flow-upline{
 border-color:#3b6e8a;
 }
 
-.flow-card.hold{
+.flow-self{
+border-color:#3b4147;
+}
+
+.flow-hold{
 border-color:#75601d;
 }
 
-.flow-card.upgrade{
-border-color:#8a6b20;
+.flow-upgrade{
+border-color:#a47b25;
 }
 
-.flow-card.downline{
+.flow-downline{
 border-color:#3f6b55;
 }
 
-.flow-card.recycle{
+.flow-recycle{
 border-color:#784c7b;
 }
 
+/* SUMMARY */
+
 .cycle-summary{
-margin-top:20px;
+margin-top:22px;
 border:1px solid #343a40;
 border-radius:17px;
 overflow:hidden;
@@ -397,7 +482,7 @@ background:#090c0f;
 }
 
 .summary-title{
-padding:16px 18px;
+padding:17px 19px;
 color:var(--gold);
 font-weight:900;
 border-bottom:1px solid #292e33;
@@ -405,7 +490,7 @@ border-bottom:1px solid #292e33;
 
 .summary-row{
 display:flex;
-gap:10px;
+gap:9px;
 flex-wrap:wrap;
 align-items:center;
 padding:12px 18px;
@@ -416,16 +501,17 @@ border-bottom:1px solid #1f2429;
 border-bottom:0;
 }
 
-.summary-row span{
+.summary-label{
 min-width:115px;
 color:#888;
-font-size:11px;
+font-size:10px;
+font-weight:900;
 text-transform:uppercase;
-letter-spacing:.7px;
+letter-spacing:.8px;
 }
 
-.summary-row b{
-font-size:12px;
+.summary-item{
+font-size:11px;
 color:#ddd;
 background:#11161a;
 border:1px solid #2c3339;
@@ -433,7 +519,53 @@ border-radius:8px;
 padding:7px 9px;
 }
 
-/* CONTRACT */
+/* ================= LEVEL TABLE ================= */
+
+.level-box{
+margin-top:24px;
+border:1px solid #343a40;
+border-radius:17px;
+overflow:hidden;
+background:#090c0f;
+}
+
+.level-title{
+padding:17px 19px;
+font-weight:900;
+color:var(--gold);
+border-bottom:1px solid #292e33;
+}
+
+.level-grid{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+}
+
+.level{
+padding:14px 8px;
+text-align:center;
+border-right:1px solid #24292e;
+border-bottom:1px solid #24292e;
+}
+
+.level:nth-child(6n){
+border-right:0;
+}
+
+.level b{
+display:block;
+font-size:12px;
+color:#ddd;
+}
+
+.level span{
+display:block;
+margin-top:5px;
+font-size:11px;
+color:var(--gold);
+}
+
+/* ================= CONTRACT ================= */
 
 .contract{
 display:grid;
@@ -448,6 +580,10 @@ border-radius:18px;
 padding:28px;
 }
 
+.box h3{
+margin-top:0;
+}
+
 .address{
 display:flex;
 gap:8px;
@@ -456,12 +592,13 @@ margin:18px 0;
 
 .address input{
 flex:1;
+min-width:0;
 background:#050607;
 color:#ddd;
 border:1px solid #343a40;
 border-radius:9px;
 padding:12px;
-font-size:13px;
+font-size:12px;
 }
 
 .copy{
@@ -473,13 +610,18 @@ padding:0 15px;
 cursor:pointer;
 }
 
-/* NFT */
+.status{
+color:#999;
+margin:12px 0;
+}
+
+/* ================= NFT ================= */
 
 .nft{
 border:1px solid #604b1b;
 background:linear-gradient(145deg,#171208,#090b0d);
 border-radius:18px;
-padding:28px;
+padding:30px;
 text-align:center;
 }
 
@@ -493,10 +635,12 @@ display:grid;
 place-items:center;
 color:var(--gold);
 font-weight:900;
-background:radial-gradient(circle,#5b40100f,#080808);
+background:
+radial-gradient(circle,#5b40100f,#080808);
+box-shadow:0 0 35px #f4bd3f0b;
 }
 
-/* FAQ */
+/* ================= FAQ ================= */
 
 .faq{
 max-width:850px;
@@ -516,16 +660,18 @@ font-weight:800;
 details p{
 color:#999;
 margin:10px 0 0;
+line-height:1.6;
 }
 
-/* CTA */
+/* ================= CTA ================= */
 
 .cta{
 border:1px solid #604b1b;
 border-radius:22px;
 padding:45px;
 text-align:center;
-background:radial-gradient(circle at 80% 50%,#3a270a,#0a0c0f 55%);
+background:
+radial-gradient(circle at 80% 50%,#3a270a,#0a0c0f 55%);
 }
 
 .cta h2{
@@ -540,6 +686,8 @@ margin-top:20px;
 line-height:1.6;
 }
 
+/* ================= FOOTER ================= */
+
 footer{
 border-top:1px solid #20252a;
 padding:28px 0;
@@ -547,23 +695,25 @@ color:#777;
 font-size:12px;
 }
 
+/* ================= TOAST ================= */
+
 #toast{
 position:fixed;
 bottom:24px;
 left:50%;
 transform:translateX(-50%);
-background:#f4bd3f;
+background:var(--gold);
 color:#111;
-padding:10px 16px;
+padding:10px 17px;
 border-radius:8px;
 font-weight:800;
 display:none;
-z-index:99;
+z-index:999;
 }
 
-/* TABLET */
+/* ================= TABLET ================= */
 
-@media(max-width:850px){
+@media(max-width:900px){
 
 .navlinks{
 display:none;
@@ -590,32 +740,37 @@ grid-template-columns:1fr;
 grid-template-columns:1fr 1fr;
 }
 
-.flow-note{
-grid-template-columns:1fr 1fr;
-}
-
 .flow-grid{
 grid-template-columns:1fr;
 }
 
+.level-grid{
+grid-template-columns:repeat(4,1fr);
 }
 
-/* MOBILE */
+}
 
-@media(max-width:520px){
+/* ================= MOBILE ================= */
+
+@media(max-width:600px){
 
 .hero{
+min-height:570px;
 padding:60px 0;
 }
 
 .hero:after{
 font-size:240px;
-right:-25%;
+right:-28%;
 top:10%;
 }
 
 h1{
 letter-spacing:-2px;
+}
+
+.hero p{
+font-size:16px;
 }
 
 .stats{
@@ -634,17 +789,36 @@ grid-template-columns:1fr 1fr;
 grid-template-columns:50px 1fr;
 }
 
-.flow-num{
+.flow-number{
 width:42px;
 height:42px;
+font-size:18px;
 }
 
-.summary-row span{
-width:100%;
+.summary-row{
+display:block;
+}
+
+.summary-label{
+display:block;
+margin-bottom:8px;
+}
+
+.level-grid{
+grid-template-columns:repeat(3,1fr);
+}
+
+.matrix-header{
+display:block;
+}
+
+.matrix-badge{
+display:inline-block;
+margin-top:12px;
 }
 
 section{
-padding:60px 0;
+padding:62px 0;
 }
 
 .cta{
@@ -652,12 +826,36 @@ padding:30px 18px;
 }
 
 }
+
+/* ================= SMALL MOBILE ================= */
+
+@media(max-width:380px){
+
+.flow-note{
+grid-template-columns:1fr;
+}
+
+.level-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.stats{
+grid-template-columns:1fr;
+}
+
+}
+
 </style>
 </head>
 
+
 <body>
 
+
+<!-- ================= HEADER ================= -->
+
 <header>
+
 <div class="wrap nav">
 
 <a class="brand" href="#">
@@ -666,30 +864,40 @@ TITANOVA
 </a>
 
 <nav class="navlinks">
+
 <a href="#about">About</a>
 <a href="#plan">Plan</a>
 <a href="#works">How It Works</a>
-<a href="#contract">Smart Contract</a>
+<a href="#contract">Contract</a>
 <a href="#nft">NFT</a>
 <a href="#faq">FAQ</a>
+
 </nav>
 
-<a class="navbtn" href="#join">Join Now</a>
+<a class="navbtn" href="#join">
+Join Now
+</a>
 
-<button class="hamb" onclick="toggleMenu()">☰</button>
+<button class="hamb" onclick="toggleMenu()">
+☰
+</button>
 
 </div>
+
 </header>
+
 
 <main>
 
-<!-- HERO -->
+
+<!-- ================= HERO ================= -->
 
 <section class="hero">
+
 <div class="wrap">
 
 <div class="badge">
-BNB Smart Chain • Decentralized Ecosystem
+BNB SMART CHAIN • TITANOVA
 </div>
 
 <h1>
@@ -698,25 +906,29 @@ THE NEXT<br>
 </h1>
 
 <p>
-A premium interface for exploring the TITANOVA matrix ecosystem,
-its 12-level structure, smart-contract architecture and NFT infrastructure.
+A decentralized matrix ecosystem interface built around
+12 levels, a 14-spot Cycle 1 structure, smart-contract
+infrastructure and NFT technology.
 </p>
 
 <div class="actions">
+
 <a class="btn primary" href="#plan">
-Explore Plan →
+Explore Matrix →
 </a>
 
 <a class="btn secondary" href="#contract">
 Smart Contract
 </a>
+
 </div>
 
 </div>
+
 </section>
 
 
-<!-- STATS -->
+<!-- ================= STATS ================= -->
 
 <div class="wrap">
 
@@ -731,19 +943,19 @@ Smart Contract
 <div class="stat">
 <small>Structure</small>
 <b>12 Levels</b>
-<small>14 Spots Per Cycle</small>
+<small>14 Spots • Cycle 1</small>
 </div>
 
 <div class="stat">
-<small>Infrastructure</small>
-<b>NFT</b>
-<small>Membership / utility layer</small>
+<small>Entry</small>
+<b>0.001 BTCB</b>
+<small>Level 1</small>
 </div>
 
 <div class="stat">
-<small>Verification</small>
-<b>On-Chain</b>
-<small>Check before signing</small>
+<small>Pricing</small>
+<b>2×</b>
+<small>Every next level</small>
 </div>
 
 </div>
@@ -751,7 +963,7 @@ Smart Contract
 </div>
 
 
-<!-- ABOUT -->
+<!-- ================= ABOUT ================= -->
 
 <section id="about">
 
@@ -759,49 +971,72 @@ Smart Contract
 
 <div class="title">
 
-<div class="kicker">About</div>
+<div class="kicker">
+About TITANOVA
+</div>
 
 <h2>
-Built for a
-<span class="gold">transparent</span>
-experience
+Built around a
+<span class="gold">clear structure</span>
 </h2>
 
 <p class="sub">
-TITANOVA is presented as a smart-contract-based ecosystem on
-BNB Smart Chain. Users should independently verify contract source
-code, addresses, fees and transaction results.
+TITANOVA is designed around a defined matrix structure,
+level-based pricing and smart-contract infrastructure on
+BNB Smart Chain. Always verify the final deployed contract
+before interacting with it.
 </p>
 
 </div>
+
 
 <div class="grid">
 
 <div class="card">
+
 <div class="ico">◈</div>
-<h3>Decentralized Logic</h3>
+
+<h3>
+Decentralized Logic
+</h3>
+
 <p>
-Rules and state can be implemented through deployed smart contracts
-rather than a conventional centralized database.
+The matrix rules and user state can be implemented through
+smart contracts and recorded on-chain.
 </p>
+
 </div>
 
+
 <div class="card">
+
 <div class="ico">⬡</div>
-<h3>BNB Smart Chain</h3>
+
+<h3>
+12 Level Structure
+</h3>
+
 <p>
-Designed for the BNB Smart Chain environment with token and NFT
-infrastructure as defined by the deployed contracts.
+The level pricing begins at 0.001 BTCB and follows a
+2× progression for each next level.
 </p>
+
 </div>
 
+
 <div class="card">
+
 <div class="ico">✓</div>
-<h3>Verify Everything</h3>
+
+<h3>
+Verify Before Signing
+</h3>
+
 <p>
-Always compare the official contract address with verified explorer
-data before connecting or signing a transaction.
+Always verify the contract address, network, transaction
+amount and gas fee before confirming any transaction.
 </p>
+
 </div>
 
 </div>
@@ -811,7 +1046,7 @@ data before connecting or signing a transaction.
 </section>
 
 
-<!-- HOW IT WORKS -->
+<!-- ================= HOW IT WORKS ================= -->
 
 <section id="works">
 
@@ -819,50 +1054,85 @@ data before connecting or signing a transaction.
 
 <div class="title">
 
-<div class="kicker">Workflow</div>
+<div class="kicker">
+Workflow
+</div>
 
 <h2>
 How TITANOVA Works
 </h2>
 
+<p class="sub">
+The website explains the intended structure. Actual on-chain
+behavior is determined by the final deployed smart contract.
+</p>
+
 </div>
+
 
 <div class="steps">
 
 <div class="step">
+
 <div class="num">1</div>
-<h3>Connect Wallet</h3>
+
+<h3>
+Connect Wallet
+</h3>
+
 <p>
-Connect a compatible Web3 wallet when the final contract interface
-is published.
+Connect a compatible Web3 wallet when the final contract
+interface is available.
 </p>
+
 </div>
 
+
 <div class="step">
+
 <div class="num">2</div>
-<h3>Review</h3>
+
+<h3>
+Select Level
+</h3>
+
 <p>
-Read the contract address, network, transaction amount and gas fee
-before signing.
+Review the level, required BTCB amount and applicable
+matrix rules before continuing.
 </p>
+
 </div>
 
+
 <div class="step">
+
 <div class="num">3</div>
-<h3>Interact</h3>
+
+<h3>
+Confirm
+</h3>
+
 <p>
-Choose the available contract action and confirm only after checking
-all transaction details.
+Check the transaction details carefully before signing
+the blockchain transaction.
 </p>
+
 </div>
 
+
 <div class="step">
+
 <div class="num">4</div>
-<h3>Verify</h3>
+
+<h3>
+Verify
+</h3>
+
 <p>
-Check the transaction hash and resulting on-chain state in a BNB
-Chain explorer.
+After confirmation, verify the transaction hash and
+contract state on-chain.
 </p>
+
 </div>
 
 </div>
@@ -872,11 +1142,12 @@ Chain explorer.
 </section>
 
 
-<!-- MATRIX FLOW -->
+<!-- ================= MATRIX PLAN ================= -->
 
 <section id="plan">
 
 <div class="wrap">
+
 
 <div class="title">
 
@@ -890,96 +1161,222 @@ Matrix Flow
 </h2>
 
 <p class="sub">
-TITANOVA Cycle 1 follows the defined 14-spot flow below.
-Level pricing starts at 0.001 BTCB and doubles at every next level.
+This is the defined Cycle 1 flow. There are 14 spots in
+the cycle and 12 levels in the overall structure.
 </p>
 
 </div>
 
 
-<!-- LEVEL PRICE -->
+<div class="matrix-header">
+
+<div>
+
+<strong style="color:#ddd">
+Cycle 1 • 14 Spots
+</strong>
+
+<div style="color:#888;font-size:12px;margin-top:5px">
+Upline → Self → Hold → Upgrade → Downline → Recycle
+</div>
+
+</div>
+
+<div class="matrix-badge">
+14 SPOTS
+</div>
+
+</div>
+
+
+<!-- LEVEL PRICING -->
 
 <div class="flow-note">
 
-<div>
-<b>Level 1</b>
-<span>0.001 BTCB</span>
-</div>
+<div class="flow-note-box">
 
-<div>
-<b>Level 2</b>
-<span>0.002 BTCB</span>
-</div>
+<b>LEVEL 1</b>
 
-<div>
-<b>Level 3</b>
-<span>0.004 BTCB</span>
-</div>
-
-<div>
-<b>Level 4+</b>
-<span>2× Previous Level</span>
-</div>
+<span>
+0.001 BTCB
+</span>
 
 </div>
 
 
-<!-- 14 SPOTS -->
+<div class="flow-note-box">
+
+<b>LEVEL 2</b>
+
+<span>
+0.002 BTCB
+</span>
+
+</div>
+
+
+<div class="flow-note-box">
+
+<b>LEVEL 3</b>
+
+<span>
+0.004 BTCB
+</span>
+
+</div>
+
+
+<div class="flow-note-box">
+
+<b>LEVEL 4–12</b>
+
+<span>
+2× Previous Level
+</span>
+
+</div>
+
+</div>
+
+
+<!-- 14 SPOT FLOW -->
 
 <div class="flow-grid" id="matrixFlow">
 </div>
 
 
-<!-- SUMMARY -->
+<!-- FLOW SUMMARY -->
 
 <div class="cycle-summary">
 
 <div class="summary-title">
-Cycle 1 Flow Summary
+Cycle 1 — Flow Summary
 </div>
+
 
 <div class="summary-row">
-<span>Upline</span>
-<b>Spot 1 → 1 Level</b>
-<b>Spot 2 → 2 Level</b>
+
+<span class="summary-label">
+Upline
+</span>
+
+<span class="summary-item">
+Spot 1 → Upline 1 Level
+</span>
+
+<span class="summary-item">
+Spot 2 → Upline 2 Level
+</span>
+
 </div>
+
 
 <div class="summary-row">
-<span>Self</span>
-<b>Spot 3</b>
-<b>Spot 6</b>
-<b>Spot 8</b>
-<b>Spot 9</b>
-<b>Spot 11</b>
-<b>Spot 12</b>
+
+<span class="summary-label">
+Self
+</span>
+
+<span class="summary-item">
+Spot 3
+</span>
+
+<span class="summary-item">
+Spot 6
+</span>
+
+<span class="summary-item">
+Spot 8
+</span>
+
+<span class="summary-item">
+Spot 9
+</span>
+
+<span class="summary-item">
+Spot 11
+</span>
+
+<span class="summary-item">
+Spot 12
+</span>
+
 </div>
+
 
 <div class="summary-row">
-<span>Hold / Upgrade</span>
-<b>Spot 4 → Hold</b>
-<b>Spot 5 → Upgrade (2 Level)</b>
+
+<span class="summary-label">
+Hold / Upgrade
+</span>
+
+<span class="summary-item">
+Spot 4 → Hold
+</span>
+
+<span class="summary-item">
+Spot 5 → Upgrade • 2 Level
+</span>
+
 </div>
+
 
 <div class="summary-row">
-<span>Downline</span>
-<b>Spot 7 → 1st Downline</b>
-<b>Spot 10 → 2nd Downline</b>
-<b>Spot 13 → 1st Downline (2 Level)</b>
+
+<span class="summary-label">
+Downline
+</span>
+
+<span class="summary-item">
+Spot 7 → 1st Downline • 1 Level
+</span>
+
+<span class="summary-item">
+Spot 10 → 2nd Downline • 1 Level
+</span>
+
+<span class="summary-item">
+Spot 13 → 1st Downline • 2 Level
+</span>
+
 </div>
+
 
 <div class="summary-row">
-<span>Recycle</span>
-<b>Spot 14 → Recycle</b>
+
+<span class="summary-label">
+Recycle
+</span>
+
+<span class="summary-item">
+Spot 14 → Recycle
+</span>
+
 </div>
 
 </div>
+
+
+<!-- LEVEL PRICES -->
+
+<div class="level-box">
+
+<div class="level-title">
+12 Level Pricing • 2× Progression
+</div>
+
+<div class="level-grid" id="levelGrid">
+</div>
+
+</div>
+
 
 </div>
 
 </section>
 
 
-<!-- SMART CONTRACT -->
+<!-- ================= CONTRACT ================= -->
 
 <section id="contract">
 
@@ -996,14 +1393,15 @@ Smart Contract
 </h2>
 
 <p class="sub">
-Final mainnet address should be inserted only after deployment
-and verification.
+The final deployed contract address should be inserted only
+after deployment and verification.
 </p>
 
 </div>
 
 
 <div class="contract">
+
 
 <div class="box">
 
@@ -1019,11 +1417,15 @@ value="0xYOUR_MAINNET_CONTRACT_ADDRESS"
 readonly
 >
 
-<button class="copy" onclick="copyAddress()">
+<button
+class="copy"
+onclick="copyAddress()"
+>
 Copy
 </button>
 
 </div>
+
 
 <a
 class="btn primary"
@@ -1033,9 +1435,11 @@ onclick="explorerAlert();return false"
 View on BNB Explorer ↗
 </a>
 
+
 <p class="disclaimer">
-Do not send funds to an address copied from an unofficial source.
-Verify the chain and contract independently.
+Never send BTCB or BNB to an address copied from an
+unofficial source. Verify the final contract address
+independently.
 </p>
 
 </div>
@@ -1049,7 +1453,7 @@ Wallet Connection
 
 <p
 id="walletStatus"
-style="color:#999;margin:12px 0"
+class="status"
 >
 Wallet not connected
 </p>
@@ -1062,12 +1466,13 @@ Connect Wallet
 </button>
 
 <p class="disclaimer">
-This demo detects an injected Web3 provider.
-A production contract interaction page will require the final
-verified ABI and contract address.
+Wallet connection is currently a basic Web3 provider
+demo. Final contract interaction requires the verified
+contract ABI and deployed address.
 </p>
 
 </div>
+
 
 </div>
 
@@ -1076,7 +1481,7 @@ verified ABI and contract address.
 </section>
 
 
-<!-- NFT -->
+<!-- ================= NFT ================= -->
 
 <section id="nft">
 
@@ -1092,7 +1497,13 @@ Digital Asset
 NFT Welcome Pass
 </h2>
 
+<p class="sub">
+The NFT layer is presented separately from the matrix
+logic.
+</p>
+
 </div>
+
 
 <div class="nft">
 
@@ -1105,11 +1516,10 @@ NFT PASS
 Membership / Utility Layer
 </h3>
 
-<p style="color:#999;max-width:650px;margin:10px auto">
+<p style="color:#999;max-width:650px;margin:10px auto;line-height:1.6">
 
-NFT functionality shown here is an interface concept.
-Transferability, utility, ownership and rank-related behavior
-must be determined from the final NFT contracts.
+NFT transferability, utility, ownership and rank behavior
+must follow the final deployed NFT and matrix contracts.
 
 </p>
 
@@ -1120,7 +1530,7 @@ must be determined from the final NFT contracts.
 </section>
 
 
-<!-- FAQ -->
+<!-- ================= FAQ ================= -->
 
 <section id="faq">
 
@@ -1138,7 +1548,9 @@ Frequently Asked Questions
 
 </div>
 
+
 <div class="faq">
+
 
 <details open>
 
@@ -1147,8 +1559,36 @@ What is TITANOVA?
 </summary>
 
 <p>
-TITANOVA is presented as a decentralized matrix ecosystem using
-smart-contract infrastructure on BNB Smart Chain.
+TITANOVA is a decentralized matrix ecosystem interface
+designed around a 12-level structure and a 14-spot Cycle 1.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+What is the Level 1 entry amount?
+</summary>
+
+<p>
+The defined Level 1 amount is 0.001 BTCB. Each next level
+follows a 2× progression.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+How many spots are in Cycle 1?
+</summary>
+
+<p>
+Cycle 1 contains 14 spots. Spot 14 completes the cycle
+through the defined Recycle step.
 </p>
 
 </details>
@@ -1161,8 +1601,9 @@ Is income guaranteed?
 </summary>
 
 <p>
-No. The website does not guarantee income, returns or rewards.
-Digital assets and smart-contract interactions involve risk.
+No. The website does not guarantee income, profit or
+financial returns. Blockchain and digital-asset activities
+involve risks.
 </p>
 
 </details>
@@ -1171,12 +1612,12 @@ Digital assets and smart-contract interactions involve risk.
 <details>
 
 <summary>
-How do I verify the contract?
+How should I verify the contract?
 </summary>
 
 <p>
-Use the official published address and compare it with the
-verified source code and on-chain transaction history.
+Verify the final contract address, source code, network,
+transaction amount and transaction history before signing.
 </p>
 
 </details>
@@ -1189,12 +1630,13 @@ Will NFT and rank transfer together?
 </summary>
 
 <p>
-Not necessarily. This depends entirely on the final deployed
-contracts. The website will state the actual behavior after
-the contracts are verified.
+This depends on the final deployed contract logic. NFT
+ownership and rank state should be checked separately
+against the verified contract.
 </p>
 
 </details>
+
 
 </div>
 
@@ -1203,7 +1645,7 @@ the contracts are verified.
 </section>
 
 
-<!-- JOIN -->
+<!-- ================= JOIN ================= -->
 
 <section id="join">
 
@@ -1216,12 +1658,17 @@ TITANOVA
 </div>
 
 <h2>
-Explore. Verify. Participate Responsibly.
+Explore • Verify • Build
 </h2>
 
-<p style="color:#999;max-width:680px;margin:auto">
-A premium community-facing interface for the TITANOVA ecosystem.
+<p style="color:#999;max-width:680px;margin:auto;line-height:1.6">
+
+Explore the matrix structure, understand the smart-contract
+logic and verify every blockchain transaction before
+participating.
+
 </p>
+
 
 <div
 class="actions"
@@ -1230,24 +1677,28 @@ style="justify-content:center"
 
 <a
 class="btn primary"
+href="#plan"
+>
+View Matrix
+</a>
+
+<a
+class="btn secondary"
 href="#contract"
 >
 View Contract
 </a>
 
-<a
-class="btn secondary"
-href="#faq"
->
-Read FAQ
-</a>
-
 </div>
 
+
 <div class="disclaimer">
-Informational website only. No guarantee of profit or financial
-return is made. Users are responsible for independently reviewing
-smart contracts, fees, risks and applicable laws before participating.
+
+Informational website only. No guarantee of profit or
+financial return is made. Users should independently
+review smart contracts, transaction fees, risks and
+applicable laws before participating.
+
 </div>
 
 </div>
@@ -1256,15 +1707,18 @@ smart contracts, fees, risks and applicable laws before participating.
 
 </section>
 
+
 </main>
 
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
 <div class="wrap">
-© 2026 TITANOVA • Decentralized Matrix Ecosystem • Verify before you interact.
+
+© 2026 TITANOVA • Decentralized Matrix Ecosystem
+
 </div>
 
 </footer>
@@ -1276,180 +1730,243 @@ smart contracts, fees, risks and applicable laws before participating.
 <script>
 
 /* =========================================
-   TITANOVA 14 SPOT CYCLE 1 FLOW
+   TITANOVA — 14 SPOT CYCLE 1
    ========================================= */
 
 const flowData = [
 
 {
 n:1,
-t:"Upline — 1 Level",
-d:"First upline routing",
-cls:"upline",
-tag:"1 Level"
+title:"Upline — 1 Level",
+desc:"First upline routing",
+tag:"Upline • 1 Level",
+cls:"flow-upline"
 },
 
 {
 n:2,
-t:"Upline — 2 Level",
-d:"Second upline routing",
-cls:"upline",
-tag:"2 Level"
+title:"Upline — 2 Level",
+desc:"Second upline routing",
+tag:"Upline • 2 Level",
+cls:"flow-upline"
 },
 
 {
 n:3,
-t:"Self",
-d:"Self-directed spot",
-cls:"self",
-tag:"Self"
+title:"Self",
+desc:"Self-directed spot",
+tag:"Self",
+cls:"flow-self"
 },
 
 {
 n:4,
-t:"Hold",
-d:"Hold amount for the next upgrade",
-cls:"hold",
-tag:"Hold"
+title:"Hold",
+desc:"Amount is held for the defined upgrade step",
+tag:"Hold",
+cls:"flow-hold"
 },
 
 {
 n:5,
-t:"Upgrade — 2 Level",
-d:"Activates the next level according to the plan",
-cls:"upgrade",
-tag:"Upgrade"
+title:"Upgrade — 2 Level",
+desc:"Upgrade step according to the matrix flow",
+tag:"Upgrade • 2 Level",
+cls:"flow-upgrade"
 },
 
 {
 n:6,
-t:"Self",
-d:"Self-directed spot",
-cls:"self",
-tag:"Self"
+title:"Self",
+desc:"Self-directed spot",
+tag:"Self",
+cls:"flow-self"
 },
 
 {
 n:7,
-t:"1st Downline — 1 Level",
-d:"First downline routing",
-cls:"downline",
-tag:"1st Downline"
+title:"1st Downline — 1 Level",
+desc:"First downline routing",
+tag:"1st Downline • 1 Level",
+cls:"flow-downline"
 },
 
 {
 n:8,
-t:"Self",
-d:"Self-directed spot",
-cls:"self",
-tag:"Self"
+title:"Self",
+desc:"Self-directed spot",
+tag:"Self",
+cls:"flow-self"
 },
 
 {
 n:9,
-t:"Self",
-d:"Self-directed spot",
-cls:"self",
-tag:"Self"
+title:"Self",
+desc:"Self-directed spot",
+tag:"Self",
+cls:"flow-self"
 },
 
 {
 n:10,
-t:"2nd Downline — 1 Level",
-d:"Second downline routing",
-cls:"downline",
-tag:"2nd Downline"
+title:"2nd Downline — 1 Level",
+desc:"Second downline routing",
+tag:"2nd Downline • 1 Level",
+cls:"flow-downline"
 },
 
 {
 n:11,
-t:"Self",
-d:"Self-directed spot",
-cls:"self",
-tag:"Self"
+title:"Self",
+desc:"Self-directed spot",
+tag:"Self",
+cls:"flow-self"
 },
 
 {
 n:12,
-t:"Self",
-d:"Self-directed spot",
-cls:"self",
-tag:"Self"
+title:"Self",
+desc:"Self-directed spot",
+tag:"Self",
+cls:"flow-self"
 },
 
 {
 n:13,
-t:"1st Downline — 2 Level",
-d:"First downline routing at 2-level depth",
-cls:"downline",
-tag:"2 Level"
+title:"1st Downline — 2 Level",
+desc:"First downline routing at 2-level depth",
+tag:"1st Downline • 2 Level",
+cls:"flow-downline"
 },
 
 {
 n:14,
-t:"Recycle",
-d:"Cycle completes and recycles",
-cls:"recycle",
-tag:"Recycle"
+title:"Recycle",
+desc:"Cycle completes and enters the recycle step",
+tag:"Recycle",
+cls:"flow-recycle"
 }
 
 ];
 
 
-const flow = document.getElementById("matrixFlow");
+const flow =
+document.getElementById("matrixFlow");
 
 
-flowData.forEach(s => {
+flowData.forEach(item=>{
 
-let d = document.createElement("div");
+const card =
+document.createElement("div");
 
-d.className = "flow-card " + s.cls;
+card.className =
+"flow-card " + item.cls;
 
-d.innerHTML = `
+card.innerHTML = `
 
-<div class="flow-num">
-${s.n}
+<div class="flow-number">
+${item.n}
 </div>
 
 <div>
 
 <h3>
-Spot ${s.n} — ${s.t}
+Spot ${item.n} — ${item.title}
 </h3>
 
 <p>
-${s.d}
+${item.desc}
 </p>
 
 <span class="flow-tag">
-${s.tag}
+${item.tag}
 </span>
 
 </div>
 
 `;
 
-flow.appendChild(d);
+flow.appendChild(card);
 
 });
 
 
 /* =========================================
-   COPY CONTRACT ADDRESS
+   LEVEL PRICING
+   ========================================= */
+
+const levelGrid =
+document.getElementById("levelGrid");
+
+const basePrice = 0.001;
+
+for(let level=1;level<=12;level++){
+
+const amount =
+basePrice * Math.pow(2,level-1);
+
+const div =
+document.createElement("div");
+
+div.className="level";
+
+div.innerHTML=`
+
+<b>
+Level ${level}
+</b>
+
+<span>
+${formatBTCB(amount)} BTCB
+</span>
+
+`;
+
+levelGrid.appendChild(div);
+
+}
+
+
+function formatBTCB(value){
+
+if(value < 1){
+
+return value.toFixed(3);
+
+}
+
+return value.toLocaleString(
+"en-US",
+{
+maximumFractionDigits:3
+}
+);
+
+}
+
+
+/* =========================================
+   COPY CONTRACT
    ========================================= */
 
 function copyAddress(){
 
-const value =
-document.getElementById("contractAddress").value;
+const address =
+document.getElementById(
+"contractAddress"
+).value;
 
 if(navigator.clipboard){
 
-navigator.clipboard.writeText(value);
-
-}
+navigator.clipboard.writeText(address);
 
 toast("Contract address copied");
+
+}else{
+
+toast("Copy not supported");
+
+}
 
 }
 
@@ -1458,25 +1975,26 @@ toast("Contract address copied");
    TOAST
    ========================================= */
 
-function toast(t){
+function toast(message){
 
-const x =
+const box =
 document.getElementById("toast");
 
-x.textContent = t;
+box.textContent=message;
 
-x.style.display = "block";
+box.style.display="block";
 
-setTimeout(
-() => x.style.display = "none",
-1800
-);
+setTimeout(()=>{
+
+box.style.display="none";
+
+},1800);
 
 }
 
 
 /* =========================================
-   WALLET CONNECTION
+   WALLET
    ========================================= */
 
 async function connectWallet(){
@@ -1496,6 +2014,8 @@ await window.ethereum.request({
 method:"eth_requestAccounts"
 });
 
+if(accounts && accounts.length){
+
 document.getElementById(
 "walletStatus"
 ).textContent =
@@ -1511,7 +2031,7 @@ toast("Wallet connected");
 
 }
 
-catch(e){
+}catch(error){
 
 toast("Connection cancelled");
 
@@ -1539,30 +2059,30 @@ toast(
 
 function toggleMenu(){
 
-const n =
+const menu =
 document.querySelector(".navlinks");
 
-if(n.style.display === "flex"){
+if(menu.style.display==="flex"){
 
-n.style.display = "none";
+menu.style.display="none";
 
 }else{
 
-n.style.display = "flex";
+menu.style.display="flex";
 
-n.style.position = "absolute";
+menu.style.position="absolute";
 
-n.style.top = "72px";
+menu.style.top="72px";
 
-n.style.left = "0";
+menu.style.left="0";
 
-n.style.right = "0";
+menu.style.right="0";
 
-n.style.padding = "20px";
+menu.style.padding="20px";
 
-n.style.background = "#080909";
+menu.style.background="#080909";
 
-n.style.flexDirection = "column";
+menu.style.flexDirection="column";
 
 }
 
