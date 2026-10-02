@@ -2,325 +2,375 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TITANOVA | Testnet Dashboard</title>
 
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+}
 
 body{
- background:#050505;
- color:#fff;
- min-height:100vh;
+  background:#050505;
+  color:#fff;
+  min-height:100vh;
 }
+
 body:before{
- content:"";
- position:fixed;
- inset:0;
- pointer-events:none;
- background:
- radial-gradient(circle at 15% 0%,rgba(255,200,0,.13),transparent 30%),
- radial-gradient(circle at 100% 30%,rgba(255,170,0,.08),transparent 30%);
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(255,200,0,.14),transparent 30%),
+    radial-gradient(circle at 100% 20%,rgba(255,160,0,.10),transparent 30%);
 }
 
 .container{
- width:100%;
- max-width:1150px;
- margin:auto;
- padding:14px;
- position:relative;
- z-index:1;
+  max-width:1150px;
+  margin:auto;
+  padding:14px;
+  position:relative;
+  z-index:1;
 }
 
 .header{
- border:1px solid #806314;
- border-radius:22px;
- padding:20px;
- background:linear-gradient(145deg,#171717,#080808);
- box-shadow:0 0 35px rgba(255,200,0,.08);
+  border:1px solid #8d6914;
+  border-radius:22px;
+  padding:20px;
+  background:linear-gradient(145deg,#171717,#080808);
+  box-shadow:0 0 35px rgba(255,190,0,.10);
+  margin-bottom:15px;
 }
 
-.top{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:15px;
+.brand{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
 }
 
 .logo{
- font-size:32px;
- font-weight:1000;
- letter-spacing:4px;
- color:#ffd84d;
+  font-size:32px;
+  font-weight:900;
+  letter-spacing:4px;
+  color:#ffd84d;
 }
 
-.tag{
- color:#999;
- font-size:11px;
- margin-top:5px;
- letter-spacing:1px;
+.subtitle{
+  color:#999;
+  font-size:11px;
+  margin-top:5px;
+  letter-spacing:1px;
 }
 
 button{
- border:0;
- cursor:pointer;
- font-weight:900;
+  border:0;
+  cursor:pointer;
+  font-weight:800;
 }
 
-.connect{
- background:linear-gradient(135deg,#ffe36a,#d49a00);
- color:#000;
- padding:14px 20px;
- border-radius:12px;
+.connect,
+.goldBtn{
+  background:linear-gradient(135deg,#ffe16b,#d89b00);
+  color:#000;
+  padding:13px 18px;
+  border-radius:12px;
 }
 
 .wallet{
- margin-top:13px;
- color:#aaa;
- font-size:12px;
- word-break:break-all;
+  margin-top:13px;
+  font-size:12px;
+  color:#aaa;
+  word-break:break-all;
 }
 
 .status{
- margin-top:10px;
- padding:10px 12px;
- background:#111;
- border:1px solid #292313;
- border-radius:10px;
- color:#ffd84d;
- font-size:12px;
+  margin-top:10px;
+  background:#111;
+  border:1px solid #302713;
+  padding:10px 12px;
+  border-radius:10px;
+  font-size:12px;
+  color:#ffd84d;
 }
 
 .section{
- margin-top:15px;
- padding:18px;
- border-radius:20px;
- border:1px solid #3e3215;
- background:linear-gradient(145deg,#121212,#080808);
+  margin-top:15px;
+  border:1px solid #3d3218;
+  border-radius:19px;
+  background:linear-gradient(145deg,#121212,#080808);
+  padding:18px;
 }
 
-.title{
- color:#ffd84d;
- font-size:19px;
- font-weight:1000;
- margin-bottom:14px;
+.sectionTitle{
+  color:#ffd84d;
+  font-size:19px;
+  font-weight:900;
+  margin-bottom:5px;
 }
 
-.sub{
- color:#777;
- font-size:11px;
- line-height:1.6;
- margin-bottom:12px;
+.sectionSub{
+  color:#777;
+  font-size:11px;
+  margin-bottom:14px;
 }
 
 .cards{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:11px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:11px;
 }
 
 .card{
- padding:15px;
- border-radius:14px;
- border:1px solid #302711;
- background:#0b0b0b;
+  background:#0c0c0c;
+  border:1px solid #332b15;
+  border-radius:14px;
+  padding:15px;
 }
 
 .label{
- color:#777;
- font-size:10px;
- text-transform:uppercase;
+  color:#777;
+  font-size:10px;
+  text-transform:uppercase;
 }
 
 .value{
- color:#ffd84d;
- font-size:21px;
- font-weight:900;
- margin-top:7px;
- word-break:break-word;
+  margin-top:7px;
+  color:#ffd84d;
+  font-size:21px;
+  font-weight:900;
+  word-break:break-word;
 }
 
 .search{
- display:flex;
- gap:10px;
+  display:flex;
+  gap:10px;
 }
 
 input{
- flex:1;
- background:#050505;
- color:#fff;
- border:1px solid #554719;
- border-radius:11px;
- padding:14px;
- outline:none;
- font-size:15px;
+  flex:1;
+  min-width:0;
+  background:#050505;
+  color:#fff;
+  border:1px solid #554518;
+  border-radius:11px;
+  padding:14px;
+  font-size:15px;
+  outline:none;
 }
 
-input:focus{border-color:#ffd84d}
-
-.gold{
- background:linear-gradient(135deg,#ffe36a,#d49a00);
- color:#000;
- padding:13px 20px;
- border-radius:11px;
+input:focus{
+  border-color:#ffd84d;
 }
 
 .profile{
- display:none;
- margin-top:15px;
+  display:none;
+  margin-top:15px;
 }
 
 .profileGrid{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:10px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
 }
 
 .info{
- padding:13px;
- border-radius:12px;
- background:#090909;
- border:1px solid #292313;
+  background:#090909;
+  border:1px solid #292313;
+  border-radius:12px;
+  padding:13px;
 }
 
 .info span{
- display:block;
- color:#777;
- font-size:9px;
- margin-bottom:6px;
+  display:block;
+  color:#777;
+  font-size:10px;
+  margin-bottom:6px;
 }
 
 .info b{
- font-size:13px;
- word-break:break-word;
+  font-size:13px;
+  word-break:break-word;
 }
 
-.goldText{color:#ffd84d!important}
+.gold{
+  color:#ffd84d!important;
+}
+
+.green{
+  color:#5dff8a!important;
+}
+
+.red{
+  color:#ff6868!important;
+}
 
 .levels{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:12px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:14px;
 }
 
 .level{
- border:1px solid #3b3116;
- border-radius:15px;
- background:#0a0a0a;
- padding:14px;
+  background:#090909;
+  border:1px solid #342b14;
+  border-radius:15px;
+  padding:14px;
 }
 
-.levelTop{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin-bottom:9px;
+.level.activeLevel{
+  border-color:#a77c0d;
+  box-shadow:0 0 15px rgba(255,200,0,.06);
 }
 
-.levelName{
- color:#ffd84d;
- font-size:18px;
- font-weight:1000;
+.levelHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
 }
 
-.on{
- color:#63ff8a;
- font-size:10px;
- font-weight:900;
+.levelTitle{
+  color:#ffd84d;
+  font-size:18px;
+  font-weight:900;
 }
 
-.off{
- color:#777;
- font-size:10px;
- font-weight:900;
+.badge{
+  font-size:9px;
+  padding:5px 8px;
+  border-radius:20px;
+  background:#171717;
+  color:#777;
 }
 
-.matrixStats{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:6px;
- margin-bottom:9px;
+.badge.active{
+  color:#63ff8a;
+  border:1px solid #245b36;
 }
 
-.stat{
- background:#111;
- padding:7px;
- border-radius:7px;
- color:#999;
- font-size:9px;
-}
-
-.stat b{
- display:block;
- color:#fff;
- margin-top:3px;
- font-size:11px;
+.levelData{
+  color:#aaa;
+  font-size:11px;
+  line-height:1.9;
 }
 
 .slots{
- display:grid;
- grid-template-columns:repeat(7,1fr);
- gap:4px;
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+  margin-top:10px;
 }
 
 .slot{
- height:28px;
- border-radius:5px;
- display:flex;
- align-items:center;
- justify-content:center;
- font-size:8px;
- background:#111;
- border:1px solid #25200f;
- color:#666;
+  height:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:6px;
+  background:#111;
+  border:1px solid #28210f;
+  color:#555;
+  font-size:9px;
 }
 
 .slot.filled{
- background:#503d06;
- border-color:#c49617;
- color:#ffd84d;
+  background:#4a3804;
+  border-color:#b98b13;
+  color:#ffd84d;
 }
 
-.notice{
- padding:12px;
- border-radius:10px;
- background:#0e0e0e;
- border:1px solid #302711;
- color:#aaa;
- font-size:11px;
- line-height:1.6;
+.loading{
+  color:#ffd84d;
+  padding:10px 0;
+  font-size:12px;
 }
 
-.loading{color:#ffd84d;padding:10px 0}
-.success{color:#63ff8a}
-.error{color:#ff6b6b}
+.error{
+  color:#ff6b6b;
+}
+
+.success{
+  color:#63ff8a;
+}
+
+.empty{
+  color:#666;
+  font-size:12px;
+  padding:15px 0;
+}
 
 .footer{
- text-align:center;
- color:#666;
- font-size:10px;
- padding:25px 0;
+  text-align:center;
+  color:#666;
+  font-size:11px;
+  padding:25px 0;
 }
 
 @media(max-width:850px){
- .cards{grid-template-columns:repeat(2,1fr)}
- .profileGrid{grid-template-columns:repeat(2,1fr)}
- .levels{grid-template-columns:1fr}
+
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .profileGrid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .levels{
+    grid-template-columns:1fr;
+  }
 }
 
-@media(max-width:550px){
- .container{padding:9px}
- .top{flex-direction:column;align-items:stretch}
- .connect{width:100%}
- .logo{font-size:26px}
- .search{flex-direction:column}
- .gold{width:100%}
- .cards{gap:8px}
- .card{padding:11px}
- .value{font-size:17px}
- .profileGrid{grid-template-columns:1fr 1fr}
+@media(max-width:520px){
+
+  .container{
+    padding:9px;
+  }
+
+  .brand{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .connect{
+    width:100%;
+  }
+
+  .logo{
+    font-size:26px;
+  }
+
+  .search{
+    flex-direction:column;
+  }
+
+  .goldBtn{
+    width:100%;
+  }
+
+  .profileGrid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .cards{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .card{
+    padding:12px;
+  }
+
+  .value{
+    font-size:17px;
+  }
 }
 </style>
 </head>
@@ -329,25 +379,36 @@ input:focus{border-color:#ffd84d}
 
 <div class="container">
 
+<!-- HEADER -->
+
 <div class="header">
- <div class="top">
-  <div>
-   <div class="logo">TITANOVA</div>
-   <div class="tag">DECENTRALIZED MATRIX ECOSYSTEM • TESTNET</div>
+
+  <div class="brand">
+
+    <div>
+      <div class="logo">TITANOVA</div>
+      <div class="subtitle">
+        DECENTRALIZED MATRIX ECOSYSTEM • TESTNET
+      </div>
+    </div>
+
+    <button
+      class="connect"
+      id="connectBtn"
+      onclick="connectWallet()">
+      CONNECT WALLET
+    </button>
+
   </div>
 
-  <button class="connect" id="connectBtn" onclick="connectWallet()">
-   CONNECT WALLET
-  </button>
- </div>
+  <div class="wallet" id="wallet">
+    Wallet not connected
+  </div>
 
- <div class="wallet" id="wallet">
-  Wallet not connected
- </div>
+  <div class="status" id="status">
+    Ready — Connect your wallet
+  </div>
 
- <div class="status" id="status">
-  Ready — Connect your wallet
- </div>
 </div>
 
 
@@ -355,51 +416,58 @@ input:focus{border-color:#ffd84d}
 
 <div class="section">
 
- <div class="title">⚡ MY DASHBOARD</div>
-
- <div class="cards">
-
-  <div class="card">
-   <div class="label">My ID</div>
-   <div class="value" id="myId">—</div>
+  <div class="sectionTitle">
+    ⚡ MY DASHBOARD
   </div>
 
-  <div class="card">
-   <div class="label">Referrer ID</div>
-   <div class="value" id="myReferrer">—</div>
+  <div class="sectionSub">
+    Connected wallet ka TITANOVA account overview
   </div>
 
-  <div class="card">
-   <div class="label">Active Levels</div>
-   <div class="value" id="myLevels">—</div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="label">My ID</div>
+      <div class="value" id="myId">—</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Referrer ID</div>
+      <div class="value" id="myReferrer">—</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Active Levels</div>
+      <div class="value" id="myLevels">—</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Team Size</div>
+      <div class="value" id="myTeam">—</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Direct Partners</div>
+      <div class="value" id="myDirect">—</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Total Income</div>
+      <div class="value" id="myIncome">—</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Registration</div>
+      <div class="value" id="myDate">—</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Network</div>
+      <div class="value">TESTNET</div>
+    </div>
+
   </div>
 
-  <div class="card">
-   <div class="label">Team Size</div>
-   <div class="value" id="myTeam">—</div>
-  </div>
-
-  <div class="card">
-   <div class="label">Direct Partners</div>
-   <div class="value" id="myDirect">—</div>
-  </div>
-
-  <div class="card">
-   <div class="label">Total Income</div>
-   <div class="value" id="myIncome">—</div>
-  </div>
-
-  <div class="card">
-   <div class="label">Registration</div>
-   <div class="value" id="myDate">—</div>
-  </div>
-
-  <div class="card">
-   <div class="label">Network</div>
-   <div class="value">BSC TESTNET</div>
-  </div>
-
- </div>
 </div>
 
 
@@ -407,74 +475,90 @@ input:focus{border-color:#ffd84d}
 
 <div class="section">
 
- <div class="title">🔎 CHECK ANY USER ID</div>
+  <div class="sectionTitle">
+    🔎 CHECK ANY USER ID
+  </div>
 
- <div class="sub">
-  Kisi bhi registered User ID ka public dashboard data check karein.
- </div>
+  <div class="sectionSub">
+    Kisi bhi registered TITANOVA ID ka public dashboard data check karein.
+  </div>
 
- <div class="search">
-  <input id="searchId" type="number" min="1"
-         placeholder="Enter User ID e.g. 1">
-  <button class="gold" onclick="checkAnyId()">CHECK ID</button>
- </div>
+  <div class="search">
 
- <div id="searchStatus"></div>
+    <input
+      id="searchId"
+      type="number"
+      min="1"
+      placeholder="Enter User ID — e.g. 1">
 
- <div class="profile" id="searchedProfile">
-
-  <div class="profileGrid">
-
-   <div class="info">
-    <span>USER ID</span>
-    <b id="sId">—</b>
-   </div>
-
-   <div class="info">
-    <span>WALLET</span>
-    <b class="goldText" id="sAddress">—</b>
-   </div>
-
-   <div class="info">
-    <span>REFERRER ID</span>
-    <b id="sReferrer">—</b>
-   </div>
-
-   <div class="info">
-    <span>DIRECT PARTNERS</span>
-    <b id="sDirect">—</b>
-   </div>
-
-   <div class="info">
-    <span>ACTIVE LEVELS</span>
-    <b id="sLevels">—</b>
-   </div>
-
-   <div class="info">
-    <span>TEAM SIZE</span>
-    <b id="sTeam">—</b>
-   </div>
-
-   <div class="info">
-    <span>TOTAL INCOME</span>
-    <b id="sIncome">—</b>
-   </div>
-
-   <div class="info">
-    <span>REGISTRATION DATE</span>
-    <b id="sDate">—</b>
-   </div>
+    <button
+      class="goldBtn"
+      onclick="checkAnyId()">
+      CHECK ID
+    </button>
 
   </div>
 
-  <div style="margin-top:18px">
-   <div class="title" style="font-size:15px">
-    USER 12 LEVEL MATRIX
-   </div>
-   <div id="searchedLevels" class="levels"></div>
+  <div id="searchStatus"></div>
+
+  <div class="profile" id="searchProfile">
+
+    <div class="profileGrid">
+
+      <div class="info">
+        <span>USER ID</span>
+        <b class="gold" id="sId">—</b>
+      </div>
+
+      <div class="info">
+        <span>WALLET ADDRESS</span>
+        <b class="gold" id="sAddress">—</b>
+      </div>
+
+      <div class="info">
+        <span>REFERRER ID</span>
+        <b id="sReferrer">—</b>
+      </div>
+
+      <div class="info">
+        <span>DIRECT PARTNERS</span>
+        <b id="sDirect">—</b>
+      </div>
+
+      <div class="info">
+        <span>ACTIVE LEVELS</span>
+        <b class="green" id="sLevels">—</b>
+      </div>
+
+      <div class="info">
+        <span>TEAM SIZE</span>
+        <b id="sTeam">—</b>
+      </div>
+
+      <div class="info">
+        <span>TOTAL INCOME</span>
+        <b class="gold" id="sIncome">—</b>
+      </div>
+
+      <div class="info">
+        <span>REGISTRATION DATE</span>
+        <b id="sDate">—</b>
+      </div>
+
+    </div>
+
+    <div style="margin-top:18px">
+
+      <div class="sectionTitle" style="font-size:16px">
+        🧩 USER MATRIX
+      </div>
+
+      <div id="searchLevels" class="levels"></div>
+
+    </div>
+
   </div>
 
- </div>
 </div>
 
 
@@ -482,27 +566,896 @@ input:focus{border-color:#ffd84d}
 
 <div class="section">
 
- <div class="title">🧩 MY 12 LEVEL MATRIX</div>
+  <div class="sectionTitle">
+    🧩 MY 12 LEVEL MATRIX
+  </div>
 
- <div class="sub">
-  Har level mein 14 matrix positions display hoti hain.
- </div>
+  <div class="sectionSub">
+    Har level mein 14 positions. Filled positions actual contract data se read hoti hain.
+  </div>
 
- <div id="myMatrix" class="levels"></div>
+  <div id="myMatrix" class="levels">
+
+    <div class="empty">
+      Wallet connect karne ke baad matrix load hogi.
+    </div>
+
+  </div>
 
 </div>
 
 
-<!-- CONTRACT INFO -->
+<div class="footer">
+  TITANOVA • Testnet Dashboard<br>
+  Knowledge First • Decision Later
+</div>
 
-<div class="section">
+</div>
 
- <div class="title">⛓ TITANOVA CONTRACT</div>
 
- <div class="notice">
-  <b>Contract:</b><br>
-  0x1Dc24B48364cE513397db87C71708d722bfABcc1
-  <br><br>
-  <b>Matrix:</b> 14 Spots<br>
-  <b>Levels:</b> 1–12<br>
- 
+<script>
+
+/* =====================================================
+                    CONTRACT ADDRESS
+   ===================================================== */
+
+const CONTRACT_ADDRESS =
+"0x1Dc24B48364cE513397db87C71708d722bfABcc1";
+
+
+/* =====================================================
+                       ACTUAL ABI
+   ===================================================== */
+
+const ABI = [
+
+  "function BTCB() view returns(address)",
+
+  "function LAST_LEVEL() view returns(uint8)",
+
+  "function MATRIX_SIZE() view returns(uint8)",
+
+  "function MAX_REGISTRATION_PASSES() view returns(uint256)",
+
+  "function NFT_FUND() view returns(address)",
+
+  "function REGISTRATION_PASS() view returns(address)",
+
+  "function ROYALTY_CARD() view returns(address)",
+
+  "function ROYALTY_POOL() view returns(address)",
+
+  "function TREASURY_FUND() view returns(address)",
+
+  "function addressToId(address) view returns(uint256)",
+
+  "function idToAddress(uint256) view returns(address)",
+
+  "function contractTokenBalance() view returns(uint256)",
+
+  "function currentNFTPrice() view returns(uint256)",
+
+  "function getDirectPartnerIds(uint256) view returns(uint256[])",
+
+  "function getLevelCost(uint8) view returns(uint256)",
+
+  "function getMatrix(address,uint8) view returns(address,uint256,uint256,uint256,uint256,uint256)",
+
+  "function getMatrixReferrals(address,uint8) view returns(address[])",
+
+  "function getUserDetails(uint256) view returns(address,address,uint256,uint256,uint8,uint256,uint256,uint256)",
+
+  "function getUserId(address) view returns(uint256)",
+
+  "function isUserExists(address) view returns(bool)",
+
+  "function lastUserId() view returns(uint256)",
+
+  "function levelTokenCost(uint8) view returns(uint256)",
+
+  "function owner() view returns(address)",
+
+  "function registrationPassAddress() view returns(address)",
+
+  "function royaltyCardAddress() view returns(address)",
+
+  "function totalProjectInvestment() view returns(uint256)",
+
+  "function treasuryAddress() view returns(address)",
+
+  "function registration(uint256) external"
+
+];
+
+
+/* =====================================================
+                         VARIABLES
+   ===================================================== */
+
+let provider = null;
+let signer = null;
+let contract = null;
+let currentAccount = null;
+
+
+/* =====================================================
+                      CONNECT WALLET
+   ===================================================== */
+
+async function connectWallet(){
+
+  try{
+
+    if(!window.ethereum){
+
+      showStatus(
+        "Compatible Web3 wallet install karein.",
+        true
+      );
+
+      return;
+    }
+
+    provider =
+      new ethers.BrowserProvider(
+        window.ethereum
+      );
+
+    await provider.send(
+      "eth_requestAccounts",
+      []
+    );
+
+    signer =
+      await provider.getSigner();
+
+    currentAccount =
+      await signer.getAddress();
+
+    contract =
+      new ethers.Contract(
+        CONTRACT_ADDRESS,
+        ABI,
+        signer
+      );
+
+    const network =
+      await provider.getNetwork();
+
+    document.getElementById("wallet").innerText =
+      currentAccount;
+
+    document.getElementById("connectBtn").innerText =
+      "CONNECTED";
+
+    showStatus(
+      "Wallet connected • Chain ID: " +
+      network.chainId.toString()
+    );
+
+    await loadMyDashboard();
+
+  }catch(error){
+
+    console.error(error);
+
+    showStatus(
+      getError(error),
+      true
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+                     MY DASHBOARD
+   ===================================================== */
+
+async function loadMyDashboard(){
+
+  try{
+
+    const userId =
+      await contract.addressToId(
+        currentAccount
+      );
+
+    const id =
+      Number(userId);
+
+    if(id === 0){
+
+      showStatus(
+        "Is wallet se TITANOVA ID registered nahi hai.",
+        true
+      );
+
+      clearMyDashboard();
+
+      return;
+    }
+
+    await displayUser(
+      id,
+      "my"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showStatus(
+      "Dashboard data load nahi ho saka.",
+      true
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+                      CHECK ANY ID
+   ===================================================== */
+
+async function checkAnyId(){
+
+  const id =
+    Number(
+      document.getElementById(
+        "searchId"
+      ).value
+    );
+
+  const status =
+    document.getElementById(
+      "searchStatus"
+    );
+
+  if(!id || id < 1){
+
+    status.innerHTML =
+      "<div class='error'>Valid User ID enter karein.</div>";
+
+    return;
+  }
+
+  if(!contract){
+
+    status.innerHTML =
+      "<div class='error'>Pehle wallet connect karein.</div>";
+
+    return;
+  }
+
+  try{
+
+    status.innerHTML =
+      "<div class='loading'>ID " +
+      id +
+      " loading...</div>";
+
+    await displayUser(
+      id,
+      "search"
+    );
+
+    status.innerHTML =
+      "<div class='success'>ID " +
+      id +
+      " successfully loaded.</div>";
+
+  }catch(error){
+
+    console.error(error);
+
+    document.getElementById(
+      "searchProfile"
+    ).style.display = "none";
+
+    status.innerHTML =
+      "<div class='error'>" +
+      "ID " +
+      id +
+      " nahi mila ya contract data unavailable hai." +
+      "</div>";
+
+  }
+
+}
+
+
+/* =====================================================
+                      DISPLAY USER
+   ===================================================== */
+
+async function displayUser(
+  userId,
+  type
+){
+
+  const data =
+    await contract.getUserDetails(
+      userId
+    );
+
+  const userAddress =
+    data[0];
+
+  if(
+    !userAddress ||
+    userAddress === ethers.ZeroAddress
+  ){
+
+    throw new Error(
+      "USER_NOT_FOUND"
+    );
+  }
+
+  const referrerId =
+    Number(data[2]);
+
+  const directCount =
+    Number(data[3]);
+
+  const activeLevelCount =
+    Number(data[4]);
+
+  const teamSize =
+    Number(data[5]);
+
+  const timestamp =
+    Number(data[6]);
+
+  const totalIncome =
+    data[7];
+
+
+  if(type === "my"){
+
+    document.getElementById(
+      "myId"
+    ).innerText =
+      userId;
+
+    document.getElementById(
+      "myReferrer"
+    ).innerText =
+      referrerId;
+
+    document.getElementById(
+      "myLevels"
+    ).innerText =
+      activeLevelCount +
+      " / 12";
+
+    document.getElementById(
+      "myTeam"
+    ).innerText =
+      teamSize;
+
+    document.getElementById(
+      "myDirect"
+    ).innerText =
+      directCount;
+
+    document.getElementById(
+      "myIncome"
+    ).innerText =
+      formatBTCB(
+        totalIncome
+      );
+
+    document.getElementById(
+      "myDate"
+    ).innerText =
+      formatDate(
+        timestamp
+      );
+
+    await buildLevels(
+      userAddress,
+      "myMatrix"
+    );
+
+  }else{
+
+    document.getElementById(
+      "searchProfile"
+    ).style.display =
+      "block";
+
+    document.getElementById(
+      "sId"
+    ).innerText =
+      userId;
+
+    document.getElementById(
+      "sAddress"
+    ).innerText =
+      userAddress;
+
+    document.getElementById(
+      "sReferrer"
+    ).innerText =
+      referrerId;
+
+    document.getElementById(
+      "sDirect"
+    ).innerText =
+      directCount;
+
+    document.getElementById(
+      "sLevels"
+    ).innerText =
+      activeLevelCount +
+      " / 12";
+
+    document.getElementById(
+      "sTeam"
+    ).innerText =
+      teamSize;
+
+    document.getElementById(
+      "sIncome"
+    ).innerText =
+      formatBTCB(
+        totalIncome
+      );
+
+    document.getElementById(
+      "sDate"
+    ).innerText =
+      formatDate(
+        timestamp
+      );
+
+    await buildLevels(
+      userAddress,
+      "searchLevels"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+                    BUILD 12 LEVELS
+   ===================================================== */
+
+async function buildLevels(
+  userAddress,
+  containerId
+){
+
+  const container =
+    document.getElementById(
+      containerId
+    );
+
+  container.innerHTML =
+    "<div class='loading'>Loading 12 levels...</div>";
+
+  let html = "";
+
+
+  for(
+    let level = 1;
+    level <= 12;
+    level++
+  ){
+
+    try{
+
+      const matrix =
+        await contract.getMatrix(
+          userAddress,
+          level
+        );
+
+      const referralCount =
+        Number(matrix[1]);
+
+      const reinvestCount =
+        Number(matrix[2]);
+
+      const heldUpgrade =
+        matrix[3];
+
+      const teamSize =
+        Number(matrix[4]);
+
+      const earning =
+        matrix[5];
+
+      const referrals =
+        await contract.getMatrixReferrals(
+          userAddress,
+          level
+        );
+
+      /*
+        Contract mein direct active-level boolean
+        public getter nahi hai.
+
+        Isliye level ko active tab display karenge
+        jab matrix activity ho.
+      */
+
+      const active =
+        level === 1 ||
+        referralCount > 0 ||
+        reinvestCount > 0 ||
+        teamSize > 0 ||
+        heldUpgrade > 0 ||
+        earning > 0;
+
+
+      html += createLevelCard(
+        level,
+        active,
+        referralCount,
+        reinvestCount,
+        heldUpgrade,
+        teamSize,
+        earning,
+        referrals
+      );
+
+    }catch(error){
+
+      console.error(
+        "Level " +
+        level,
+        error
+      );
+
+      html += createLevelCard(
+        level,
+        false,
+        0,
+        0,
+        0,
+        0,
+        0,
+        []
+      );
+
+    }
+
+  }
+
+  container.innerHTML =
+    html;
+
+}
+
+
+/* =====================================================
+                   LEVEL CARD
+   ===================================================== */
+
+function createLevelCard(
+  level,
+  active,
+  referralCount,
+  reinvestCount,
+  heldUpgrade,
+  teamSize,
+  earning,
+  referrals
+){
+
+  let slots = "";
+
+  for(
+    let i = 1;
+    i <= 14;
+    i++
+  ){
+
+    const filled =
+      i <= referrals.length;
+
+    slots +=
+      "<div class='slot " +
+      (filled ? "filled" : "") +
+      "'>" +
+      i +
+      "</div>";
+
+  }
+
+
+  return `
+
+    <div class="level ${active ? "activeLevel" : ""}">
+
+      <div class="levelHead">
+
+        <div class="levelTitle">
+          LEVEL ${level}
+        </div>
+
+        <div class="badge ${active ? "active" : ""}">
+          ${active ? "ACTIVE / DATA" : "NO DATA"}
+        </div>
+
+      </div>
+
+      <div class="levelData">
+
+        Matrix Filled:
+        <b>${referralCount} / 14</b><br>
+
+        Recycle:
+        <b>${reinvestCount}</b><br>
+
+        Team:
+        <b>${teamSize}</b><br>
+
+        Hold:
+        <b>${formatBTCB(heldUpgrade)}</b><br>
+
+        Earning:
+        <b>${formatBTCB(earning)}</b>
+
+      </div>
+
+      <div class="slots">
+        ${slots}
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+                    FORMAT BTCB
+   ===================================================== */
+
+function formatBTCB(
+  value
+){
+
+  try{
+
+    const formatted =
+      ethers.formatUnits(
+        value,
+        18
+      );
+
+    const number =
+      Number(formatted);
+
+    if(
+      !isFinite(number)
+    ){
+
+      return formatted +
+        " BTCB";
+
+    }
+
+    return number.toLocaleString(
+      "en-US",
+      {
+        maximumFractionDigits:8
+      }
+    ) + " BTCB";
+
+  }catch(e){
+
+    return "0 BTCB";
+
+  }
+
+}
+
+
+/* =====================================================
+                       DATE
+   ===================================================== */
+
+function formatDate(
+  timestamp
+){
+
+  if(!timestamp)
+    return "—";
+
+  try{
+
+    return new Date(
+      timestamp * 1000
+    ).toLocaleString(
+      "en-IN"
+    );
+
+  }catch(e){
+
+    return "—";
+
+  }
+
+}
+
+
+/* =====================================================
+                    SHORT ADDRESS
+   ===================================================== */
+
+function shortAddress(
+  address
+){
+
+  if(!address)
+    return "—";
+
+  return (
+    address.substring(0,6) +
+    "..." +
+    address.substring(
+      address.length - 4
+    )
+  );
+
+}
+
+
+/* =====================================================
+                       STATUS
+   ===================================================== */
+
+function showStatus(
+  message,
+  isError=false
+){
+
+  const el =
+    document.getElementById(
+      "status"
+    );
+
+  el.innerHTML =
+    "<span class='" +
+    (isError ? "error" : "success") +
+    "'>" +
+    message +
+    "</span>";
+
+}
+
+
+/* =====================================================
+                 CLEAR DASHBOARD
+   ===================================================== */
+
+function clearMyDashboard(){
+
+  document.getElementById(
+    "myId"
+  ).innerText = "—";
+
+  document.getElementById(
+    "myReferrer"
+  ).innerText = "—";
+
+  document.getElementById(
+    "myLevels"
+  ).innerText = "—";
+
+  document.getElementById(
+    "myTeam"
+  ).innerText = "—";
+
+  document.getElementById(
+    "myDirect"
+  ).innerText = "—";
+
+  document.getElementById(
+    "myIncome"
+  ).innerText = "—";
+
+  document.getElementById(
+    "myDate"
+  ).innerText = "—";
+
+}
+
+
+/* =====================================================
+                     ERROR
+   ===================================================== */
+
+function getError(
+  error
+){
+
+  if(
+    error &&
+    error.reason
+  ){
+
+    return error.reason;
+  }
+
+  if(
+    error &&
+    error.shortMessage
+  ){
+
+    return error.shortMessage;
+  }
+
+  if(
+    error &&
+    error.message
+  ){
+
+    return error.message
+      .substring(0,200);
+  }
+
+  return "Wallet connection error.";
+
+}
+
+
+/* =====================================================
+                WALLET ACCOUNT CHANGE
+   ===================================================== */
+
+if(window.ethereum){
+
+  window.ethereum.on(
+    "accountsChanged",
+    function(accounts){
+
+      if(
+        accounts &&
+        accounts.length
+      ){
+
+        connectWallet();
+
+      }else{
+
+        location.reload();
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+                    NETWORK CHANGE
+   ===================================================== */
+
+if(window.ethereum){
+
+  window.ethereum.on(
+    "chainChanged",
+    function(){
+
+      location.reload();
+
+    }
+  );
+
+}
+
+</script>
+
+</body>
+</html>
