@@ -1,145 +1,1574 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TITANNOVA — Decentralized Matrix Ecosystem</title>
-  <meta name="description" content="TITANNOVA — 12-level, 14-spot decentralized matrix ecosystem on BNB Smart Chain.">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050505">
+<title>TITANOVA — Bitcoin Matrix Ecosystem</title>
+
+<style>
+:root{
+--bg:#040506;
+--panel:#0a0d10;
+--gold:#f4bd3f;
+--gold2:#ffe7a0;
+--white:#f7f7f7;
+--muted:#a8adb4;
+--line:#2a2f35;
+--cyan:#53c7ff;
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+margin:0;
+background:radial-gradient(circle at 50% -15%,#392807 0,#080909 34%,#040506 70%);
+color:var(--white);
+font-family:Inter,Arial,sans-serif;
+}
+
+a{text-decoration:none;color:inherit}
+
+.wrap{
+width:min(1180px,92%);
+margin:auto;
+}
+
+header{
+position:sticky;
+top:0;
+z-index:50;
+background:rgba(4,5,6,.88);
+backdrop-filter:blur(15px);
+border-bottom:1px solid #20252a;
+}
+
+.nav{
+height:72px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:900;
+font-size:24px;
+letter-spacing:1.5px;
+color:var(--gold);
+}
+
+.brandmark{
+width:34px;
+height:34px;
+border:2px solid var(--gold);
+display:grid;
+place-items:center;
+clip-path:polygon(50% 0,100% 22%,82% 100%,18% 100%,0 22%);
+font-size:18px;
+}
+
+.navlinks{
+display:flex;
+gap:23px;
+color:#ddd;
+font-size:14px;
+}
+
+.navlinks a:hover{
+color:var(--gold);
+}
+
+.navbtn{
+border:1px solid #8d681e;
+background:linear-gradient(135deg,#ffe38a,#e3a72c);
+color:#111;
+padding:11px 17px;
+border-radius:9px;
+font-weight:900;
+}
+
+.hamb{
+display:none;
+background:#111;
+border:1px solid #444;
+color:#fff;
+padding:8px;
+border-radius:8px;
+}
+
+.hero{
+min-height:620px;
+display:flex;
+align-items:center;
+padding:75px 0 55px;
+position:relative;
+overflow:hidden;
+}
+
+.hero:after{
+content:"₿";
+position:absolute;
+right:5%;
+top:4%;
+font-size:430px;
+color:#f4bd3f0c;
+z-index:-1;
+}
+
+.badge{
+display:inline-block;
+padding:7px 12px;
+border:1px solid #735819;
+border-radius:99px;
+color:var(--gold2);
+background:#171207;
+font-size:11px;
+letter-spacing:1.4px;
+text-transform:uppercase;
+}
+
+h1{
+font-size:clamp(52px,8vw,96px);
+line-height:.9;
+letter-spacing:-4px;
+margin:24px 0 20px;
+}
+
+.gold{
+color:var(--gold);
+text-shadow:0 0 35px #f4bd3f30;
+}
+
+.hero p{
+max-width:680px;
+color:#c8ccd1;
+font-size:18px;
+}
+
+.actions{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+margin-top:28px;
+}
+
+.btn{
+padding:13px 21px;
+border-radius:10px;
+font-weight:900;
+display:inline-block;
+}
+
+.primary{
+background:linear-gradient(135deg,#ffe18a,#d99b22);
+color:#111;
+}
+
+.secondary{
+border:1px solid #4c9fc4;
+background:#0a1115;
+color:#dff5ff;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:1px;
+border:1px solid #343a40;
+background:#343a40;
+border-radius:17px;
+overflow:hidden;
+}
+
+.stat{
+padding:23px;
+background:#090c0f;
+}
+
+.stat b{
+display:block;
+color:var(--gold);
+font-size:25px;
+}
+
+.stat small{
+color:#999;
+}
+
+section{
+padding:82px 0;
+}
+
+.title{
+text-align:center;
+margin-bottom:42px;
+}
+
+.kicker{
+color:var(--gold);
+font-size:11px;
+letter-spacing:2px;
+font-weight:900;
+text-transform:uppercase;
+}
+
+.title h2{
+font-size:clamp(32px,5vw,52px);
+margin:7px 0;
+}
+
+.sub{
+color:#9ea4aa;
+max-width:730px;
+margin:auto;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:17px;
+}
+
+.card{
+background:linear-gradient(145deg,#101419,#080a0c);
+border:1px solid var(--line);
+border-radius:17px;
+padding:25px;
+}
+
+.ico{
+font-size:28px;
+color:var(--gold);
+}
+
+.card h3{
+margin:10px 0 6px;
+}
+
+.card p{
+color:#999;
+font-size:14px;
+}
+
+.steps{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+}
+
+.step{
+border:1px solid var(--line);
+border-radius:16px;
+background:#090c0f;
+padding:23px;
+}
+
+.num{
+width:35px;
+height:35px;
+border-radius:50%;
+display:grid;
+place-items:center;
+background:#251d0c;
+color:var(--gold);
+font-weight:900;
+}
+
+.step p{
+color:#999;
+font-size:14px;
+}
+
+/* MATRIX FLOW */
+
+.flow-note{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-bottom:22px;
+}
+
+.flow-note>div{
+background:#090c0f;
+border:1px solid #3a3425;
+border-radius:14px;
+padding:15px;
+text-align:center;
+}
+
+.flow-note b{
+display:block;
+color:var(--gold);
+font-size:15px;
+}
+
+.flow-note span{
+display:block;
+color:#aaa;
+font-size:12px;
+margin-top:5px;
+}
+
+.flow-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+.flow-card{
+display:grid;
+grid-template-columns:58px 1fr;
+gap:14px;
+align-items:center;
+background:linear-gradient(145deg,#101419,#080a0c);
+border:1px solid #30343a;
+border-radius:15px;
+padding:14px;
+}
+
+.flow-num{
+width:48px;
+height:48px;
+border-radius:12px;
+display:grid;
+place-items:center;
+background:#171207;
+border:1px solid #7b5d1d;
+color:var(--gold);
+font-size:21px;
+font-weight:900;
+}
+
+.flow-card h3{
+margin:0 0 4px;
+font-size:16px;
+}
+
+.flow-card p{
+margin:0;
+color:#999;
+font-size:12px;
+line-height:1.45;
+}
+
+.flow-tag{
+display:inline-block;
+margin-top:7px;
+padding:4px 8px;
+border-radius:99px;
+background:#15181b;
+color:#d8d8d8;
+font-size:10px;
+text-transform:uppercase;
+letter-spacing:.7px;
+}
+
+.flow-card.upline{
+border-color:#3b6e8a;
+}
+
+.flow-card.hold{
+border-color:#75601d;
+}
+
+.flow-card.upgrade{
+border-color:#8a6b20;
+}
+
+.flow-card.downline{
+border-color:#3f6b55;
+}
+
+.flow-card.recycle{
+border-color:#784c7b;
+}
+
+.cycle-summary{
+margin-top:20px;
+border:1px solid #343a40;
+border-radius:17px;
+overflow:hidden;
+background:#090c0f;
+}
+
+.summary-title{
+padding:16px 18px;
+color:var(--gold);
+font-weight:900;
+border-bottom:1px solid #292e33;
+}
+
+.summary-row{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+align-items:center;
+padding:12px 18px;
+border-bottom:1px solid #1f2429;
+}
+
+.summary-row:last-child{
+border-bottom:0;
+}
+
+.summary-row span{
+min-width:115px;
+color:#888;
+font-size:11px;
+text-transform:uppercase;
+letter-spacing:.7px;
+}
+
+.summary-row b{
+font-size:12px;
+color:#ddd;
+background:#11161a;
+border:1px solid #2c3339;
+border-radius:8px;
+padding:7px 9px;
+}
+
+/* CONTRACT */
+
+.contract{
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:18px;
+}
+
+.box{
+border:1px solid #343a40;
+background:#090c0f;
+border-radius:18px;
+padding:28px;
+}
+
+.address{
+display:flex;
+gap:8px;
+margin:18px 0;
+}
+
+.address input{
+flex:1;
+background:#050607;
+color:#ddd;
+border:1px solid #343a40;
+border-radius:9px;
+padding:12px;
+font-size:13px;
+}
+
+.copy{
+border:1px solid #745819;
+background:#171207;
+color:var(--gold);
+border-radius:9px;
+padding:0 15px;
+cursor:pointer;
+}
+
+/* NFT */
+
+.nft{
+border:1px solid #604b1b;
+background:linear-gradient(145deg,#171208,#090b0d);
+border-radius:18px;
+padding:28px;
+text-align:center;
+}
+
+.nftbadge{
+width:130px;
+height:160px;
+margin:0 auto 18px;
+border:1px solid #b88828;
+border-radius:12px;
+display:grid;
+place-items:center;
+color:var(--gold);
+font-weight:900;
+background:radial-gradient(circle,#5b40100f,#080808);
+}
+
+/* FAQ */
+
+.faq{
+max-width:850px;
+margin:auto;
+}
+
+details{
+border-bottom:1px solid #292e33;
+padding:18px 5px;
+}
+
+summary{
+cursor:pointer;
+font-weight:800;
+}
+
+details p{
+color:#999;
+margin:10px 0 0;
+}
+
+/* CTA */
+
+.cta{
+border:1px solid #604b1b;
+border-radius:22px;
+padding:45px;
+text-align:center;
+background:radial-gradient(circle at 80% 50%,#3a270a,#0a0c0f 55%);
+}
+
+.cta h2{
+font-size:clamp(30px,5vw,50px);
+margin:8px 0;
+}
+
+.disclaimer{
+font-size:11px;
+color:#777;
+margin-top:20px;
+line-height:1.6;
+}
+
+footer{
+border-top:1px solid #20252a;
+padding:28px 0;
+color:#777;
+font-size:12px;
+}
+
+#toast{
+position:fixed;
+bottom:24px;
+left:50%;
+transform:translateX(-50%);
+background:#f4bd3f;
+color:#111;
+padding:10px 16px;
+border-radius:8px;
+font-weight:800;
+display:none;
+z-index:99;
+}
+
+/* TABLET */
+
+@media(max-width:850px){
+
+.navlinks{
+display:none;
+}
+
+.navbtn{
+display:none;
+}
+
+.hamb{
+display:block;
+}
+
+.stats{
+grid-template-columns:1fr 1fr;
+}
+
+.grid,
+.contract{
+grid-template-columns:1fr;
+}
+
+.steps{
+grid-template-columns:1fr 1fr;
+}
+
+.flow-note{
+grid-template-columns:1fr 1fr;
+}
+
+.flow-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:520px){
+
+.hero{
+padding:60px 0;
+}
+
+.hero:after{
+font-size:240px;
+right:-25%;
+top:10%;
+}
+
+h1{
+letter-spacing:-2px;
+}
+
+.stats{
+grid-template-columns:1fr 1fr;
+}
+
+.steps{
+grid-template-columns:1fr;
+}
+
+.flow-note{
+grid-template-columns:1fr 1fr;
+}
+
+.flow-card{
+grid-template-columns:50px 1fr;
+}
+
+.flow-num{
+width:42px;
+height:42px;
+}
+
+.summary-row span{
+width:100%;
+}
+
+section{
+padding:60px 0;
+}
+
+.cta{
+padding:30px 18px;
+}
+
+}
+</style>
 </head>
+
 <body>
-  <header class="nav">
-    <a class="brand" href="#home">
-    <img src="logo.png" alt="TITANNOVA Logo">
+
+<header>
+<div class="wrap nav">
+
+<a class="brand" href="#">
+<span class="brandmark">T</span>
+TITANOVA
 </a>
-    <button class="menu" id="menuBtn">☰</button>
-    <nav id="navLinks">
-      <a href="#how">How It Works</a>
-      <a href="#levels">12 Levels</a>
-      <a href="#nft">NFT</a>
-      <a href="#royalty">Royalty</a>
-      <a href="#faq">FAQ</a>
-      <a class="nav-btn" href="#connect">Connect</a>
-    </nav>
-  </header>
 
-  <main>
-    <section id="home" class="hero">
-      <div class="glow"></div>
-      <p class="eyebrow">BNB SMART CHAIN • WEB3 ECOSYSTEM</p>
-      <h1>BUILD THE<br><span>NEXT TITAN</span></h1>
-      <p class="lead">TITANNOVA is a smart-contract based matrix ecosystem designed around 12 levels, 14 spots, NFT utilities and an on-chain royalty mechanism.</p>
-      <div class="actions">
-        <a class="btn primary" href="#how">Explore Plan</a>
-        <a class="btn ghost" href="#contract">Smart Contract</a>
-      </div>
-      <div class="stats">
-        <div><b>12</b><small>Levels</small></div>
-        <div><b>14</b><small>Spots / Cycle</small></div>
-        <div><b>4</b><small>Royalty Ranks</small></div>
-        <div><b>100K</b><small>Pass Limit</small></div>
-      </div>
-    </section>
+<nav class="navlinks">
+<a href="#about">About</a>
+<a href="#plan">Plan</a>
+<a href="#works">How It Works</a>
+<a href="#contract">Smart Contract</a>
+<a href="#nft">NFT</a>
+<a href="#faq">FAQ</a>
+</nav>
 
-    <section id="how" class="section">
-      <p class="eyebrow">THE ARCHITECTURE</p>
-      <h2>How TITANNOVA Works</h2>
-      <p class="section-intro">The ecosystem is organized into a 14-spot matrix at each active level. Placement, spillover, payouts and recycle actions are executed by the smart contract according to its programmed rules.</p>
-      <div class="cards">
-        <article><span>01</span><h3>Registration</h3><p>A participant registers through the smart contract using the configured token payment and receives the Registration Pass NFT, subject to the 100,000-pass limit.</p></article>
-        <article><span>02</span><h3>Matrix Placement</h3><p>Each level uses 14 spots. The contract determines placement and eligible receivers according to the matrix rules.</p></article>
-        <article><span>03</span><h3>Upgrade</h3><p>Levels 1–11 can activate the next level through the programmed cycle-1 Spot 4 and Spot 5 mechanism.</p></article>
-        <article><span>04</span><h3>Recycle</h3><p>When a 14-spot cycle completes, the matrix recycles according to the contract. Spot 4 is allocated to the NFT Pool and Spot 5 to the Royalty Pool.</p></article>
-      </div>
-    </section>
+<a class="navbtn" href="#join">Join Now</a>
 
-    <section id="levels" class="section dark">
-      <p class="eyebrow">LEVEL SYSTEM</p>
-      <h2>12 Levels</h2>
-      <p class="section-intro">Level costs are configured to double from the previous level. The exact token amount is determined by the deployed contract.</p>
-      <div class="level-grid" id="levelGrid"></div>
-      <p class="note">Illustrative display: verify the deployed contract's public <code>levelTokenCost</code> values before relying on any amount.</p>
-    </section>
+<button class="hamb" onclick="toggleMenu()">☰</button>
 
-    <section id="matrix" class="section">
-      <p class="eyebrow">14-SPOT CYCLE</p>
-      <h2>Matrix Flow</h2>
-      <div class="matrix">
-        <div class="spot special">1<br><small>Upline</small></div>
-        <div class="spot special">2<br><small>Upline</small></div>
-        <div class="spot">3<br><small>Dividend</small></div>
-        <div class="spot nft">4<br><small>NFT Pool*</small></div>
-        <div class="spot royalty">5<br><small>Royalty*</small></div>
-        <div class="spot">6<br><small>Dividend</small></div>
-        <div class="spot spill">7<br><small>Spill</small></div>
-        <div class="spot">8<br><small>Dividend</small></div>
-        <div class="spot">9<br><small>Dividend</small></div>
-        <div class="spot spill">10<br><small>Spill</small></div>
-        <div class="spot">11<br><small>Dividend</small></div>
-        <div class="spot">12<br><small>Dividend</small></div>
-        <div class="spot spill">13<br><small>Spill</small></div>
-        <div class="spot recycle">14<br><small>Recycle</small></div>
-      </div>
-      <p class="note">* Spot 4/5 routing depends on the cycle and level rules in the deployed contract. At Level 12, and on recycle, Spot 4 routes to the NFT Pool and Spot 5 to the Royalty Pool under the stated specification.</p>
-    </section>
+</div>
+</header>
 
-    <section id="nft" class="section dark">
-      <p class="eyebrow">NFT ECOSYSTEM</p>
-      <h2>Registration Pass & Level-6 NFT</h2>
-      <div class="two-col">
-        <div class="panel"><h3>100,000 Registration Passes</h3><p>The Registration Pass supply is capped at 100,000. Once the cap is reached, the contract can issue the configured Level-6 NFT to eligible Level-6 achievers according to its rules.</p></div>
-        <div class="panel"><h3>Transferable, Not Burned</h3><p>The Level-6 NFT can be transferred. NFT ownership and Rank achievement are separate: transferring the NFT does <strong>not</strong> transfer the Rank or its royalty eligibility.</p></div>
-      </div>
-    </section>
+<main>
 
-    <section id="royalty" class="section">
-      <p class="eyebrow">ROYALTY SYSTEM</p>
-      <h2>4 Ranks • 25% Each</h2>
-      <p class="section-intro">The configured royalty system uses four ranks. Each rank receives 25% of the distributable royalty amount for the 30-day period, subject to the deployed contract's eligibility and accounting rules.</p>
-      <div class="rank-grid">
-        <div><b>RANK 1</b><span>LEVEL 3</span><strong>25%</strong></div>
-        <div><b>RANK 2</b><span>LEVEL 6</span><strong>25%</strong></div>
-        <div><b>RANK 3</b><span>LEVEL 9</span><strong>25%</strong></div>
-        <div><b>RANK 4</b><span>LEVEL 12</span><strong>25%</strong></div>
-      </div>
-      <div class="notice"><strong>30-Day Distribution</strong><br>Royalty accounting is intended to operate in 30-day periods. The deployed contract is the source of truth for eligibility, balances, claimability and distribution timing.</div>
-    </section>
+<!-- HERO -->
 
-    <section id="contract" class="section dark">
-      <p class="eyebrow">ON-CHAIN VERIFICATION</p>
-      <h2>Smart Contract</h2>
-      <div class="contract-box">
-        <p>Network: <strong>BNB Smart Chain</strong></p>
-        <p>Contract: <code id="contractAddress">MAINNET CONTRACT ADDRESS — TO BE ADDED</code></p>
-        <button class="btn primary" id="copyBtn">Copy Address</button>
-      </div>
-      <p class="note">Do not send funds to an address until it has been verified against the official deployed contract and explorer record.</p>
-    </section>
+<section class="hero">
+<div class="wrap">
 
-    <section id="connect" class="section">
-      <p class="eyebrow">WEB3 ACCESS</p>
-      <h2>Connect Wallet</h2>
-      <p class="section-intro">The dashboard can be connected to the deployed contract after the Mainnet address and ABI are finalized.</p>
-      <button class="btn primary" id="walletBtn">Connect Wallet</button>
-      <p id="walletStatus" class="wallet-status">Wallet not connected.</p>
-    </section>
+<div class="badge">
+BNB Smart Chain • Decentralized Ecosystem
+</div>
 
-    <section id="faq" class="section dark">
-      <p class="eyebrow">FAQ</p>
-      <h2>Frequently Asked Questions</h2>
-      <details><summary>Is TITANNOVA centralized?</summary><p>The intended design is to execute core matrix and fund-routing rules through the smart contract without discretionary admin fund withdrawals. The deployed bytecode and verified source code should be used to confirm the final permissions.</p></details>
-      <details><summary>Does NFT transfer transfer Rank?</summary><p>No. Under the stated specification, NFT ownership can transfer, but Rank achievement and royalty eligibility remain associated with the address that achieved the Rank.</p></details>
-      <details><summary>What happens to Spot 4 and Spot 5?</summary><p>For the stated final plan, Level 12 and recycle use Spot 4 for the NFT Pool and Spot 5 for the Royalty Pool. Cycle-1 Levels 1–11 use the Spot 4/5 upgrade mechanism.</p></details>
-      <details><summary>Where can I verify activity?</summary><p>Use the deployed contract's official BNB Smart Chain explorer page and the contract's verified source code.</p></details>
-    </section>
-  </main>
+<h1>
+THE NEXT<br>
+<span class="gold">TITANOVA</span>
+</h1>
 
-  <footer>
-    <div class="brand">TITAN<span>NOVA</span></div>
-    <p>Smart-contract based Web3 ecosystem • Verify everything on-chain.</p>
-    <p class="tiny">© 2026 TITANNOVA. Website information is descriptive and does not guarantee returns or future income.</p>
-  </footer>
+<p>
+A premium interface for exploring the TITANOVA matrix ecosystem,
+its 12-level structure, smart-contract architecture and NFT infrastructure.
+</p>
 
-  <script src="script.js"></script>
+<div class="actions">
+<a class="btn primary" href="#plan">
+Explore Plan →
+</a>
+
+<a class="btn secondary" href="#contract">
+Smart Contract
+</a>
+</div>
+
+</div>
+</section>
+
+
+<!-- STATS -->
+
+<div class="wrap">
+
+<div class="stats">
+
+<div class="stat">
+<small>Network</small>
+<b>BNB Chain</b>
+<small>Smart-contract ecosystem</small>
+</div>
+
+<div class="stat">
+<small>Structure</small>
+<b>12 Levels</b>
+<small>14 Spots Per Cycle</small>
+</div>
+
+<div class="stat">
+<small>Infrastructure</small>
+<b>NFT</b>
+<small>Membership / utility layer</small>
+</div>
+
+<div class="stat">
+<small>Verification</small>
+<b>On-Chain</b>
+<small>Check before signing</small>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+<div class="wrap">
+
+<div class="title">
+
+<div class="kicker">About</div>
+
+<h2>
+Built for a
+<span class="gold">transparent</span>
+experience
+</h2>
+
+<p class="sub">
+TITANOVA is presented as a smart-contract-based ecosystem on
+BNB Smart Chain. Users should independently verify contract source
+code, addresses, fees and transaction results.
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+<div class="ico">◈</div>
+<h3>Decentralized Logic</h3>
+<p>
+Rules and state can be implemented through deployed smart contracts
+rather than a conventional centralized database.
+</p>
+</div>
+
+<div class="card">
+<div class="ico">⬡</div>
+<h3>BNB Smart Chain</h3>
+<p>
+Designed for the BNB Smart Chain environment with token and NFT
+infrastructure as defined by the deployed contracts.
+</p>
+</div>
+
+<div class="card">
+<div class="ico">✓</div>
+<h3>Verify Everything</h3>
+<p>
+Always compare the official contract address with verified explorer
+data before connecting or signing a transaction.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section id="works">
+
+<div class="wrap">
+
+<div class="title">
+
+<div class="kicker">Workflow</div>
+
+<h2>
+How TITANOVA Works
+</h2>
+
+</div>
+
+<div class="steps">
+
+<div class="step">
+<div class="num">1</div>
+<h3>Connect Wallet</h3>
+<p>
+Connect a compatible Web3 wallet when the final contract interface
+is published.
+</p>
+</div>
+
+<div class="step">
+<div class="num">2</div>
+<h3>Review</h3>
+<p>
+Read the contract address, network, transaction amount and gas fee
+before signing.
+</p>
+</div>
+
+<div class="step">
+<div class="num">3</div>
+<h3>Interact</h3>
+<p>
+Choose the available contract action and confirm only after checking
+all transaction details.
+</p>
+</div>
+
+<div class="step">
+<div class="num">4</div>
+<h3>Verify</h3>
+<p>
+Check the transaction hash and resulting on-chain state in a BNB
+Chain explorer.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MATRIX FLOW -->
+
+<section id="plan">
+
+<div class="wrap">
+
+<div class="title">
+
+<div class="kicker">
+Matrix Flow
+</div>
+
+<h2>
+14 Spot
+<span class="gold">Cycle 1</span>
+</h2>
+
+<p class="sub">
+TITANOVA Cycle 1 follows the defined 14-spot flow below.
+Level pricing starts at 0.001 BTCB and doubles at every next level.
+</p>
+
+</div>
+
+
+<!-- LEVEL PRICE -->
+
+<div class="flow-note">
+
+<div>
+<b>Level 1</b>
+<span>0.001 BTCB</span>
+</div>
+
+<div>
+<b>Level 2</b>
+<span>0.002 BTCB</span>
+</div>
+
+<div>
+<b>Level 3</b>
+<span>0.004 BTCB</span>
+</div>
+
+<div>
+<b>Level 4+</b>
+<span>2× Previous Level</span>
+</div>
+
+</div>
+
+
+<!-- 14 SPOTS -->
+
+<div class="flow-grid" id="matrixFlow">
+</div>
+
+
+<!-- SUMMARY -->
+
+<div class="cycle-summary">
+
+<div class="summary-title">
+Cycle 1 Flow Summary
+</div>
+
+<div class="summary-row">
+<span>Upline</span>
+<b>Spot 1 → 1 Level</b>
+<b>Spot 2 → 2 Level</b>
+</div>
+
+<div class="summary-row">
+<span>Self</span>
+<b>Spot 3</b>
+<b>Spot 6</b>
+<b>Spot 8</b>
+<b>Spot 9</b>
+<b>Spot 11</b>
+<b>Spot 12</b>
+</div>
+
+<div class="summary-row">
+<span>Hold / Upgrade</span>
+<b>Spot 4 → Hold</b>
+<b>Spot 5 → Upgrade (2 Level)</b>
+</div>
+
+<div class="summary-row">
+<span>Downline</span>
+<b>Spot 7 → 1st Downline</b>
+<b>Spot 10 → 2nd Downline</b>
+<b>Spot 13 → 1st Downline (2 Level)</b>
+</div>
+
+<div class="summary-row">
+<span>Recycle</span>
+<b>Spot 14 → Recycle</b>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SMART CONTRACT -->
+
+<section id="contract">
+
+<div class="wrap">
+
+<div class="title">
+
+<div class="kicker">
+On-Chain
+</div>
+
+<h2>
+Smart Contract
+</h2>
+
+<p class="sub">
+Final mainnet address should be inserted only after deployment
+and verification.
+</p>
+
+</div>
+
+
+<div class="contract">
+
+<div class="box">
+
+<h3>
+Contract Address
+</h3>
+
+<div class="address">
+
+<input
+id="contractAddress"
+value="0xYOUR_MAINNET_CONTRACT_ADDRESS"
+readonly
+>
+
+<button class="copy" onclick="copyAddress()">
+Copy
+</button>
+
+</div>
+
+<a
+class="btn primary"
+href="#"
+onclick="explorerAlert();return false"
+>
+View on BNB Explorer ↗
+</a>
+
+<p class="disclaimer">
+Do not send funds to an address copied from an unofficial source.
+Verify the chain and contract independently.
+</p>
+
+</div>
+
+
+<div class="box">
+
+<h3>
+Wallet Connection
+</h3>
+
+<p
+id="walletStatus"
+style="color:#999;margin:12px 0"
+>
+Wallet not connected
+</p>
+
+<button
+class="btn primary"
+onclick="connectWallet()"
+>
+Connect Wallet
+</button>
+
+<p class="disclaimer">
+This demo detects an injected Web3 provider.
+A production contract interaction page will require the final
+verified ABI and contract address.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- NFT -->
+
+<section id="nft">
+
+<div class="wrap">
+
+<div class="title">
+
+<div class="kicker">
+Digital Asset
+</div>
+
+<h2>
+NFT Welcome Pass
+</h2>
+
+</div>
+
+<div class="nft">
+
+<div class="nftbadge">
+TITANOVA<br>
+NFT PASS
+</div>
+
+<h3>
+Membership / Utility Layer
+</h3>
+
+<p style="color:#999;max-width:650px;margin:10px auto">
+
+NFT functionality shown here is an interface concept.
+Transferability, utility, ownership and rank-related behavior
+must be determined from the final NFT contracts.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FAQ -->
+
+<section id="faq">
+
+<div class="wrap">
+
+<div class="title">
+
+<div class="kicker">
+FAQ
+</div>
+
+<h2>
+Frequently Asked Questions
+</h2>
+
+</div>
+
+<div class="faq">
+
+<details open>
+
+<summary>
+What is TITANOVA?
+</summary>
+
+<p>
+TITANOVA is presented as a decentralized matrix ecosystem using
+smart-contract infrastructure on BNB Smart Chain.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+Is income guaranteed?
+</summary>
+
+<p>
+No. The website does not guarantee income, returns or rewards.
+Digital assets and smart-contract interactions involve risk.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+How do I verify the contract?
+</summary>
+
+<p>
+Use the official published address and compare it with the
+verified source code and on-chain transaction history.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+Will NFT and rank transfer together?
+</summary>
+
+<p>
+Not necessarily. This depends entirely on the final deployed
+contracts. The website will state the actual behavior after
+the contracts are verified.
+</p>
+
+</details>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- JOIN -->
+
+<section id="join">
+
+<div class="wrap">
+
+<div class="cta">
+
+<div class="kicker">
+TITANOVA
+</div>
+
+<h2>
+Explore. Verify. Participate Responsibly.
+</h2>
+
+<p style="color:#999;max-width:680px;margin:auto">
+A premium community-facing interface for the TITANOVA ecosystem.
+</p>
+
+<div
+class="actions"
+style="justify-content:center"
+>
+
+<a
+class="btn primary"
+href="#contract"
+>
+View Contract
+</a>
+
+<a
+class="btn secondary"
+href="#faq"
+>
+Read FAQ
+</a>
+
+</div>
+
+<div class="disclaimer">
+Informational website only. No guarantee of profit or financial
+return is made. Users are responsible for independently reviewing
+smart contracts, fees, risks and applicable laws before participating.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="wrap">
+© 2026 TITANOVA • Decentralized Matrix Ecosystem • Verify before you interact.
+</div>
+
+</footer>
+
+
+<div id="toast"></div>
+
+
+<script>
+
+/* =========================================
+   TITANOVA 14 SPOT CYCLE 1 FLOW
+   ========================================= */
+
+const flowData = [
+
+{
+n:1,
+t:"Upline — 1 Level",
+d:"First upline routing",
+cls:"upline",
+tag:"1 Level"
+},
+
+{
+n:2,
+t:"Upline — 2 Level",
+d:"Second upline routing",
+cls:"upline",
+tag:"2 Level"
+},
+
+{
+n:3,
+t:"Self",
+d:"Self-directed spot",
+cls:"self",
+tag:"Self"
+},
+
+{
+n:4,
+t:"Hold",
+d:"Hold amount for the next upgrade",
+cls:"hold",
+tag:"Hold"
+},
+
+{
+n:5,
+t:"Upgrade — 2 Level",
+d:"Activates the next level according to the plan",
+cls:"upgrade",
+tag:"Upgrade"
+},
+
+{
+n:6,
+t:"Self",
+d:"Self-directed spot",
+cls:"self",
+tag:"Self"
+},
+
+{
+n:7,
+t:"1st Downline — 1 Level",
+d:"First downline routing",
+cls:"downline",
+tag:"1st Downline"
+},
+
+{
+n:8,
+t:"Self",
+d:"Self-directed spot",
+cls:"self",
+tag:"Self"
+},
+
+{
+n:9,
+t:"Self",
+d:"Self-directed spot",
+cls:"self",
+tag:"Self"
+},
+
+{
+n:10,
+t:"2nd Downline — 1 Level",
+d:"Second downline routing",
+cls:"downline",
+tag:"2nd Downline"
+},
+
+{
+n:11,
+t:"Self",
+d:"Self-directed spot",
+cls:"self",
+tag:"Self"
+},
+
+{
+n:12,
+t:"Self",
+d:"Self-directed spot",
+cls:"self",
+tag:"Self"
+},
+
+{
+n:13,
+t:"1st Downline — 2 Level",
+d:"First downline routing at 2-level depth",
+cls:"downline",
+tag:"2 Level"
+},
+
+{
+n:14,
+t:"Recycle",
+d:"Cycle completes and recycles",
+cls:"recycle",
+tag:"Recycle"
+}
+
+];
+
+
+const flow = document.getElementById("matrixFlow");
+
+
+flowData.forEach(s => {
+
+let d = document.createElement("div");
+
+d.className = "flow-card " + s.cls;
+
+d.innerHTML = `
+
+<div class="flow-num">
+${s.n}
+</div>
+
+<div>
+
+<h3>
+Spot ${s.n} — ${s.t}
+</h3>
+
+<p>
+${s.d}
+</p>
+
+<span class="flow-tag">
+${s.tag}
+</span>
+
+</div>
+
+`;
+
+flow.appendChild(d);
+
+});
+
+
+/* =========================================
+   COPY CONTRACT ADDRESS
+   ========================================= */
+
+function copyAddress(){
+
+const value =
+document.getElementById("contractAddress").value;
+
+if(navigator.clipboard){
+
+navigator.clipboard.writeText(value);
+
+}
+
+toast("Contract address copied");
+
+}
+
+
+/* =========================================
+   TOAST
+   ========================================= */
+
+function toast(t){
+
+const x =
+document.getElementById("toast");
+
+x.textContent = t;
+
+x.style.display = "block";
+
+setTimeout(
+() => x.style.display = "none",
+1800
+);
+
+}
+
+
+/* =========================================
+   WALLET CONNECTION
+   ========================================= */
+
+async function connectWallet(){
+
+if(!window.ethereum){
+
+toast("No Web3 wallet detected");
+
+return;
+
+}
+
+try{
+
+const accounts =
+await window.ethereum.request({
+method:"eth_requestAccounts"
+});
+
+document.getElementById(
+"walletStatus"
+).textContent =
+"Connected: "
++
+accounts[0].slice(0,6)
++
+"..."
++
+accounts[0].slice(-4);
+
+toast("Wallet connected");
+
+}
+
+catch(e){
+
+toast("Connection cancelled");
+
+}
+
+}
+
+
+/* =========================================
+   EXPLORER
+   ========================================= */
+
+function explorerAlert(){
+
+toast(
+"Add the final verified contract address first"
+);
+
+}
+
+
+/* =========================================
+   MOBILE MENU
+   ========================================= */
+
+function toggleMenu(){
+
+const n =
+document.querySelector(".navlinks");
+
+if(n.style.display === "flex"){
+
+n.style.display = "none";
+
+}else{
+
+n.style.display = "flex";
+
+n.style.position = "absolute";
+
+n.style.top = "72px";
+
+n.style.left = "0";
+
+n.style.right = "0";
+
+n.style.padding = "20px";
+
+n.style.background = "#080909";
+
+n.style.flexDirection = "column";
+
+}
+
+}
+
+</script>
+
 </body>
 </html>
