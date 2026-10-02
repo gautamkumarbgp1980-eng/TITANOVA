@@ -2,182 +2,248 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>TITANOVA Testnet</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TITANOVA | Testnet Dashboard</title>
 
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script>
 
 <style>
-*{
-    box-sizing:border-box;
-}
-
+*{box-sizing:border-box}
 body{
-    margin:0;
-    background:#070707;
-    color:#fff;
-    font-family:Arial,sans-serif;
+margin:0;
+font-family:Arial,sans-serif;
+background:#050505;
+color:#fff;
 }
-
 .container{
-    width:100%;
-    max-width:520px;
-    margin:auto;
-    padding:18px;
+max-width:600px;
+margin:auto;
+padding:14px;
 }
-
-.header{
-    text-align:center;
-    padding:25px 0;
+header{
+text-align:center;
+padding:18px 5px 12px;
 }
-
-.header h1{
-    margin:0;
-    color:#f5c542;
-    font-size:34px;
-    letter-spacing:3px;
+.logo{
+font-size:34px;
+font-weight:900;
+letter-spacing:4px;
+color:#f5c542;
 }
-
-.header p{
-    color:#999;
-    margin:8px 0;
+.sub{
+color:#999;
+font-size:13px;
+margin-top:5px;
 }
-
-.badge{
-    display:inline-block;
-    margin-top:8px;
-    padding:7px 14px;
-    border:1px solid #f5c542;
-    border-radius:20px;
-    color:#f5c542;
-    font-size:12px;
+.testnet{
+display:inline-block;
+margin-top:9px;
+padding:6px 13px;
+border:1px solid #f5c542;
+border-radius:20px;
+font-size:11px;
+color:#f5c542;
 }
-
-.card{
-    background:#111;
-    border:1px solid #292929;
-    border-radius:16px;
-    padding:18px;
-    margin-top:15px;
-}
-
-.card h2{
-    color:#f5c542;
-    font-size:19px;
-    margin:0 0 15px;
-}
-
 button{
-    width:100%;
-    padding:15px;
-    margin-top:10px;
-    border:0;
-    border-radius:10px;
-    background:#f5c542;
-    color:#000;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
+width:100%;
+padding:13px;
+border:0;
+border-radius:10px;
+background:#f5c542;
+color:#000;
+font-weight:bold;
+font-size:15px;
+margin-top:9px;
+cursor:pointer;
 }
-
+button.secondary{
+background:#181818;
+color:#f5c542;
+border:1px solid #333;
+}
 button:disabled{
-    opacity:.45;
-    cursor:not-allowed;
+opacity:.45;
 }
-
-input{
-    width:100%;
-    padding:14px;
-    margin-top:7px;
-    border-radius:10px;
-    border:1px solid #333;
-    background:#050505;
-    color:#fff;
-    font-size:16px;
-    outline:none;
+.card{
+background:#101010;
+border:1px solid #292929;
+border-radius:16px;
+padding:15px;
+margin:12px 0;
 }
-
-label{
-    display:block;
-    margin-top:10px;
-    color:#aaa;
-    font-size:13px;
+.title{
+font-size:18px;
+font-weight:bold;
+color:#f5c542;
+margin-bottom:12px;
 }
-
+.wallet{
+font-size:12px;
+color:#999;
+word-break:break-all;
+line-height:1.5;
+}
 .status{
-    margin-top:12px;
-    padding:12px;
-    border-radius:10px;
-    background:#080808;
-    border:1px solid #292929;
-    color:#aaa;
-    font-size:13px;
-    line-height:1.5;
-    word-break:break-word;
-    white-space:pre-wrap;
+margin-top:10px;
+padding:10px;
+border-radius:9px;
+background:#080808;
+border:1px solid #292929;
+font-size:12px;
+line-height:1.5;
+word-break:break-word;
 }
+.green{color:#55e68a}
+.red{color:#ff6666}
+.yellow{color:#f5c542}
 
-.green{
-    color:#55e68a;
+.stats{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
 }
-
-.red{
-    color:#ff6666;
+.stat{
+background:#080808;
+border:1px solid #252525;
+border-radius:11px;
+padding:12px;
 }
-
-.yellow{
-    color:#f5c542;
+.stat span{
+display:block;
+font-size:11px;
+color:#777;
 }
-
-.info{
-    margin-top:12px;
-    background:#080808;
-    border:1px solid #292929;
-    border-radius:10px;
-    padding:10px;
+.stat strong{
+display:block;
+font-size:18px;
+margin-top:5px;
+color:#fff;
 }
 
 .row{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    padding:9px 0;
-    border-bottom:1px solid #222;
+display:flex;
+justify-content:space-between;
+gap:10px;
+padding:10px 0;
+border-bottom:1px solid #222;
+font-size:13px;
+}
+.row:last-child{border-bottom:0}
+.row span{color:#888}
+.row b{
+text-align:right;
+word-break:break-word;
 }
 
-.row:last-child{
-    border-bottom:0;
+input{
+width:100%;
+padding:13px;
+background:#050505;
+color:#fff;
+border:1px solid #333;
+border-radius:9px;
+outline:none;
+font-size:15px;
 }
 
-.row span{
-    color:#888;
+.levels{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:7px;
+}
+.level{
+background:#171717;
+border:1px solid #303030;
+border-radius:9px;
+padding:10px 4px;
+text-align:center;
+font-size:11px;
+}
+.level.active{
+border-color:#f5c542;
+background:#241f0c;
+color:#f5c542;
+}
+.level small{
+display:block;
+margin-top:4px;
+color:#777;
+font-size:9px;
 }
 
-.row strong{
-    text-align:right;
-    word-break:break-word;
+.matrix{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:5px;
+margin-top:12px;
+}
+.spot{
+height:42px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:7px;
+background:#171717;
+border:1px solid #303030;
+font-size:11px;
+}
+.spot.self{
+border-color:#f5c542;
+color:#f5c542;
+}
+.spot.up{
+border-color:#e96b6b;
+color:#ff8585;
+}
+.spot.down{
+border-color:#5d9cec;
+color:#76b4ff;
+}
+.spot.hold{
+border-color:#aaa;
+color:#ccc;
+}
+.spot.upgrade{
+border-color:#55e68a;
+color:#55e68a;
+}
+.spot.pool{
+border-color:#b889ff;
+color:#c59cff;
+}
+.spot.recycle{
+border-color:#f5c542;
+color:#f5c542;
 }
 
-.address{
-    margin-top:10px;
-    color:#aaa;
-    font-size:12px;
-    word-break:break-all;
+.legend{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-top:12px;
+font-size:10px;
+color:#888;
 }
+.legend span{
+padding:5px 7px;
+background:#080808;
+border-radius:5px;
+}
+
+.hidden{display:none}
 
 .contract{
-    color:#777;
-    font-size:11px;
-    line-height:1.6;
-    word-break:break-all;
+font-size:11px;
+color:#777;
+word-break:break-all;
+line-height:1.6;
 }
 
 .footer{
-    text-align:center;
-    color:#555;
-    font-size:11px;
-    padding:25px 0;
+text-align:center;
+padding:25px 0;
+color:#555;
+font-size:10px;
 }
 </style>
 </head>
@@ -186,153 +252,315 @@ label{
 
 <div class="container">
 
-<div class="header">
-    <h1>TITANOVA</h1>
-    <p>Decentralized Matrix Ecosystem</p>
-    <div class="badge">BSC TESTNET</div>
-</div>
+<header>
+<div class="logo">TITANOVA</div>
+<div class="sub">Decentralized Matrix Ecosystem</div>
+<div class="testnet">BSC TESTNET • CHAIN 97</div>
+</header>
 
 
 <!-- WALLET -->
 
 <div class="card">
 
-    <h2>🔐 Wallet</h2>
+<div class="title">🔐 Wallet Connection</div>
 
-    <button id="connectButton">
-        CONNECT WALLET
-    </button>
+<button id="connectBtn">CONNECT WALLET</button>
 
-    <div id="walletStatus" class="status">
-        Wallet not connected.
-    </div>
-
-    <div class="info">
-
-        <div class="row">
-            <span>Network</span>
-            <strong id="network">---</strong>
-        </div>
-
-        <div class="row">
-            <span>BTCB Balance</span>
-            <strong id="balance">---</strong>
-        </div>
-
-    </div>
+<div id="walletStatus" class="status">
+Wallet not connected.<br>
+Dashboard preview is available below.
+</div>
 
 </div>
 
 
-<!-- REGISTRATION -->
+<!-- DASHBOARD -->
 
 <div class="card">
 
-    <h2>🚀 Activate ID</h2>
+<div class="title">📊 Dashboard</div>
 
-    <label>Referrer ID</label>
+<div class="stats">
 
-    <input
-        id="referrerId"
-        type="number"
-        min="1"
-        placeholder="Enter Referrer ID"
-    >
+<div class="stat">
+<span>My ID</span>
+<strong id="myId">---</strong>
+</div>
 
-    <button id="approveButton" disabled>
-        1. APPROVE BTCB
-    </button>
+<div class="stat">
+<span>Referrer ID</span>
+<strong id="refId">---</strong>
+</div>
 
-    <button id="registerButton" disabled>
-        2. ACTIVATE ID
-    </button>
+<div class="stat">
+<span>Direct</span>
+<strong id="direct">0</strong>
+</div>
 
-    <div id="registerStatus" class="status">
-        Connect wallet first.
-    </div>
+<div class="stat">
+<span>Team Size</span>
+<strong id="team">0</strong>
+</div>
+
+<div class="stat">
+<span>Active Levels</span>
+<strong id="activeLevels">0 / 12</strong>
+</div>
+
+<div class="stat">
+<span>Total Income</span>
+<strong id="income">0 BTCB</strong>
+</div>
+
+</div>
 
 </div>
 
 
-<!-- USER DETAILS -->
+<!-- BALANCE -->
 
 <div class="card">
 
-    <h2>📊 My Details</h2>
+<div class="title">💰 Wallet Balance</div>
 
-    <button id="detailsButton" disabled>
-        CHECK MY DETAILS
-    </button>
+<div class="row">
+<span>BTCB</span>
+<b id="btcbBalance">---</b>
+</div>
 
-    <div class="info">
-
-        <div class="row">
-            <span>User ID</span>
-            <strong id="userId">---</strong>
-        </div>
-
-        <div class="row">
-            <span>Referrer ID</span>
-            <strong id="referrer">---</strong>
-        </div>
-
-        <div class="row">
-            <span>Direct Partners</span>
-            <strong id="direct">---</strong>
-        </div>
-
-        <div class="row">
-            <span>Active Levels</span>
-            <strong id="levels">---</strong>
-        </div>
-
-        <div class="row">
-            <span>Team Size</span>
-            <strong id="team">---</strong>
-        </div>
-
-        <div class="row">
-            <span>Total Income</span>
-            <strong id="income">---</strong>
-        </div>
-
-    </div>
-
-    <div id="detailsStatus" class="status">
-        No details loaded.
-    </div>
+<div class="row">
+<span>BNB / Gas</span>
+<b id="bnbBalance">---</b>
+</div>
 
 </div>
 
 
-<!-- CONTRACT INFO -->
+<!-- ACTIVATION -->
 
 <div class="card">
 
-    <h2>🔗 Testnet Contract</h2>
+<div class="title">🚀 Join / Activate ID</div>
 
-    <div class="contract">
+<div style="color:#888;font-size:12px;margin-bottom:8px">
+Enter the ID of the person who referred you.
+</div>
 
-        TITANOVA Contract:<br>
-        0x1Dc24B48364cE513397db87C71708d722bfABcc1
+<input id="referrerInput" type="number" min="1" placeholder="Enter Referrer ID">
 
-        <br><br>
+<button id="approveBtn" disabled>
+1. APPROVE BTCB
+</button>
 
-        BTCB Token:<br>
-        0x6ce8dA28E2f864420840cF74474eFf5fD80E65B8
+<button id="registerBtn" disabled>
+2. ACTIVATE ID
+</button>
 
-        <br><br>
+<div id="joinStatus" class="status">
+Connect wallet to activate your ID.
+</div>
 
-        BSC Testnet<br>
-        Chain ID: 97
+</div>
 
-    </div>
+
+<!-- LEVELS -->
+
+<div class="card">
+
+<div class="title">🏆 Levels 1 – 12</div>
+
+<div class="levels" id="levelGrid">
+
+<div class="level active">L1<small>0.001</small></div>
+<div class="level">L2<small>0.002</small></div>
+<div class="level">L3<small>0.004</small></div>
+<div class="level">L4<small>0.008</small></div>
+<div class="level">L5<small>0.016</small></div>
+<div class="level">L6<small>0.032</small></div>
+<div class="level">L7<small>0.064</small></div>
+<div class="level">L8<small>0.128</small></div>
+<div class="level">L9<small>0.256</small></div>
+<div class="level">L10<small>0.512</small></div>
+<div class="level">L11<small>1.024</small></div>
+<div class="level">L12<small>2.048</small></div>
+
+</div>
+
+</div>
+
+
+<!-- MATRIX -->
+
+<div class="card">
+
+<div class="title">🔢 Matrix Flow — 14 Spots</div>
+
+<div style="font-size:12px;color:#888">
+Level <b style="color:#f5c542">1</b> • Cycle 1 Preview
+</div>
+
+<div class="matrix">
+
+<div class="spot up">1</div>
+<div class="spot up">2</div>
+<div class="spot self">3</div>
+<div class="spot hold">4</div>
+<div class="spot upgrade">5</div>
+<div class="spot self">6</div>
+<div class="spot down">7</div>
+
+<div class="spot self">8</div>
+<div class="spot self">9</div>
+<div class="spot down">10</div>
+<div class="spot self">11</div>
+<div class="spot self">12</div>
+<div class="spot down">13</div>
+<div class="spot recycle">14</div>
+
+</div>
+
+<div class="legend">
+<span>🔴 Upline</span>
+<span>🟢 Upgrade</span>
+<span>🔵 Downline</span>
+<span>🟡 Self</span>
+<span>⚪ Hold</span>
+<span>🟣 Pool</span>
+<span>♻️ Recycle</span>
+</div>
+
+</div>
+
+
+<!-- MATRIX DATA -->
+
+<div class="card">
+
+<div class="title">📍 Matrix Information</div>
+
+<div class="row">
+<span>Current Referrer</span>
+<b id="matrixRef">---</b>
+</div>
+
+<div class="row">
+<span>Referral Count</span>
+<b id="matrixCount">0 / 14</b>
+</div>
+
+<div class="row">
+<span>Reinvest / Cycle</span>
+<b id="reinvest">0</b>
+</div>
+
+<div class="row">
+<span>Matrix Team</span>
+<b id="matrixTeam">0</b>
+</div>
+
+<div class="row">
+<span>Level Earning</span>
+<b id="levelIncome">0 BTCB</b>
+</div>
+
+</div>
+
+
+<!-- RANK -->
+
+<div class="card">
+
+<div class="title">👑 Rank & NFT</div>
+
+<div class="row">
+<span>Rank 1 • Level 3</span>
+<b id="rank1">LOCKED</b>
+</div>
+
+<div class="row">
+<span>Rank 2 • Level 6</span>
+<b id="rank2">LOCKED</b>
+</div>
+
+<div class="row">
+<span>Rank 3 • Level 9</span>
+<b id="rank3">LOCKED</b>
+</div>
+
+<div class="row">
+<span>Rank 4 • Level 12</span>
+<b id="rank4">LOCKED</b>
+</div>
+
+<div class="row">
+<span>Level 6 NFT</span>
+<b id="nftStatus">NOT AVAILABLE</b>
+</div>
+
+</div>
+
+
+<!-- ROYALTY -->
+
+<div class="card">
+
+<div class="title">💎 Royalty Pool</div>
+
+<div class="row">
+<span>Pool Balance</span>
+<b id="royaltyPool">---</b>
+</div>
+
+<div class="row">
+<span>Rank 1 Members</span>
+<b id="r1members">---</b>
+</div>
+
+<div class="row">
+<span>Rank 2 Members</span>
+<b id="r2members">---</b>
+</div>
+
+<div class="row">
+<span>Rank 3 Members</span>
+<b id="r3members">---</b>
+</div>
+
+<div class="row">
+<span>Rank 4 Members</span>
+<b id="r4members">---</b>
+</div>
+
+</div>
+
+
+<!-- CONTRACT -->
+
+<div class="card">
+
+<div class="title">🔗 Testnet Contract</div>
+
+<div class="contract">
+<b style="color:#f5c542">TITANOVA</b><br>
+0x1Dc24B48364cE513397db87C71708d722bfABcc1
+
+<br><br>
+
+<b style="color:#f5c542">BTCB</b><br>
+0x6ce8dA28E2f864420840cF74474eFf5fD80E65B8
+
+<br><br>
+
+Network: BSC Testnet<br>
+Chain ID: 97
+</div>
 
 </div>
 
 
 <div class="footer">
-    TITANOVA • TESTNET
+TITANOVA TESTNET • Dashboard Preview
 </div>
 
 </div>
@@ -344,49 +572,54 @@ label{
    CONTRACT SETTINGS
 ===================================================== */
 
-const CONTRACT_ADDRESS =
+const CONTRACT =
 "0x1Dc24B48364cE513397db87C71708d722bfABcc1";
 
-const BTCB_ADDRESS =
+const BTCB =
 "0x6ce8dA28E2f864420840cF74474eFf5fD80E65B8";
 
-const BSC_TESTNET_CHAIN_ID = 97;
+const CHAIN_ID = 97;
 
 
 /* =====================================================
-   TITANOVA ABI
+   ABI
+   Compatible with the ABI supplied in this chat.
 ===================================================== */
 
-const TITANOVA_ABI = [
+const CONTRACT_ABI = [
 
-    "function registration(uint256 referrerId)",
+"function registration(uint256 referrerId)",
 
-    "function isUserExists(address account) view returns (bool)",
+"function isUserExists(address account) view returns (bool)",
 
-    "function getUserId(address account) view returns (uint256)",
+"function getUserId(address account) view returns (uint256)",
 
-    "function getUserDetails(uint256 userId) view returns (address userAddress,address referrer,uint256 referrerId,uint256 directCount,uint8 activeLevelCount,uint256 teamSize,uint256 registrationTimestamp,uint256 totalIncome)",
+"function getUserDetails(uint256 userId) view returns (address userAddress,address referrer,uint256 referrerId,uint256 directCount,uint8 activeLevelCount,uint256 teamSize,uint256 registrationTimestamp,uint256 totalIncome)",
 
-    "function getLevelCost(uint8 level) view returns (uint256)",
+"function getLevelCost(uint8 level) view returns (uint256)",
 
-    "function levelTokenCost(uint8 level) view returns (uint256)"
+"function levelTokenCost(uint8 level) view returns (uint256)",
+
+"function getMatrix(address account,uint8 level) view returns (address currentReferrer,uint256 referralCount,uint256 reinvestCount,uint256 heldTokenForUpgrade,uint256 totalTeamSize,uint256 totalEarning)",
+
+"function getMatrixReferrals(address account,uint8 level) view returns (address[])",
+
+"function totalProjectInvestment() view returns (uint256)",
+
+"function lastUserId() view returns (uint256)"
 
 ];
 
 
-/* =====================================================
-   BTCB ABI
-===================================================== */
+const TOKEN_ABI = [
 
-const BTCB_ABI = [
+"function approve(address spender,uint256 amount) returns (bool)",
 
-    "function approve(address spender,uint256 amount) returns (bool)",
+"function allowance(address owner,address spender) view returns (uint256)",
 
-    "function allowance(address owner,address spender) view returns (uint256)",
+"function balanceOf(address account) view returns (uint256)",
 
-    "function balanceOf(address account) view returns (uint256)",
-
-    "function decimals() view returns (uint8)"
+"function decimals() view returns (uint8)"
 
 ];
 
@@ -395,296 +628,383 @@ const BTCB_ABI = [
    VARIABLES
 ===================================================== */
 
-let provider = null;
-let signer = null;
-let titanova = null;
-let btcb = null;
-let account = null;
+let provider;
+let signer;
+let contract;
+let token;
+let account;
 
 
 /* =====================================================
-   ELEMENTS
+   HELPERS
 ===================================================== */
 
-const connectButton =
-document.getElementById("connectButton");
+function status(id,text,type=""){
 
-const approveButton =
-document.getElementById("approveButton");
+const el=document.getElementById(id);
 
-const registerButton =
-document.getElementById("registerButton");
+el.innerText=text;
 
-const detailsButton =
-document.getElementById("detailsButton");
+el.className="status "+type;
+
+}
+
+
+function shortAddress(address){
+
+if(!address)return "---";
+
+return address.substring(0,6)+"..."+
+address.substring(address.length-4);
+
+}
 
 
 /* =====================================================
-   CONNECT WALLET
+   CONNECT
 ===================================================== */
 
-connectButton.onclick = async function(){
+document.getElementById("connectBtn").onclick=async()=>{
 
-    try{
+try{
 
-        if(!window.ethereum){
+if(!window.ethereum){
 
-            setStatus(
-                "walletStatus",
-                "Wallet नहीं मिला। TokenPocket या MetaMask में website खोलें।",
-                "red"
-            );
+status(
+"walletStatus",
+"Wallet नहीं मिला। TokenPocket / MetaMask browser wallet से website खोलें।",
+"red"
+);
 
-            return;
-        }
+return;
 
-
-        setStatus(
-            "walletStatus",
-            "Connecting wallet...",
-            "yellow"
-        );
+}
 
 
-        provider =
-            new ethers.BrowserProvider(
-                window.ethereum
-            );
+status(
+"walletStatus",
+"Connecting...",
+"yellow"
+);
 
 
-        await provider.send(
-            "eth_requestAccounts",
-            []
-        );
+provider=
+new ethers.BrowserProvider(window.ethereum);
 
 
-        signer =
-            await provider.getSigner();
+await provider.send(
+"eth_requestAccounts",
+[]
+);
 
 
-        account =
-            await signer.getAddress();
+signer=
+await provider.getSigner();
 
 
-        const network =
-            await provider.getNetwork();
+account=
+await signer.getAddress();
 
 
-        const chainId =
-            Number(network.chainId);
+const network=
+await provider.getNetwork();
 
 
-        if(chainId !== BSC_TESTNET_CHAIN_ID){
+if(Number(network.chainId)!==CHAIN_ID){
 
-            document.getElementById("network").innerText =
-                "WRONG NETWORK";
+status(
+"walletStatus",
+"Wrong Network!\nPlease switch to BSC Testnet.\nChain ID: 97",
+"red"
+);
 
+return;
 
-            setStatus(
-                "walletStatus",
-                "Please switch wallet to BSC Testnet.\nChain ID: 97",
-                "red"
-            );
-
-            return;
-        }
+}
 
 
-        document.getElementById("network").innerText =
-            "BSC TESTNET";
+contract=
+new ethers.Contract(
+CONTRACT,
+CONTRACT_ABI,
+signer
+);
 
 
-        titanova =
-            new ethers.Contract(
-                CONTRACT_ADDRESS,
-                TITANOVA_ABI,
-                signer
-            );
+token=
+new ethers.Contract(
+BTCB,
+TOKEN_ABI,
+signer
+);
 
 
-        btcb =
-            new ethers.Contract(
-                BTCB_ADDRESS,
-                BTCB_ABI,
-                signer
-            );
+document.getElementById("connectBtn").innerText=
+"WALLET CONNECTED";
 
 
-        setStatus(
-            "walletStatus",
-            "Wallet connected ✓\n\n" + account,
-            "green"
-        );
+status(
+"walletStatus",
+"Connected ✓\n"+account,
+"green"
+);
 
 
-        connectButton.innerText =
-            "WALLET CONNECTED";
+document.getElementById("approveBtn").disabled=false;
+
+document.getElementById("registerBtn").disabled=false;
 
 
-        approveButton.disabled = false;
-
-        registerButton.disabled = false;
-
-        detailsButton.disabled = false;
+await loadDashboard();
 
 
-        await loadBalance();
+}catch(error){
 
+console.log(error);
 
-        await checkUser();
+status(
+"walletStatus",
+error.shortMessage ||
+error.reason ||
+error.message ||
+"Connection failed",
+"red"
+);
 
-
-    }
-
-    catch(error){
-
-        console.log(error);
-
-        setStatus(
-            "walletStatus",
-            getErrorMessage(error),
-            "red"
-        );
-
-    }
+}
 
 };
 
 
 /* =====================================================
-   BALANCE
+   LOAD DASHBOARD
 ===================================================== */
 
-async function loadBalance(){
+async function loadDashboard(){
 
-    try{
+try{
 
-        const balance =
-            await btcb.balanceOf(account);
+const balance=
+await token.balanceOf(account);
 
-
-        const formatted =
-            ethers.formatUnits(
-                balance,
-                18
-            );
+document.getElementById("btcbBalance").innerText=
+Number(
+ethers.formatUnits(balance,18)
+).toFixed(6)+" BTCB";
 
 
-        document.getElementById("balance").innerText =
-            Number(formatted).toFixed(8) + " BTCB";
+const bnb=
+await provider.getBalance(account);
 
-    }
+document.getElementById("bnbBalance").innerText=
+Number(
+ethers.formatEther(bnb)
+).toFixed(5)+" BNB";
 
-    catch(error){
 
-        console.log(error);
+const exists=
+await contract.isUserExists(account);
 
-        document.getElementById("balance").innerText =
-            "Unable to read";
 
-    }
+if(!exists){
+
+document.getElementById("myId").innerText="NOT REGISTERED";
+
+return;
+
+}
+
+
+const id=
+await contract.getUserId(account);
+
+
+const data=
+await contract.getUserDetails(id);
+
+
+document.getElementById("myId").innerText=
+id.toString();
+
+document.getElementById("refId").innerText=
+data[2].toString();
+
+document.getElementById("direct").innerText=
+data[3].toString();
+
+document.getElementById("activeLevels").innerText=
+data[4].toString()+" / 12";
+
+document.getElementById("team").innerText=
+data[5].toString();
+
+document.getElementById("income").innerText=
+ethers.formatUnits(data[7],18)+" BTCB";
+
+
+/* LEVELS */
+
+const levelBoxes=
+document.querySelectorAll(".level");
+
+levelBoxes.forEach((box,index)=>{
+
+if(index < Number(data[4])){
+
+box.classList.add("active");
+
+}else{
+
+box.classList.remove("active");
+
+}
+
+});
+
+
+/* RANKS */
+
+const active=
+Number(data[4]);
+
+document.getElementById("rank1").innerText=
+active>=3?"ACHIEVED":"LOCKED";
+
+document.getElementById("rank2").innerText=
+active>=6?"ACHIEVED":"LOCKED";
+
+document.getElementById("rank3").innerText=
+active>=9?"ACHIEVED":"LOCKED";
+
+document.getElementById("rank4").innerText=
+active>=12?"ACHIEVED":"LOCKED";
+
+document.getElementById("nftStatus").innerText=
+active>=6?"LEVEL 6 REACHED":"NOT AVAILABLE";
+
+
+await loadMatrix(id);
+
+}catch(error){
+
+console.log(error);
+
+status(
+"walletStatus",
+"Dashboard data read failed: "+
+(error.shortMessage||error.message),
+"red"
+);
+
+}
 
 }
 
 
 /* =====================================================
-   GET LEVEL 1 COST
+   MATRIX
 ===================================================== */
 
-async function getLevel1Cost(){
+async function loadMatrix(id){
 
-    try{
+try{
 
-        return await titanova.getLevelCost(1);
+const data=
+await contract.getMatrix(
+account,
+1
+);
 
-    }
 
-    catch(error){
+document.getElementById("matrixRef").innerText=
+shortAddress(data[0]);
 
-        return await titanova.levelTokenCost(1);
+document.getElementById("matrixCount").innerText=
+data[1].toString()+" / 14";
 
-    }
+document.getElementById("reinvest").innerText=
+data[2].toString();
+
+document.getElementById("matrixTeam").innerText=
+data[4].toString();
+
+document.getElementById("levelIncome").innerText=
+ethers.formatUnits(data[5],18)+" BTCB";
+
+
+}catch(error){
+
+console.log(error);
+
+}
 
 }
 
 
 /* =====================================================
-   APPROVE BTCB
+   APPROVE
 ===================================================== */
 
-approveButton.onclick = async function(){
+document.getElementById("approveBtn").onclick=async()=>{
 
-    try{
+try{
 
-        if(!btcb){
+const ref=
+document.getElementById("referrerInput").value;
 
-            throw new Error(
-                "Please connect wallet first."
-            );
+if(!ref){
 
-        }
+status(
+"joinStatus",
+"पहले Referrer ID डालें।",
+"red"
+);
 
+return;
 
-        const referrer =
-            document.getElementById("referrerId").value;
-
-
-        if(!referrer){
-
-            throw new Error(
-                "Please enter Referrer ID."
-            );
-
-        }
+}
 
 
-        const cost =
-            await getLevel1Cost();
+const cost=
+await contract.getLevelCost(1);
 
 
-        setStatus(
-            "registerStatus",
-            "Approve transaction opening...",
-            "yellow"
-        );
+status(
+"joinStatus",
+"BTCB approval transaction opening...",
+"yellow"
+);
 
 
-        const tx =
-            await btcb.approve(
-                CONTRACT_ADDRESS,
-                cost
-            );
+const tx=
+await token.approve(
+CONTRACT,
+cost
+);
 
 
-        setStatus(
-            "registerStatus",
-            "Approval submitted.\nWaiting for confirmation...",
-            "yellow"
-        );
+await tx.wait();
 
 
-        await tx.wait();
+status(
+"joinStatus",
+"BTCB APPROVED ✓\nअब ACTIVATE ID दबाएँ।",
+"green"
+);
 
 
-        setStatus(
-            "registerStatus",
-            "BTCB APPROVED ✓\nअब ACTIVATE ID दबाएँ।",
-            "green"
-        );
+}catch(error){
 
-    }
+status(
+"joinStatus",
+error.shortMessage ||
+error.reason ||
+error.message ||
+"Approval failed",
+"red"
+);
 
-    catch(error){
-
-        console.log(error);
-
-        setStatus(
-            "registerStatus",
-            getErrorMessage(error),
-            "red"
-        );
-
-    }
+}
 
 };
 
@@ -693,386 +1013,90 @@ approveButton.onclick = async function(){
    REGISTRATION
 ===================================================== */
 
-registerButton.onclick = async function(){
+document.getElementById("registerBtn").onclick=async()=>{
 
-    try{
+try{
 
-        if(!titanova){
+const ref=
+document.getElementById("referrerInput").value;
 
-            throw new Error(
-                "Please connect wallet first."
-            );
+if(!ref){
 
-        }
+status(
+"joinStatus",
+"Referrer ID डालें।",
+"red"
+);
 
+return;
 
-        const referrer =
-            document.getElementById("referrerId").value;
-
-
-        if(!referrer){
-
-            throw new Error(
-                "Please enter Referrer ID."
-            );
-
-        }
+}
 
 
-        const exists =
-            await titanova.isUserExists(
-                account
-            );
+status(
+"joinStatus",
+"Registration transaction opening...",
+"yellow"
+);
 
 
-        if(exists){
-
-            setStatus(
-                "registerStatus",
-                "यह wallet पहले से registered है।",
-                "yellow"
-            );
-
-            await loadDetails();
-
-            return;
-        }
+const tx=
+await contract.registration(
+Number(ref)
+);
 
 
-        const cost =
-            await getLevel1Cost();
+status(
+"joinStatus",
+"Transaction submitted...\nWaiting for confirmation.",
+"yellow"
+);
 
 
-        const allowance =
-            await btcb.allowance(
-                account,
-                CONTRACT_ADDRESS
-            );
+await tx.wait();
 
 
-        if(allowance < cost){
-
-            setStatus(
-                "registerStatus",
-                "BTCB approval नहीं है। पहले APPROVE BTCB दबाएँ।",
-                "yellow"
-            );
-
-            return;
-        }
+status(
+"joinStatus",
+"🎉 ID ACTIVATED SUCCESSFULLY!",
+"green"
+);
 
 
-        setStatus(
-            "registerStatus",
-            "Activate transaction opening...",
-            "yellow"
-        );
+await loadDashboard();
 
 
-        const tx =
-            await titanova.registration(
-                Number(referrer)
-            );
+}catch(error){
 
+status(
+"joinStatus",
+error.shortMessage ||
+error.reason ||
+error.message ||
+"Registration failed",
+"red"
+);
 
-        setStatus(
-            "registerStatus",
-            "Transaction submitted.\nConfirmation का इंतजार करें...",
-            "yellow"
-        );
-
-
-        await tx.wait();
-
-
-        setStatus(
-            "registerStatus",
-            "🎉 ID ACTIVATED SUCCESSFULLY!",
-            "green"
-        );
-
-
-        await loadBalance();
-
-        await loadDetails();
-
-    }
-
-    catch(error){
-
-        console.log(error);
-
-        setStatus(
-            "registerStatus",
-            getErrorMessage(error),
-            "red"
-        );
-
-    }
+}
 
 };
 
 
 /* =====================================================
-   CHECK USER
-===================================================== */
-
-async function checkUser(){
-
-    try{
-
-        const exists =
-            await titanova.isUserExists(
-                account
-            );
-
-
-        if(exists){
-
-            setStatus(
-                "registerStatus",
-                "यह wallet पहले से registered है।",
-                "yellow"
-            );
-
-            await loadDetails();
-
-        }
-
-    }
-
-    catch(error){
-
-        console.log(error);
-
-    }
-
-}
-
-
-/* =====================================================
-   USER DETAILS
-===================================================== */
-
-detailsButton.onclick = async function(){
-
-    await loadDetails();
-
-};
-
-
-async function loadDetails(){
-
-    try{
-
-        if(!titanova || !account){
-
-            throw new Error(
-                "Please connect wallet first."
-            );
-
-        }
-
-
-        setStatus(
-            "detailsStatus",
-            "Loading details...",
-            "yellow"
-        );
-
-
-        const id =
-            await titanova.getUserId(
-                account
-            );
-
-
-        if(Number(id) === 0){
-
-            document.getElementById("userId").innerText =
-                "---";
-
-            setStatus(
-                "detailsStatus",
-                "This wallet is not registered yet.",
-                "yellow"
-            );
-
-            return;
-        }
-
-
-        const data =
-            await titanova.getUserDetails(
-                id
-            );
-
-
-        document.getElementById("userId").innerText =
-            id.toString();
-
-
-        document.getElementById("referrer").innerText =
-            data[2].toString();
-
-
-        document.getElementById("direct").innerText =
-            data[3].toString();
-
-
-        document.getElementById("levels").innerText =
-            data[4].toString() + " / 12";
-
-
-        document.getElementById("team").innerText =
-            data[5].toString();
-
-
-        document.getElementById("income").innerText =
-            ethers.formatUnits(
-                data[7],
-                18
-            ) + " BTCB";
-
-
-        setStatus(
-            "detailsStatus",
-            "Details loaded successfully ✓",
-            "green"
-        );
-
-    }
-
-    catch(error){
-
-        console.log(error);
-
-        setStatus(
-            "detailsStatus",
-            getErrorMessage(error),
-            "red"
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   STATUS FUNCTION
-===================================================== */
-
-function setStatus(
-    elementId,
-    message,
-    type
-){
-
-    const element =
-        document.getElementById(elementId);
-
-
-    element.innerText =
-        message;
-
-
-    element.className =
-        "status " + type;
-
-}
-
-
-/* =====================================================
-   ERROR FUNCTION
-===================================================== */
-
-function getErrorMessage(error){
-
-    if(!error){
-
-        return "Unknown error.";
-
-    }
-
-
-    if(error.code === 4001){
-
-        return "Transaction wallet में reject कर दी गई।";
-
-    }
-
-
-    if(error.code === "ACTION_REJECTED"){
-
-        return "Transaction wallet में reject कर दी गई।";
-
-    }
-
-
-    if(error.shortMessage){
-
-        return error.shortMessage;
-
-    }
-
-
-    if(error.reason){
-
-        return error.reason;
-
-    }
-
-
-    if(error.message){
-
-        if(
-            error.message.includes(
-                "insufficient funds"
-            )
-        ){
-
-            return "Gas के लिए Testnet BNB कम है.";
-
-        }
-
-
-        return error.message.substring(
-            0,
-            300
-        );
-
-    }
-
-
-    return "Transaction failed.";
-
-}
-
-
-/* =====================================================
-   ACCOUNT / NETWORK CHANGE
+   WALLET CHANGE
 ===================================================== */
 
 if(window.ethereum){
 
-    window.ethereum.on(
-        "accountsChanged",
-        function(){
+window.ethereum.on(
+"accountsChanged",
+()=>location.reload()
+);
 
-            location.reload();
-
-        }
-    );
-
-
-    window.ethereum.on(
-        "chainChanged",
-        function(){
-
-            location.reload();
-
-        }
-    );
+window.ethereum.on(
+"chainChanged",
+()=>location.reload()
+);
 
 }
 
